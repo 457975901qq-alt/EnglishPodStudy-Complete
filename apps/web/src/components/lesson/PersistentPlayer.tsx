@@ -47,6 +47,7 @@ type PersistentPlayerProps = {
   autoplayRequest: { lessonId: string; version: number } | null
   resumeTime: number
   subtitleMode: SubtitleMode
+  subtitleLocked?: boolean
   onSubtitleModeChange: (mode: SubtitleMode) => void
   onTimeUpdate: (time: number) => void
   onDurationChange: (duration: number) => void
@@ -95,6 +96,7 @@ export function PersistentPlayer({
   autoplayRequest,
   resumeTime,
   subtitleMode,
+  subtitleLocked = false,
   onSubtitleModeChange,
   onTimeUpdate,
   onDurationChange,
@@ -196,6 +198,7 @@ export function PersistentPlayer({
   }
 
   const handleSubtitleButtonKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (subtitleLocked) return
     const currentIndex = SUBTITLE_MODE_OPTIONS.findIndex((option) => option.mode === subtitleMode)
     if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
       event.preventDefault()
@@ -372,7 +375,9 @@ export function PersistentPlayer({
             aria-label={`字幕模式：${subtitleModeLabel}`}
             aria-haspopup="menu"
             aria-expanded={subtitleMenuOpen}
-            onClick={() => { setSubtitleMenuOpen((open) => !open); setSpeedMenuOpen(false) }}
+            disabled={subtitleLocked}
+            title={subtitleLocked ? '学习模式当前阶段已锁定字幕' : undefined}
+            onClick={() => { if (!subtitleLocked) setSubtitleMenuOpen((open) => !open); setSpeedMenuOpen(false) }}
             onKeyDown={handleSubtitleButtonKeyDown}
           >
             {subtitleModeLabel}
@@ -439,6 +444,5 @@ export function PersistentPlayer({
     </footer>
   )
 }
-
 
 

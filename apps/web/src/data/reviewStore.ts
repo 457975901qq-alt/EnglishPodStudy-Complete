@@ -457,7 +457,7 @@ function chooseReviewContext(entry: VocabEntry) {
 
 export function getDueReviewItems(now = Date.now(), limit = 10): ReviewItem[] {
   const wordItems: ReviewItem[] = readVocab({ now })
-    .filter((entry) => entry.review.status !== 'mastered' && entry.review.dueAt <= now)
+    .filter((entry) => entry.review.dueAt <= now)
     .map((entry) => ({
       type: 'word' as const,
       entry,
@@ -467,7 +467,7 @@ export function getDueReviewItems(now = Date.now(), limit = 10): ReviewItem[] {
     .filter((item) => item.context)
 
   const sentenceItems: ReviewItem[] = readReviewSentences({ now })
-    .filter((sentence) => sentence.review.status !== 'mastered' && sentence.review.dueAt <= now)
+    .filter((sentence) => sentence.review.dueAt <= now)
     .map((sentence) => ({ type: 'sentence', sentence, review: sentence.review }))
 
   const sortedItems = [...wordItems, ...sentenceItems]
@@ -517,6 +517,19 @@ export function countDueReviewItems(now = Date.now()) {
   return getDueReviewItems(now, Number.POSITIVE_INFINITY).length
 }
 
+function reviewItemKey(item: ReviewItem) {
+  return item.type === 'word' ? `word:${item.entry.id}` : `sentence:${item.sentence.id}`
+}
+
+export function updateReviewSessionQueue(
+  items: ReviewItem[],
+  ratedItem: ReviewItem,
+  rating: ReviewRating,
+) {
+  const remaining = items.filter((item) => reviewItemKey(item) !== reviewItemKey(ratedItem))
+  return rating === 'again' ? [...remaining, ratedItem] : remaining
+}
+
 function nextReviewState(review: ReviewState, rating: ReviewRating, now: number): ReviewState {
   const previousStage = review.stage
   const nextStage =
@@ -538,6 +551,16 @@ function nextReviewState(review: ReviewState, rating: ReviewRating, now: number)
   }
 }
 
+export function rateReviewItem(
+  item: WordReviewItem,
+  rating: ReviewRating,
+  now?: number,
+): VocabEntry
+export function rateReviewItem(
+  item: SentenceReviewItem,
+  rating: ReviewRating,
+  now?: number,
+): ReviewSentence
 export function rateReviewItem(item: ReviewItem, rating: ReviewRating, now = Date.now()) {
   const review = nextReviewState(item.review, rating, now)
 

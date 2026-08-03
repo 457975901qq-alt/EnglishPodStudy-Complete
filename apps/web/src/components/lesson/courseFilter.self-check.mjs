@@ -4,7 +4,9 @@ import { getLessonStatus, matchesLessonSearch, matchesLessonStatusFilter } from 
 assert.equal(getLessonStatus(0), 'todo')
 assert.equal(getLessonStatus(1), 'doing')
 assert.equal(getLessonStatus(99), 'doing')
-assert.equal(getLessonStatus(100), 'done')
+assert.equal(getLessonStatus(100), 'doing')
+assert.equal(getLessonStatus({ progress: 0, stage: 'intensive' }), 'doing')
+assert.equal(getLessonStatus({ progress: 12, completedAt: 123 }), 'done')
 
 assert.equal(matchesLessonStatusFilter('all', 'todo'), true)
 assert.equal(matchesLessonStatusFilter('all', 'doing'), true)

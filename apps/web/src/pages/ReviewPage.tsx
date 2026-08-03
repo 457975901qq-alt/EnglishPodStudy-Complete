@@ -11,6 +11,7 @@ import {
   getDueReviewItems,
   rateReviewItem,
   REVIEW_CHANGE_EVENT,
+  updateReviewSessionQueue,
   type ReviewItem,
   type ReviewRating,
 } from '@/data/reviewStore'
@@ -29,10 +30,6 @@ const SENTENCE_RATING_LABELS: Record<ReviewRating, string> = {
   easy: '能跟读',
 }
 const CJK_RE = /[\u3400-\u9fff\uf900-\ufaff]/
-
-function itemKey(item: ReviewItem) {
-  return item.type === 'word' ? `word:${item.entry.id}` : `sentence:${item.sentence.id}`
-}
 
 function itemLessonId(item: ReviewItem) {
   return item.type === 'word' ? item.context.lessonId : item.sentence.lessonId
@@ -143,10 +140,19 @@ export function ReviewPage() {
 
   const handleRate = (rating: ReviewRating) => {
     if (!activeItem) return
-    rateReviewItem(activeItem, rating)
+    const ratedItem: ReviewItem =
+      activeItem.type === 'word'
+        ? (() => {
+            const entry = rateReviewItem(activeItem, rating)
+            return { ...activeItem, entry, review: entry.review }
+          })()
+        : (() => {
+            const sentence = rateReviewItem(activeItem, rating)
+            return { ...activeItem, sentence, review: sentence.review }
+          })()
     setCompleted((value) => value + 1)
     setAnswerVisible(false)
-    setItems((current) => current.filter((item) => itemKey(item) !== itemKey(activeItem)))
+    setItems((current) => updateReviewSessionQueue(current, ratedItem, rating))
   }
 
   if (items.length === 0 && !hasFinishedSession) {

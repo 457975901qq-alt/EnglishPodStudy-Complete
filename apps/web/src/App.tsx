@@ -165,7 +165,7 @@ function DashboardPage() {
         </h1>
       </div>
 
-      <ContinueLearningCard data={data} />
+      <TodayLearningCard data={data} dueReviewCount={dueReviewCount} />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => {
@@ -203,7 +203,35 @@ function DashboardPage() {
   )
 }
 
-function ContinueLearningCard({ data }: { data: CourseListData | null }) {
+function TodayLearningCard({
+  data,
+  dueReviewCount,
+}: {
+  data: CourseListData | null
+  dueReviewCount: number
+}) {
+  if (dueReviewCount > 0) {
+    return (
+      <Link
+        className="group flex items-center justify-between gap-5 rounded-[var(--radius-lg)] border border-[color-mix(in_srgb,var(--accent)_38%,var(--border-soft))] bg-[color-mix(in_srgb,var(--accent)_8%,var(--surface-warm))] p-5 transition hover:bg-[color-mix(in_srgb,var(--accent)_12%,var(--surface-warm))]"
+        to="/review"
+      >
+        <div className="flex items-center gap-4">
+          <span className="grid size-12 place-items-center rounded-[var(--radius-pill)] bg-[var(--accent)] text-[var(--accent-on)]">
+            <HeadphonesIcon />
+          </span>
+          <div>
+            <p className="font-semibold">先完成今日复习</p>
+            <p className="text-sm text-[var(--muted)]">{dueReviewCount} 项内容已经到期，完成后再学习新课。</p>
+          </div>
+        </div>
+        <span className="font-[var(--font-mono)] text-xs uppercase tracking-[0.08em] text-[var(--accent)]">
+          Review
+        </span>
+      </Link>
+    )
+  }
+
   const target = getContinueLearningTarget(data)
   const title = target.lesson ? '继续学习' : '开始学习'
   const subtitle = target.lesson
@@ -332,7 +360,7 @@ function CoursesPage() {
   const rows = lessons
     .map((lesson) => {
       const progress = progressMap[lesson.id]
-      const status = getLessonStatus(progress?.progress ?? 0)
+      const status = getLessonStatus(progress ?? { progress: 0 })
       return { lesson, progress, status }
     })
     .filter(({ lesson, status }) =>
@@ -351,7 +379,7 @@ function CoursesPage() {
 
   const statusCounts = lessons.reduce<Record<LessonStatus | 'all', number>>(
     (counts, lesson) => {
-      const status = getLessonStatus(progressMap[lesson.id]?.progress ?? 0)
+      const status = getLessonStatus(progressMap[lesson.id] ?? { progress: 0 })
       counts.all += 1
       counts[status] += 1
       return counts
@@ -458,7 +486,7 @@ function courseHref(lessonId: string, progress?: { currentTime: number }) {
 }
 
 function formatCourseProgress(progress?: { progress: number; currentTime: number }) {
-  return progress ? progress.progress + '% · ' + formatTime(progress.currentTime) : '未开始'
+  return progress ? '播放 ' + progress.progress + '% · ' + formatTime(progress.currentTime) : '未开始'
 }
 
 function progressBarWidth(progress?: { progress: number }) {

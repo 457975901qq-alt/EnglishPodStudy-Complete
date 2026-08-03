@@ -1,9 +1,12 @@
 export type LessonStatus = 'todo' | 'doing' | 'done'
 export type LessonStatusFilter = LessonStatus | 'all'
 
-export function getLessonStatus(progress: number): LessonStatus {
-  if (progress >= 100) return 'done'
-  return progress > 0 ? 'doing' : 'todo'
+type LessonActivity = { progress?: number; stage?: unknown; blindRating?: unknown; completedAt?: number }
+
+export function getLessonStatus(progressOrActivity: number | LessonActivity): LessonStatus {
+  const activity = typeof progressOrActivity === 'number' ? { progress: progressOrActivity } : progressOrActivity
+  if (activity.completedAt) return 'done'
+  return (activity.progress ?? 0) > 0 || activity.stage || activity.blindRating ? 'doing' : 'todo'
 }
 
 export function matchesLessonStatusFilter(

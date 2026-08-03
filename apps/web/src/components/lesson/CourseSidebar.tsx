@@ -45,7 +45,7 @@ export function CourseSidebar({
       const progress = isActive
         ? Math.max(savedProgress, Math.max(0, Math.min(100, activeProgress)))
         : savedProgress
-      const status = getLessonStatus(progress)
+      const status = getLessonStatus({ ...progressMap[lesson.id], progress })
 
       return { lesson, isActive, progress, status }
     })
@@ -96,14 +96,14 @@ export function CourseSidebar({
                   <span
                     className="ci-bar"
                     role="progressbar"
-                    aria-label={`${lesson.displayTitle} 学习进度`}
+                    aria-label={`${lesson.displayTitle} 播放进度`}
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-valuenow={progress}
                   >
                     <i style={{ width: `${progress}%` }} />
                   </span>
-                  <span className="ci-pct">{progress}%</span>
+                  <span className="ci-pct">播放 {progress}%</span>
                 </span>
               </span>
               <span className={`ci-dot ${status}`} aria-label={STATUS_LABELS[status]} />
