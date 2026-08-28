@@ -48,7 +48,7 @@ EnglishPod365 is an online English learning website built around 365 EnglishPod 
 
 在课程字幕中点击英文单词，会弹出释义卡片，展示音标、词性和中文释义。用户可以把单词加入生词本，系统会记录来源课程、句子和时间点，方便之后回到真实语境中复习。
 
-词典数据来自 `resource/dict/lookup.json` 和 `resource/dict/lemmas.json`。如果需要重新构建词典，可准备 `resource/dict/ecdict.mini.csv` 后运行构建脚本。
+词典数据来自 `resource/dict/lookup.json` 和 `resource/dict/lemmas.json`。`npm run start`、`npm run dev` 和 Docker 启动时会在 JSON 缺失或源 CSV 更新后自动构建；也可以手动运行构建脚本。
 
 ### 句子收藏与间隔复习
 
@@ -88,22 +88,24 @@ API 默认从仓库根目录下的 `resource` 读取课程资源：
 resource
 ├── course-list.json
 ├── dict
-│   ├── lookup.json
-│   ├── lemmas.json
+│   ├── lookup.json       # 启动时由 ecdict.mini.csv 自动生成
+│   ├── lemmas.json       # 启动时由 ecdict.mini.csv 自动生成
 │   └── ecdict.mini.csv
 └── 0001
-    ├── dialog.mp3
+    ├── dialog.mp3         # 可选
     ├── lesson.mp3
-    ├── review.mp3
+    ├── review.mp3         # 可选
     ├── subtitle.srt
     ├── subtitle.bilingual.srt
     ├── subtitle.zh.srt
     ├── transcript.txt
     ├── worksheet.pdf
-    └── host.pdf
+    └── host.pdf           # 可选，已补入可公开取得的主持人脚本
 ```
 
-单课目录名需要是 4 位数字，例如 `0001`、`0365`。API 当前允许访问的课程文件包括：`dialog.mp3`、`lesson.mp3`、`review.mp3`、`worksheet.pdf`、`host.pdf`、`subtitle.srt`、`subtitle.bilingual.srt`、`subtitle.zh.srt` 和 `transcript.txt`。
+单课目录名需要是 4 位数字，例如 `0001`、`0365`。API 当前允许访问的课程文件包括：`dialog.mp3`、`lesson.mp3`、`review.mp3`、`worksheet.pdf`、`host.pdf`、`subtitle.srt`、`subtitle.bilingual.srt`、`subtitle.zh.srt` 和 `transcript.txt`。当前 365 节课的 `dialog.mp3`、`review.mp3` 和 `host.pdf` 均已提供；其中 `host.pdf` 包含 178 份原版主持人脚本和 187 份基于本地完整转录稿生成的补充版。
+
+补充的原版音频和主持人脚本来自公开的 [Bex0-0/EnglishPod365](https://github.com/Bex0-0/EnglishPod365) 归档；该归档说明主持人脚本原本就不是 365 节全套。对于没有原版脚本的课程，项目使用本地 `transcript.txt` 生成了明确标注为 `GENERATED SUPPLEMENT` 的 PDF，不冒充原版出版物。
 
 如需使用自定义词典目录，可通过环境变量指定：
 
@@ -116,14 +118,14 @@ ENGLISHPOD_DICT_DIR=/path/to/dict
 ### 1. 安装依赖
 
 ```bash
-npm install
+npm ci
 ```
 
 ### 2. 准备课程资源
 
 确认根目录存在 `resource/course-list.json`，并且每节课的资源文件放在对应的 4 位课程目录下。仓库已包含资源时可跳过这一步。
 
-如果词典 JSON 不存在，可在准备好 `resource/dict/ecdict.mini.csv` 后运行：
+如果需要手动重建词典，可在准备好 `resource/dict/ecdict.mini.csv` 后运行：
 
 ```bash
 node tools/build-dict.mjs
@@ -234,10 +236,10 @@ PORT=8080 docker compose up -d --build   # 宿主机 8080 -> 容器 4173
 
 ```bash
 docker build -t englishpod .
-docker run -d --name englishpod -p 4173:4173 -v "$(pwd)/resource:/app/resource:ro" englishpod
+docker run -d --name englishpod -p 127.0.0.1:4173:4173 -v "$(pwd)/resource:/app/resource:ro" englishpod
 ```
 
-> 提示：词典数据（`resource/dict/lookup.json` 等）需在宿主机上提前构建好（见上文 `tools/build-dict.mjs`），容器会以只读方式读取 `resource` 目录。
+> 提示：容器以只读方式读取 `resource`，词典生成文件写入容器内的 `/app/generated-dict`，因此只要挂载的 `resource/dict/ecdict.mini.csv` 存在，首次启动会自动构建词典。
 
 ## 部署运行
 
@@ -247,7 +249,7 @@ docker run -d --name englishpod -p 4173:4173 -v "$(pwd)/resource:/app/resource:r
 
 1. 在服务器安装 Node.js 20 或更高版本。
 2. 将项目代码和 `resource` 目录上传到服务器。
-3. 在项目根目录执行 `npm install`。
+3. 在项目根目录执行 `npm ci`。
 4. 执行 `npm run build:web` 构建前端。
 5. 执行 `PORT=4173 npm run start:api` 启动 API。
 6. 使用 Nginx、Caddy 或其他静态服务托管 `apps/web/dist`。
@@ -309,7 +311,9 @@ npm run dev:api      # 仅启动 API
 npm run dev:web      # 仅启动 Web
 npm run build:web    # 构建前端
 npm run lint:web     # 检查前端代码
+npm run test         # API 测试和前端 self-check
 npm run test:api     # 运行 API 自检
+npm run test:web     # 运行前端 self-check
 npm run start:api    # 生产方式启动 API
 ```
 
@@ -318,10 +322,6 @@ npm run start:api    # 生产方式启动 API
 - 学习进度、生词本和复习计划保存在浏览器本地存储，换浏览器或清缓存后不会自动同步。
 - 当前没有用户系统，适合个人自部署使用。
 - AI 解析、PDF 内嵌阅读、跟读评分等能力在 `PRD.md` 中有规划，但 README 仅描述当前代码中可运行的核心功能。
-
-
-
-
 
 
 

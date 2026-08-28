@@ -34,8 +34,8 @@ await once(server, 'listening')
 const { port } = server.address()
 const baseUrl = `http://127.0.0.1:${port}`
 
-async function get(path) {
-  return fetch(`${baseUrl}${path}`)
+async function get(path, options) {
+  return fetch(`${baseUrl}${path}`, options)
 }
 
 try {
@@ -103,6 +103,28 @@ try {
   assert.equal(audioRes.status, 200)
   assert.equal(audioRes.headers.get('content-type'), 'audio/mpeg')
   assert.ok(Number(audioRes.headers.get('content-length')) > 1000)
+  assert.equal(audioRes.headers.get('accept-ranges'), 'bytes')
+  assert.ok(audioRes.headers.get('etag'))
+
+  const headRes = await get('/api/resources/0161/lesson.mp3', { method: 'HEAD' })
+  assert.equal(headRes.status, 200)
+  assert.equal(await headRes.text(), '')
+
+  const suffixRes = await get('/api/resources/0161/lesson.mp3', {
+    headers: { range: 'bytes=-100' },
+  })
+  assert.equal(suffixRes.status, 206)
+  assert.equal(suffixRes.headers.get('content-length'), '100')
+  assert.match(suffixRes.headers.get('content-range'), /^bytes \d+-\d+\/\d+$/)
+  assert.equal((await suffixRes.arrayBuffer()).byteLength, 100)
+
+  const missingAssetRes = await get('/assets/missing.js')
+  assert.equal(missingAssetRes.status, 404)
+
+  const spaRes = await get('/courses/not-a-real-route', {
+    headers: { accept: 'text/html' },
+  })
+  assert.equal(spaRes.status, 200)
 
   const traversalRes = await get('/api/resources/0161/../course-list.json')
   assert.equal(traversalRes.status, 404)

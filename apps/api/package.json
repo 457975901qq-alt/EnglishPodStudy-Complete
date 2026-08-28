@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node src/server.js",
-    "start": "node src/server.js",
+    "dev": "node ../../tools/ensure-dict.mjs && node src/server.js",
+    "start": "node ../../tools/ensure-dict.mjs && node src/server.js",
     "test": "node src/server.test.js"
   }
 }

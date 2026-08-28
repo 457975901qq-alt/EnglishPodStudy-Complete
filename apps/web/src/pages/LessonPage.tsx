@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { ThemeToggle, type Theme } from '@/components/ThemeToggle'
 import { CourseSidebar } from '@/components/lesson/CourseSidebar'
@@ -56,10 +56,11 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
   const [searchParams] = useSearchParams()
   const { data, loading, error } = useCourseList()
   const lesson = data?.lessons.find((item) => item.id === lessonId)
-  const activeLesson = lesson ?? data?.lessons[0]
+  const activeLesson = lesson
   const [subtitleMode, setSubtitleMode] = useState<SubtitleMode>(() => readSubtitleMode())
   const [guidedMode, setGuidedMode] = useState(true)
   const [progressMap, setProgressMap] = useState<LessonProgressMap>(() => readLessonProgress())
+  const progressMapRef = useRef(progressMap)
   const savedProgress = activeLesson ? progressMap[activeLesson.id] : undefined
   const learningStage = savedProgress?.stage ?? 'blind'
   const forcedSubtitleMode = guidedMode ? FORCED_SUBTITLES[learningStage] : undefined
@@ -90,6 +91,39 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
   const learningGuideTitleRef = useRef<HTMLHeadingElement>(null)
   const learningCurrentRef = useRef<HTMLDivElement>(null)
   const previousLearningStageRef = useRef(learningStage)
+  const progressSaveTimerRef = useRef<number | null>(null)
+  const pendingProgressRef = useRef<{
+    lessonId: string
+    time: number
+    duration: number
+  } | null>(null)
+
+  const updateProgressMap = (updater: (current: LessonProgressMap) => LessonProgressMap) => {
+    setProgressMap((current) => {
+      const next = updater(current)
+      progressMapRef.current = next
+      return next
+    })
+  }
+
+  const flushProgress = useCallback(() => {
+    const pending = pendingProgressRef.current
+    pendingProgressRef.current = null
+    if (progressSaveTimerRef.current !== null) {
+      window.clearTimeout(progressSaveTimerRef.current)
+      progressSaveTimerRef.current = null
+    }
+    if (!pending) return
+
+    const next = saveLessonProgress(
+      progressMapRef.current,
+      pending.lessonId,
+      pending.time,
+      pending.duration,
+    )
+    progressMapRef.current = next
+    setProgressMap(next)
+  }, [])
 
   const playbackMatchesLesson = playbackState.lessonId === activeLesson?.id
   const currentTime = playbackMatchesLesson
@@ -107,19 +141,27 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
 
   const updateStage = (stage: LearningStage) => {
     if (!activeLesson) return
-    setProgressMap((current) => setLessonStage(current, activeLesson.id, stage))
+    updateProgressMap((current) => setLessonStage(current, activeLesson.id, stage))
   }
 
   const rateBlindListen = (rating: BlindRating) => {
     if (!activeLesson) return
-    setProgressMap((current) => setLessonBlindRating(current, activeLesson.id, rating))
+    updateProgressMap((current) => setLessonBlindRating(current, activeLesson.id, rating))
   }
 
   const rememberProgress = (time: number, nextDuration = duration) => {
     if (!activeLesson || nextDuration <= 0) return
-    setProgressMap((currentMap) =>
-      saveLessonProgress(currentMap, activeLesson.id, time, nextDuration),
-    )
+    pendingProgressRef.current = {
+      lessonId: activeLesson.id,
+      time,
+      duration: nextDuration,
+    }
+    if (progressSaveTimerRef.current === null) {
+      progressSaveTimerRef.current = window.setTimeout(() => {
+        progressSaveTimerRef.current = null
+        flushProgress()
+      }, 750)
+    }
   }
 
   const handleTimeUpdate = (time: number) => {
@@ -141,6 +183,8 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
     }))
     rememberProgress(currentTime, nextDuration)
   }
+
+  useEffect(() => () => flushProgress(), [activeLesson?.id, flushProgress])
 
   useEffect(() => {
     if (!toastMessage) return
@@ -249,7 +293,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
           </Link>
         </header>
         <main className="main p-8 text-[var(--muted)]">
-          课程加载失败：{error ?? '没有可用课程'}
+          课程加载失败：{error ?? (lessonId ? '课程不存在' : '没有可用课程')}
         </main>
       </div>
     )
@@ -387,7 +431,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
                     {learningStage === 'final' && <>
                       <h3>最终无字幕复听</h3><p>字幕已关闭。复听后完成四项掌握自检，全部确认才可完成本课。</p>
                       <div className="mastery-checks">{MASTERY_ITEMS.map((item, index) => <label key={item}><input type="checkbox" checked={masteryChecks[index]} onChange={(event) => setMasteryState({ lessonId: activeLesson.id, checks: masteryChecks.map((checked, itemIndex) => itemIndex === index ? event.target.checked : checked) })} />{item}</label>)}</div>
-                      <button className="learning-primary" type="button" disabled={!masteryChecks.every(Boolean)} onClick={() => activeLesson && setProgressMap((current) => completeLesson(current, activeLesson.id))}>标记本课已学习</button>
+                      <button className="learning-primary" type="button" disabled={!masteryChecks.every(Boolean)} onClick={() => activeLesson && updateProgressMap((current) => completeLesson(current, activeLesson.id))}>标记本课已学习</button>
                     </>}
                   </div>
                 </div>
@@ -462,6 +506,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
         autoplayRequest={autoplayRequest}
         resumeTime={progressMap[activeLesson.id]?.currentTime ?? 0}
         onTimeUpdate={handleTimeUpdate}
+        onFlushProgress={flushProgress}
         subtitleMode={effectiveSubtitleMode}
         subtitleLocked={Boolean(forcedSubtitleMode)}
         onSubtitleModeChange={handleSubtitleModeChange}

@@ -33,8 +33,8 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 
 # 安装依赖 (无 node_modules 时)
 if (-not (Test-Path 'node_modules')) {
-  Write-Host '==> 安装依赖 (npm install) ...' -ForegroundColor Cyan
-  npm install
+  Write-Host '==> 安装依赖 (npm ci) ...' -ForegroundColor Cyan
+  npm ci
 }
 
 if ($Dev) {

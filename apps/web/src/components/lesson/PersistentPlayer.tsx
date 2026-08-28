@@ -50,6 +50,7 @@ type PersistentPlayerProps = {
   subtitleLocked?: boolean
   onSubtitleModeChange: (mode: SubtitleMode) => void
   onTimeUpdate: (time: number) => void
+  onFlushProgress?: () => void
   onDurationChange: (duration: number) => void
   onAutoplayLesson: (lessonId: string) => void
 }
@@ -99,6 +100,7 @@ export function PersistentPlayer({
   subtitleLocked = false,
   onSubtitleModeChange,
   onTimeUpdate,
+  onFlushProgress,
   onDurationChange,
   onAutoplayLesson,
 }: PersistentPlayerProps) {
@@ -243,6 +245,7 @@ export function PersistentPlayer({
 
   const handleEnded = () => {
     const audio = audioRef.current
+    onFlushProgress?.()
     const action = getEndedPlaybackAction(playbackMode, lessons, lesson.id)
 
     if (audio && action.type === 'replay') {
@@ -289,6 +292,7 @@ export function PersistentPlayer({
           }
         }}
         onTimeUpdate={(event) => onTimeUpdate(event.currentTarget.currentTime)}
+        onPause={onFlushProgress}
         onEnded={handleEnded}
       />
       <div className="now">
@@ -444,5 +448,3 @@ export function PersistentPlayer({
     </footer>
   )
 }
-
-

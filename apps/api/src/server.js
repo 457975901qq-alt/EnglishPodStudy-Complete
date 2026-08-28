@@ -56,25 +56,43 @@ const subtitleModeFiles = new Map([
   ['zh', 'subtitle.zh.srt'],
 ])
 
-function json(res, status, body) {
+function json(res, status, body, head = false) {
   const payload = JSON.stringify(body)
   res.writeHead(status, {
     'content-type': 'application/json; charset=utf-8',
     'content-length': Buffer.byteLength(payload),
   })
+  if (head) {
+    res.end()
+    return
+  }
   res.end(payload)
 }
 
-function notFound(res) {
-  json(res, 404, { error: 'Not found' })
+function notFound(res, head = false) {
+  json(res, 404, { error: 'Not found' }, head)
 }
 
-function methodNotAllowed(res) {
-  json(res, 405, { error: 'Method not allowed' })
+function methodNotAllowed(res, head = false) {
+  json(res, 405, { error: 'Method not allowed' }, head)
 }
 
-function serviceUnavailable(res, message) {
-  json(res, 503, { error: message })
+function serviceUnavailable(res, message, head = false) {
+  json(res, 503, { error: message }, head)
+}
+
+function fileEtag(fileStat) {
+  return `"${fileStat.size.toString(16)}-${Math.trunc(fileStat.mtimeMs).toString(16)}"`
+}
+
+function fileHeaders(fileStat, contentType, cacheControl) {
+  return {
+    'accept-ranges': 'bytes',
+    'cache-control': cacheControl,
+    'content-type': contentType,
+    etag: fileEtag(fileStat),
+    'last-modified': fileStat.mtime.toUTCString(),
+  }
 }
 
 function stripWord(word) {
@@ -117,12 +135,23 @@ export function parseSrt(content) {
     })
 }
 
+let catalogState = null
+
 async function readCatalog() {
-  const content = await readFile(catalogPath, 'utf8')
-  return JSON.parse(content.replace(/^\uFEFF/, ''))
+  if (!catalogState) {
+    catalogState = readFile(catalogPath, 'utf8')
+      .then((content) => JSON.parse(content.replace(/^\uFEFF/, '')))
+      .catch((error) => {
+        catalogState = null
+        throw error
+      })
+  }
+
+  return catalogState
 }
 
 let dictionaryState = null
+const subtitleCache = new Map()
 
 async function readJsonFile(filePath) {
   const content = await readFile(filePath, 'utf8')
@@ -143,6 +172,20 @@ async function loadDictionary() {
   }
 
   return dictionaryState
+}
+
+async function readSubtitleFile(filePath) {
+  if (!subtitleCache.has(filePath)) {
+    subtitleCache.set(
+      filePath,
+      readFile(filePath, 'utf8').catch((error) => {
+        subtitleCache.delete(filePath)
+        throw error
+      }),
+    )
+  }
+
+  return subtitleCache.get(filePath)
 }
 
 async function lookupDictionary(inputWord) {
@@ -188,7 +231,7 @@ function resourcePathFor(lessonId, fileName) {
 async function sendResource(req, res, lessonId, fileName) {
   const fullPath = resourcePathFor(lessonId, fileName)
   if (!fullPath) {
-    notFound(res)
+    notFound(res, req.method === 'HEAD')
     return
   }
 
@@ -196,7 +239,7 @@ async function sendResource(req, res, lessonId, fileName) {
   try {
     fileStat = await stat(fullPath)
   } catch {
-    notFound(res)
+    notFound(res, req.method === 'HEAD')
     return
   }
 
@@ -211,29 +254,56 @@ async function sendResource(req, res, lessonId, fileName) {
       return
     }
 
-    const start = match[1] ? Number(match[1]) : 0
-    const end = match[2] ? Number(match[2]) : fileStat.size - 1
-    if (start >= fileStat.size || end >= fileStat.size || start > end) {
+    let start
+    let end
+    if (!match[1]) {
+      const suffixLength = Number(match[2])
+      if (!Number.isSafeInteger(suffixLength) || suffixLength <= 0) {
+        res.writeHead(416, { 'content-range': `bytes */${fileStat.size}` })
+        res.end()
+        return
+      }
+      start = Math.max(fileStat.size - suffixLength, 0)
+      end = fileStat.size - 1
+    } else {
+      start = Number(match[1])
+      end = match[2] ? Number(match[2]) : fileStat.size - 1
+      if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end)) {
+        res.writeHead(416, { 'content-range': `bytes */${fileStat.size}` })
+        res.end()
+        return
+      }
+      end = Math.min(end, fileStat.size - 1)
+    }
+
+    if (start >= fileStat.size || start > end) {
       res.writeHead(416, { 'content-range': `bytes */${fileStat.size}` })
       res.end()
       return
     }
 
     res.writeHead(206, {
-      'accept-ranges': 'bytes',
+      ...fileHeaders(fileStat, contentType, 'public, max-age=86400'),
       'content-type': contentType,
       'content-length': end - start + 1,
       'content-range': `bytes ${start}-${end}/${fileStat.size}`,
     })
+    if (req.method === 'HEAD') {
+      res.end()
+      return
+    }
     createReadStream(fullPath, { start, end }).pipe(res)
     return
   }
 
   res.writeHead(200, {
-    'accept-ranges': 'bytes',
-    'content-type': contentType,
+    ...fileHeaders(fileStat, contentType, 'public, max-age=86400'),
     'content-length': fileStat.size,
   })
+  if (req.method === 'HEAD') {
+    res.end()
+    return
+  }
   createReadStream(fullPath).pipe(res)
 }
 
@@ -257,6 +327,10 @@ async function sendStatic(req, res, pathname) {
 
   // SPA fallback: unknown non-asset routes return index.html
   const indexPath = path.join(webDistDir, 'index.html')
+  const acceptsHtml = (req.headers.accept ?? '').includes('text/html')
+  const isNavigation = !path.extname(relativePath) && acceptsHtml
+  if (!fileStat && !isNavigation) return false
+
   const target = fileStat?.isFile() ? filePath : indexPath
   const contentType =
     staticContentTypes.get(path.extname(target).toLowerCase()) ??
@@ -270,7 +344,11 @@ async function sendStatic(req, res, pathname) {
   }
 
   res.writeHead(200, {
-    'content-type': contentType,
+    ...fileHeaders(
+      targetStat,
+      contentType,
+      target === indexPath ? 'no-cache' : 'public, max-age=31536000, immutable',
+    ),
     'content-length': targetStat.size,
   })
   if (req.method === 'HEAD') {
@@ -282,8 +360,9 @@ async function sendStatic(req, res, pathname) {
 }
 
 async function route(req, res) {
+  const head = req.method === 'HEAD'
   if (req.method !== 'GET' && req.method !== 'HEAD') {
-    methodNotAllowed(res)
+    methodNotAllowed(res, head)
     return
   }
 
@@ -291,22 +370,23 @@ async function route(req, res) {
   const parts = url.pathname.split('/').filter(Boolean)
 
   if (url.pathname === '/api/health') {
-    json(res, 200, { ok: true })
+    json(res, 200, { ok: true }, head)
     return
   }
 
   if (url.pathname === '/api/courses') {
-    json(res, 200, await readCatalog())
+    json(res, 200, await readCatalog(), head)
     return
   }
 
   if (parts[0] === 'api' && parts[1] === 'dict' && parts.length === 3) {
     try {
-      json(res, 200, await lookupDictionary(parts[2]))
+      json(res, 200, await lookupDictionary(parts[2]), head)
     } catch {
       serviceUnavailable(
         res,
         'Dictionary is not built. Put ecdict.mini.csv in resource/dict and run: node tools/build-dict.mjs',
+        head,
       )
     }
     return
@@ -315,7 +395,7 @@ async function route(req, res) {
   if (parts[0] === 'api' && parts[1] === 'courses' && parts[2]) {
     const lessonId = parts[2]
     if (!isLessonId(lessonId)) {
-      notFound(res)
+      notFound(res, head)
       return
     }
 
@@ -324,14 +404,14 @@ async function route(req, res) {
       const subtitleFile = subtitleModeFiles.get(mode)
       const fullPath = subtitleFile ? resourcePathFor(lessonId, subtitleFile) : null
       if (!fullPath) {
-        notFound(res)
+        notFound(res, head)
         return
       }
 
       try {
-        json(res, 200, parseSrt(await readFile(fullPath, 'utf8')))
+        json(res, 200, parseSrt(await readSubtitleFile(fullPath)), head)
       } catch {
-        notFound(res)
+        notFound(res, head)
       }
       return
     }
@@ -340,9 +420,9 @@ async function route(req, res) {
       const catalog = await readCatalog()
       const lesson = catalog.lessons.find((item) => item.id === lessonId)
       if (lesson) {
-        json(res, 200, lesson)
+        json(res, 200, lesson, head)
       } else {
-        notFound(res)
+        notFound(res, head)
       }
       return
     }
@@ -362,7 +442,7 @@ async function route(req, res) {
     if (served) return
   }
 
-  notFound(res)
+  notFound(res, head)
 }
 
 export function createServer() {
@@ -375,7 +455,17 @@ export function createServer() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const port = Number(process.env.PORT ?? 4173)
-  createServer().listen(port, () => {
-    console.log(`EnglishPod API listening on http://localhost:${port}`)
+  const host = process.env.HOST ?? '127.0.0.1'
+  const server = createServer()
+  const shutdown = () => {
+    server.close(() => process.exit(0))
+  }
+  for (const signal of ['SIGINT', 'SIGTERM']) server.once(signal, shutdown)
+  server.on('error', (error) => {
+    console.error(error instanceof Error ? error.message : error)
+    process.exitCode = 1
+  })
+  server.listen(port, host, () => {
+    console.log(`EnglishPod API listening on http://${host}:${port}`)
   })
 }

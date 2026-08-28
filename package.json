@@ -9,13 +9,15 @@
   "scripts": {
     "dev": "node tools/dev.mjs",
     "build": "npm run build:web",
-    "start": "node apps/api/src/server.js",
-    "serve": "npm run build:web && node apps/api/src/server.js",
+    "start": "node tools/ensure-dict.mjs && node apps/api/src/server.js",
+    "serve": "npm run build:web && npm run start",
+    "test": "npm run test:api && npm run test:web",
     "dev:api": "npm run dev -w apps/api",
     "start:api": "npm run start -w apps/api",
     "test:api": "npm run test -w apps/api",
     "dev:web": "npm run dev -w apps/web",
     "build:web": "npm run build -w apps/web",
-    "lint:web": "npm run lint -w apps/web"
+    "lint:web": "npm run lint -w apps/web",
+    "test:web": "node tools/run-web-self-checks.mjs"
   }
 }

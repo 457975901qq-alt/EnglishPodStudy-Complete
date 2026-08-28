@@ -101,6 +101,10 @@ type SubtitleState = {
   error: string | null
 }
 
+let courseListCache: CourseListData | null = null
+let courseListPromise: Promise<CourseListData> | null = null
+const subtitleCache = new Map<string, SubtitleCue[]>()
+
 async function fetchJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   const response = await fetch(url, { signal })
   if (!response.ok) {
@@ -111,20 +115,37 @@ async function fetchJson<T>(url: string, signal?: AbortSignal): Promise<T> {
 
 export function useCourseList(): AsyncState<CourseListData> {
   const [state, setState] = useState<AsyncState<CourseListData>>({
-    data: null,
-    loading: true,
+    data: courseListCache,
+    loading: courseListCache === null,
     error: null,
   })
 
   useEffect(() => {
-    const controller = new AbortController()
+    let active = true
 
-    fetchJson<CourseListData>('/api/courses', controller.signal)
+    if (courseListCache) {
+      return () => {
+        active = false
+      }
+    }
+
+    courseListPromise ??= fetchJson<CourseListData>('/api/courses')
       .then((data) => {
+        courseListCache = data
+        return data
+      })
+      .catch((error: unknown) => {
+        courseListPromise = null
+        throw error
+      })
+
+    courseListPromise
+      .then((data) => {
+        if (!active) return
         setState({ data, loading: false, error: null })
       })
       .catch((error: unknown) => {
-        if (controller.signal.aborted) return
+        if (!active) return
         setState({
           data: null,
           loading: false,
@@ -132,7 +153,9 @@ export function useCourseList(): AsyncState<CourseListData> {
         })
       })
 
-    return () => controller.abort()
+    return () => {
+      active = false
+    }
   }, [])
 
   return state
@@ -154,12 +177,19 @@ export function useLessonSubtitles(
       return
     }
 
+    const cacheKey = `${lessonId}:${mode}`
+    const cached = subtitleCache.get(cacheKey)
+    if (cached) {
+      return
+    }
+
     const controller = new AbortController()
     fetchJson<SubtitleCue[]>(
       `/api/courses/${lessonId}/subtitles?mode=${mode}`,
       controller.signal,
     )
       .then((data) => {
+        subtitleCache.set(cacheKey, data)
         setState({ lessonId, mode, data, error: null })
       })
       .catch((error: unknown) => {
@@ -177,6 +207,11 @@ export function useLessonSubtitles(
 
   if (!lessonId) {
     return { data: null, loading: false, error: null }
+  }
+
+  const cached = subtitleCache.get(`${lessonId}:${mode}`)
+  if (cached) {
+    return { data: cached, loading: false, error: null }
   }
 
   if (state.lessonId !== lessonId || state.mode !== mode) {

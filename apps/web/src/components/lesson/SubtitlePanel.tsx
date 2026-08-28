@@ -1,4 +1,4 @@
-import { useEffect, useRef, type KeyboardEvent } from 'react'
+import { useEffect, useMemo, useRef, type KeyboardEvent } from 'react'
 import { formatTime, type SubtitleCue } from '@/data/courseList'
 import { getCenteredScrollTop } from './subtitleScroll'
 import { isTranslationLine } from './subtitleLine'
@@ -36,8 +36,17 @@ export function SubtitlePanel({
 }: SubtitlePanelProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const activeCueRef = useRef<HTMLDivElement>(null)
-  const activeIndex = cues.findIndex(
-    (cue) => currentTime >= cue.start && currentTime < cue.end,
+  const activeIndex = findActiveCueIndex(cues, currentTime)
+  const renderedCues = useMemo(
+    () => cues.map((cue) => ({
+      cue,
+      lines: cue.text.split('\n').map((text) => ({
+        text,
+        translated: isTranslationLine(text),
+        tokens: tokenizeEnglish(text),
+      })),
+    })),
+    [cues],
   )
 
   useEffect(() => {
@@ -61,7 +70,7 @@ export function SubtitlePanel({
     <div className={`subs-scroll${obscured ? ' obscured' : ''}`} id="subsScroll" ref={scrollRef}>
       <div className="subs" id="subs">
         {message && <p className="text-sm text-[var(--muted)]">{message}</p>}
-        {cues.map((cue, index) => (
+        {renderedCues.map(({ cue, lines }, index) => (
           <div
             key={cue.id}
             ref={index === activeIndex ? activeCueRef : null}
@@ -88,14 +97,14 @@ export function SubtitlePanel({
               {formatTime(cue.start)}
             </button>
             <span className="line">
-              {cue.text.split('\n').map((line, lineIndex) => (
+              {lines.map(({ text: line, translated, tokens }, lineIndex) => (
                 <span
                   key={`${cue.id}-${lineIndex}`}
-                  className={isTranslationLine(line) ? 'line-translation' : undefined}
+                  className={translated ? 'line-translation' : undefined}
                 >
-                  {isTranslationLine(line) || obscured
+                  {translated || obscured
                     ? line
-                    : tokenizeEnglish(line).map((token, tokenIndex) =>
+                    : tokens.map((token, tokenIndex) =>
                         token.isWord ? (
                           <button
                             key={`${cue.id}-${lineIndex}-${tokenIndex}`}
@@ -144,4 +153,23 @@ export function SubtitlePanel({
       </div>
     </div>
   )
+}
+
+function findActiveCueIndex(cues: SubtitleCue[], currentTime: number) {
+  let low = 0
+  let high = cues.length - 1
+
+  while (low <= high) {
+    const middle = Math.floor((low + high) / 2)
+    const cue = cues[middle]
+    if (currentTime < cue.start) {
+      high = middle - 1
+    } else if (currentTime >= cue.end) {
+      low = middle + 1
+    } else {
+      return middle
+    }
+  }
+
+  return -1
 }

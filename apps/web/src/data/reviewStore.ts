@@ -514,7 +514,11 @@ function interleaveReviewItems(items: ReviewItem[]) {
 }
 
 export function countDueReviewItems(now = Date.now()) {
-  return getDueReviewItems(now, Number.POSITIVE_INFINITY).length
+  const dueWords = readVocab({ now }).filter((entry) => entry.review.dueAt <= now).length
+  const dueSentences = readReviewSentences({ now }).filter(
+    (sentence) => sentence.review.dueAt <= now,
+  ).length
+  return dueWords + dueSentences
 }
 
 function reviewItemKey(item: ReviewItem) {

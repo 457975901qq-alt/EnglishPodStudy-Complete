@@ -4,10 +4,12 @@ services:
     image: englishpod
     container_name: englishpod
     ports:
-      - "${PORT:-4173}:4173"
+      - "127.0.0.1:${PORT:-4173}:4173"
     volumes:
       # 课程资源 (音频/字幕/PDF/词典) 挂载进容器, 只读
       - ./resource:/app/resource:ro
     environment:
+      - HOST=0.0.0.0
       - PORT=4173
+      - ENGLISHPOD_DICT_DIR=/app/generated-dict
     restart: unless-stopped

@@ -10,8 +10,13 @@ const dictDir = path.join(rootDir, 'resource', 'dict')
 const sourcePath = process.argv[2]
   ? path.resolve(process.argv[2])
   : path.join(dictDir, 'ecdict.mini.csv')
-const lookupPath = path.join(dictDir, 'lookup.json')
-const lemmasPath = path.join(dictDir, 'lemmas.json')
+const outputDir = process.argv[3]
+  ? path.resolve(process.argv[3])
+  : process.env.ENGLISHPOD_DICT_DIR
+    ? path.resolve(process.env.ENGLISHPOD_DICT_DIR)
+    : dictDir
+const lookupPath = path.join(outputDir, 'lookup.json')
+const lemmasPath = path.join(outputDir, 'lemmas.json')
 
 const columns = [
   'word',
@@ -142,7 +147,7 @@ async function main() {
     addExchangeLemmas(lemmas, word, record.exchange)
   }
 
-  await mkdir(dictDir, { recursive: true })
+  await mkdir(outputDir, { recursive: true })
   await writeFile(lookupPath, `${JSON.stringify(lookup)}\n`)
   await writeFile(lemmasPath, `${JSON.stringify(lemmas)}\n`)
 

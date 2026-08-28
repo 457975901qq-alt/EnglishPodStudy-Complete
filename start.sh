@@ -28,8 +28,8 @@ fi
 
 # 安装依赖
 if [ ! -d node_modules ]; then
-  echo "==> 安装依赖 (npm install) ..."
-  npm install
+  echo "==> 安装依赖 (npm ci) ..."
+  npm ci
 fi
 
 if [ "$DEV" = true ]; then
