@@ -102,6 +102,45 @@ function stripWord(word) {
     .toLowerCase()
 }
 
+function inflectionCandidates(word) {
+  const candidates = []
+  const add = (candidate) => {
+    if (candidate && candidate !== word && !candidates.includes(candidate)) {
+      candidates.push(candidate)
+    }
+  }
+
+  if (word.endsWith('ies') && word.length > 3) add(`${word.slice(0, -3)}y`)
+  if (word.endsWith('ves') && word.length > 3) {
+    add(`${word.slice(0, -3)}f`)
+    add(`${word.slice(0, -3)}fe`)
+  }
+
+  if (word.endsWith('s') && !word.endsWith('ss') && word.length > 2) {
+    add(word.slice(0, -1))
+  }
+  if (word.endsWith('es') && word.length > 3) {
+    add(word.slice(0, -2))
+  }
+
+  if (word.endsWith('ied') && word.length > 3) add(`${word.slice(0, -3)}y`)
+  if (word.endsWith('ed') && word.length > 3) {
+    const stem = word.slice(0, -2)
+    add(stem)
+    add(`${stem}e`)
+    if (/(bb|dd|gg|mm|nn|pp|rr|tt)$/.test(stem)) add(stem.slice(0, -1))
+  }
+
+  if (word.endsWith('ing') && word.length > 4) {
+    const stem = word.slice(0, -3)
+    add(stem)
+    add(`${stem}e`)
+    if (/(bb|dd|gg|mm|nn|pp|rr|tt)$/.test(stem)) add(stem.slice(0, -1))
+  }
+
+  return candidates
+}
+
 function parseTime(value) {
   const match = value.match(/^(\d{2}):(\d{2}):(\d{2}),(\d{3})$/)
   if (!match) return 0
@@ -195,8 +234,18 @@ async function lookupDictionary(inputWord) {
   const normalizedWord = word.toLowerCase()
   const strippedWord = stripWord(word)
   const { lookup, lemmas } = await loadDictionary()
-  const candidates = [normalizedWord, strippedWord, lemmas[normalizedWord], lemmas[strippedWord]]
-    .filter(Boolean)
+  const candidates = []
+  const addCandidate = (candidate) => {
+    if (candidate && !candidates.includes(candidate)) candidates.push(candidate)
+  }
+  const addWithLemma = (candidate) => {
+    addCandidate(candidate)
+    addCandidate(lemmas[candidate])
+  }
+
+  addWithLemma(normalizedWord)
+  addWithLemma(strippedWord)
+  for (const candidate of inflectionCandidates(strippedWord)) addWithLemma(candidate)
 
   for (const candidate of candidates) {
     const entry = lookup[candidate]

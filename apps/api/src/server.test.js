@@ -21,6 +21,18 @@ await writeFile(
       pos: 'v:100',
       translation: 'vi. 跑; 运转',
     },
+    go: {
+      word: 'go',
+      phonetic: 'ɡəʊ',
+      pos: 'v',
+      translation: 'vi. 去；走',
+    },
+    study: {
+      word: 'study',
+      phonetic: 'ˈstʌdi',
+      pos: 'v; n',
+      translation: '学习；研究',
+    },
   }),
 )
 await writeFile(path.join(tempDictDir, 'lemmas.json'), JSON.stringify({ ran: 'run', running: 'run' }))
@@ -93,6 +105,20 @@ try {
   assert.equal(lemma.found, true)
   assert.equal(lemma.word, 'run')
   assert.equal(lemma.matched, 'run')
+
+  const heuristicLemmaRes = await get('/api/dict/goes')
+  assert.equal(heuristicLemmaRes.status, 200)
+  const heuristicLemma = await heuristicLemmaRes.json()
+  assert.equal(heuristicLemma.found, true)
+  assert.equal(heuristicLemma.word, 'go')
+  assert.equal(heuristicLemma.matched, 'go')
+
+  const iesLemmaRes = await get('/api/dict/studies')
+  assert.equal(iesLemmaRes.status, 200)
+  const iesLemma = await iesLemmaRes.json()
+  assert.equal(iesLemma.found, true)
+  assert.equal(iesLemma.word, 'study')
+  assert.equal(iesLemma.matched, 'study')
 
   const missingWordRes = await get('/api/dict/notaword')
   assert.equal(missingWordRes.status, 200)

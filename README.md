@@ -48,7 +48,21 @@ EnglishPod365 is an online English learning website built around 365 EnglishPod 
 
 在课程字幕中点击英文单词，会弹出释义卡片，展示音标、词性和中文释义。用户可以把单词加入生词本，系统会记录来源课程、句子和时间点，方便之后回到真实语境中复习。
 
-词典数据来自 `resource/dict/lookup.json` 和 `resource/dict/lemmas.json`。`npm run start`、`npm run dev` 和 Docker 启动时会在 JSON 缺失或源 CSV 更新后自动构建；也可以手动运行构建脚本。
+词典查询支持三层匹配：原词精确匹配、ECDICT 词形映射（例如 `running` → `run`、`goes` → `go`），以及常见的复数、过去式、进行时和第三人称形式回退。因此点击字幕中的变形词时，也能尽量显示原形释义。
+
+词典数据位于 `resource/dict/ecdict.mini.csv`，当前是从公开 [ECDICT](https://github.com/skywind3000/ECDICT) 数据整理出的课程词汇子集，覆盖仓库课程字幕中的词汇及其常见变形，约 5.7 万条词典记录。启动时会自动生成本地查询索引：
+
+- `resource/dict/lookup.json`：单词、音标、词性和中文释义索引。
+- `resource/dict/lemmas.json`：变形词到原形的映射。
+
+首次启动或词典源 CSV 更新后，`npm run start`、`npm run dev` 和 Docker 启动会自动重建索引。也可以手动执行：
+
+```bash
+node tools/ensure-dict.mjs
+node tools/build-dict.mjs
+```
+
+如果使用自定义词典目录，需要同时指定输出目录；如果词典源不在默认位置，再指定 `ENGLISHPOD_DICT_SOURCE`：
 
 ### 句子收藏与间隔复习
 
@@ -111,6 +125,7 @@ resource
 
 ```bash
 ENGLISHPOD_DICT_DIR=/path/to/dict
+ENGLISHPOD_DICT_SOURCE=/path/to/ecdict.mini.csv
 ```
 
 ## 本地开发运行
@@ -322,6 +337,5 @@ npm run start:api    # 生产方式启动 API
 - 学习进度、生词本和复习计划保存在浏览器本地存储，换浏览器或清缓存后不会自动同步。
 - 当前没有用户系统，适合个人自部署使用。
 - AI 解析、PDF 内嵌阅读、跟读评分等能力在 `PRD.md` 中有规划，但 README 仅描述当前代码中可运行的核心功能。
-
 
 
