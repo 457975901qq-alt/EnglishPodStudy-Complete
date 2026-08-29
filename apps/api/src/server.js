@@ -142,9 +142,66 @@ function inflectionCandidates(word) {
 }
 
 const MORPHOLOGY_MARKER = /(?:复数|过去式|过去分词|现在分词|第三人称单数|plural of|past tense|past participle|present participle)/i
+const CONTRACTION_EXPANSIONS = {
+  "i'm": ['i', 'am'],
+  "you're": ['you', 'are'],
+  "he's": ['he', 'is'],
+  "she's": ['she', 'is'],
+  "it's": ['it', 'is'],
+  "we're": ['we', 'are'],
+  "they're": ['they', 'are'],
+  "i've": ['i', 'have'],
+  "you've": ['you', 'have'],
+  "we've": ['we', 'have'],
+  "they've": ['they', 'have'],
+  "i'll": ['i', 'will'],
+  "you'll": ['you', 'will'],
+  "he'll": ['he', 'will'],
+  "she'll": ['she', 'will'],
+  "we'll": ['we', 'will'],
+  "they'll": ['they', 'will'],
+  "can't": ['can', 'not'],
+  "won't": ['will', 'not'],
+  "don't": ['do', 'not'],
+  "doesn't": ['does', 'not'],
+  "didn't": ['did', 'not'],
+  "isn't": ['is', 'not'],
+  "aren't": ['are', 'not'],
+  "wasn't": ['was', 'not'],
+  "weren't": ['were', 'not'],
+  "haven't": ['have', 'not'],
+  "hasn't": ['has', 'not'],
+  "hadn't": ['had', 'not'],
+  "wouldn't": ['would', 'not'],
+  "shouldn't": ['should', 'not'],
+  "couldn't": ['could', 'not'],
+  "that's": ['that', 'is'],
+  "what's": ['what', 'is'],
+  "there's": ['there', 'is'],
+}
 
 function hasMorphologicalTranslation(entry) {
   return Boolean(entry?.translation && MORPHOLOGY_MARKER.test(entry.translation))
+}
+
+function lookupContraction(word, lookup) {
+  const parts = CONTRACTION_EXPANSIONS[word]
+  if (!parts) return null
+
+  const entries = parts.map((part) => lookup[part] ?? lookup[stripWord(part)])
+  if (entries.some((entry) => !entry)) return null
+
+  return {
+    found: true,
+    query: word,
+    matched: parts.join(' '),
+    word: parts.join(' '),
+    phonetic: '',
+    pos: '',
+    translation: entries
+      .map((entry, index) => `${parts[index]}：${entry.translation}`)
+      .join('\n'),
+  }
 }
 
 function parseTime(value) {
@@ -243,6 +300,9 @@ async function lookupDictionary(inputWord) {
   const possessiveBase = possessiveMatch ? possessiveMatch[1] : ''
   const possessiveStripped = stripWord(possessiveBase)
   const { lookup, lemmas } = await loadDictionary()
+  const contraction = lookupContraction(normalizedWord, lookup)
+  if (contraction) return { ...contraction, query: word }
+
   const candidates = []
   const addCandidate = (candidate) => {
     if (candidate && !candidates.includes(candidate)) candidates.push(candidate)
@@ -272,7 +332,9 @@ async function lookupDictionary(inputWord) {
   // Prefer a real base word for standard inflections. This avoids cases
   // where an inflected row has a weak or unrelated definition, such as
   // "weeks" being treated as a surname instead of the plural of "week".
-  for (const candidate of inflections) addWithLemma(candidate)
+  if (!exactEntry || hasMorphologicalTranslation(exactEntry)) {
+    for (const candidate of inflections) addWithLemma(candidate)
+  }
 
   // Apostrophe-s words are normally possessives in subtitle text. Query the
   // noun itself before stripping punctuation, so "child's" does not become

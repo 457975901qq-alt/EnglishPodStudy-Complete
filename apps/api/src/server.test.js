@@ -87,6 +87,18 @@ await writeFile(
       pos: 'n',
       translation: '阿科姆（人名）',
     },
+    they: {
+      word: 'they',
+      phonetic: 'ðeɪ',
+      pos: 'pron',
+      translation: '他们；它们',
+    },
+    have: {
+      word: 'have',
+      phonetic: 'hæv',
+      pos: 'v',
+      translation: '有；已经',
+    },
   }),
 )
 await writeFile(
@@ -205,6 +217,14 @@ try {
   assert.equal(exactWord.found, true)
   assert.equal(exactWord.word, 'I')
   assert.equal(exactWord.translation, '我')
+
+  const contractionRes = await get("/api/dict/they've")
+  assert.equal(contractionRes.status, 200)
+  const contraction = await contractionRes.json()
+  assert.equal(contraction.found, true)
+  assert.equal(contraction.word, 'they have')
+  assert.match(contraction.translation, /they：他们；它们/)
+  assert.match(contraction.translation, /have：有；已经/)
 
   const missingWordRes = await get('/api/dict/notaword')
   assert.equal(missingWordRes.status, 200)
