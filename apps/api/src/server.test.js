@@ -45,9 +45,54 @@ await writeFile(
       pos: 'n',
       translation: '星期；周',
     },
+    buses: {
+      word: 'buses',
+      phonetic: '',
+      pos: 'n',
+      translation: '公共汽车（bus 的复数形式）',
+    },
+    buse: {
+      word: 'buse',
+      phonetic: '',
+      pos: 'n',
+      translation: '布斯（人名）',
+    },
+    bus: {
+      word: 'bus',
+      phonetic: 'bʌs',
+      pos: 'n',
+      translation: '公共汽车',
+    },
+    child: {
+      word: 'child',
+      phonetic: 'tʃaɪld',
+      pos: 'n',
+      translation: '孩子；儿童',
+    },
+    childs: {
+      word: 'childs',
+      phonetic: '',
+      pos: 'n',
+      translation: '蔡尔兹（人名）',
+    },
+    i: {
+      word: 'I',
+      phonetic: 'aɪ',
+      pos: 'pron',
+      translation: '我',
+    },
+    acoming: {
+      word: 'a-coming',
+      phonetic: '',
+      pos: 'n',
+      translation: '阿科姆（人名）',
+    },
   }),
 )
-await writeFile(path.join(tempDictDir, 'lemmas.json'), JSON.stringify({ ran: 'run', running: 'run', weeks: 'week' }))
+await writeFile(
+  path.join(tempDictDir, 'lemmas.json'),
+  JSON.stringify({ ran: 'run', running: 'run', weeks: 'week', buses: 'bus', i: 'acoming' }),
+)
 
 const { createServer } = await import('./server.js')
 
@@ -139,6 +184,27 @@ try {
   assert.equal(ambiguousLemma.word, 'week')
   assert.equal(ambiguousLemma.translation, '星期；周')
   assert.equal(ambiguousLemma.matched, 'week')
+
+  const pluralRes = await get('/api/dict/buses')
+  assert.equal(pluralRes.status, 200)
+  const plural = await pluralRes.json()
+  assert.equal(plural.found, true)
+  assert.equal(plural.word, 'bus')
+  assert.equal(plural.translation, '公共汽车')
+
+  const possessiveRes = await get("/api/dict/child's")
+  assert.equal(possessiveRes.status, 200)
+  const possessive = await possessiveRes.json()
+  assert.equal(possessive.found, true)
+  assert.equal(possessive.word, 'child')
+  assert.equal(possessive.translation, '孩子；儿童')
+
+  const exactWordRes = await get('/api/dict/i')
+  assert.equal(exactWordRes.status, 200)
+  const exactWord = await exactWordRes.json()
+  assert.equal(exactWord.found, true)
+  assert.equal(exactWord.word, 'I')
+  assert.equal(exactWord.translation, '我')
 
   const missingWordRes = await get('/api/dict/notaword')
   assert.equal(missingWordRes.status, 200)

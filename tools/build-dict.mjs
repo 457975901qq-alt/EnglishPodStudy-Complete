@@ -116,8 +116,26 @@ function addExchangeLemmas(lemmas, word, exchange) {
   }
 }
 
-function addLookupAlias(lookup, key, entry) {
-  if (key && !lookup[key]) lookup[key] = entry
+function lookupPriority(key, word) {
+  const normalizedWord = word.toLowerCase()
+  let priority = 0
+
+  // ECDICT contains entries such as "at-tack", "b-e" and "ba-by".
+  // Their stripped aliases collide with the normal words "attack", "be"
+  // and "baby". Prefer the spelling that actually matches the query.
+  if (normalizedWord === key) priority += 100
+  if (stripWord(word) === key) priority += 10
+  return priority
+}
+
+function addLookupAlias(lookup, priorities, key, entry) {
+  if (!key) return
+
+  const priority = lookupPriority(key, entry.word)
+  if (!lookup[key] || priority > (priorities[key] ?? -Infinity)) {
+    lookup[key] = entry
+    priorities[key] = priority
+  }
 }
 
 async function main() {
@@ -127,6 +145,7 @@ async function main() {
     rows[0]?.[0]?.toLowerCase() === 'word' ? rows : [columns, ...rows]
 
   const lookup = {}
+  const lookupPriorities = {}
   const lemmas = {}
 
   for (const row of entries) {
@@ -142,8 +161,8 @@ async function main() {
       translation: record.translation.trim(),
     }
 
-    addLookupAlias(lookup, normalizedWord, entry)
-    addLookupAlias(lookup, stripWord(word), entry)
+    addLookupAlias(lookup, lookupPriorities, normalizedWord, entry)
+    addLookupAlias(lookup, lookupPriorities, stripWord(word), entry)
     addExchangeLemmas(lemmas, word, record.exchange)
   }
 

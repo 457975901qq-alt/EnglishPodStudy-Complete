@@ -141,6 +141,12 @@ function inflectionCandidates(word) {
   return candidates
 }
 
+const MORPHOLOGY_MARKER = /(?:复数|过去式|过去分词|现在分词|第三人称单数|plural of|past tense|past participle|present participle)/i
+
+function hasMorphologicalTranslation(entry) {
+  return Boolean(entry?.translation && MORPHOLOGY_MARKER.test(entry.translation))
+}
+
 function parseTime(value) {
   const match = value.match(/^(\d{2}):(\d{2}):(\d{2}),(\d{3})$/)
   if (!match) return 0
@@ -233,6 +239,9 @@ async function lookupDictionary(inputWord) {
 
   const normalizedWord = word.toLowerCase()
   const strippedWord = stripWord(word)
+  const possessiveMatch = normalizedWord.match(/^(.*?)[’']s$/)
+  const possessiveBase = possessiveMatch ? possessiveMatch[1] : ''
+  const possessiveStripped = stripWord(possessiveBase)
   const { lookup, lemmas } = await loadDictionary()
   const candidates = []
   const addCandidate = (candidate) => {
@@ -243,15 +252,36 @@ async function lookupDictionary(inputWord) {
     addCandidate(lemmas[candidate])
   }
 
-  // Prefer the lemma entry for inflected forms. Some dictionary datasets
-  // contain a weaker or unrelated translation on the inflected row itself
-  // (for example, "weeks" may be treated as a surname), while the lemma
-  // entry contains the useful common-word definition.
-  addCandidate(lemmas[normalizedWord])
-  addCandidate(lemmas[strippedWord])
+  const exactEntry = lookup[normalizedWord] ?? lookup[strippedWord]
+  const mappedLemma = lemmas[normalizedWord] ?? lemmas[strippedWord]
+  const inflections = inflectionCandidates(strippedWord)
+
+  // Keep an explicit source mapping ahead of heuristic candidates. For
+  // example, "buses" can be guessed as "buse" or "bus", but ECDICT's
+  // mapping identifies "bus" as the correct base word.
+  if (
+    mappedLemma &&
+    (!exactEntry ||
+      hasMorphologicalTranslation(exactEntry) ||
+      inflections.includes(mappedLemma) ||
+      possessiveStripped === strippedWord)
+  ) {
+    addCandidate(mappedLemma)
+  }
+
+  // Prefer a real base word for standard inflections. This avoids cases
+  // where an inflected row has a weak or unrelated definition, such as
+  // "weeks" being treated as a surname instead of the plural of "week".
+  for (const candidate of inflections) addWithLemma(candidate)
+
+  // Apostrophe-s words are normally possessives in subtitle text. Query the
+  // noun itself before stripping punctuation, so "child's" does not become
+  // the unrelated dictionary entry "childs".
+  addCandidate(possessiveBase)
+  addCandidate(possessiveStripped)
+
   addCandidate(normalizedWord)
   addCandidate(strippedWord)
-  for (const candidate of inflectionCandidates(strippedWord)) addWithLemma(candidate)
 
   for (const candidate of candidates) {
     const entry = lookup[candidate]
