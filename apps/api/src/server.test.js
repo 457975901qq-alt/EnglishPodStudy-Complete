@@ -33,9 +33,21 @@ await writeFile(
       pos: 'v; n',
       translation: '学习；研究',
     },
+    weeks: {
+      word: 'weeks',
+      phonetic: 'wiːks',
+      pos: 'n',
+      translation: '威克斯（姓氏）',
+    },
+    week: {
+      word: 'week',
+      phonetic: 'wiːk',
+      pos: 'n',
+      translation: '星期；周',
+    },
   }),
 )
-await writeFile(path.join(tempDictDir, 'lemmas.json'), JSON.stringify({ ran: 'run', running: 'run' }))
+await writeFile(path.join(tempDictDir, 'lemmas.json'), JSON.stringify({ ran: 'run', running: 'run', weeks: 'week' }))
 
 const { createServer } = await import('./server.js')
 
@@ -119,6 +131,14 @@ try {
   assert.equal(iesLemma.found, true)
   assert.equal(iesLemma.word, 'study')
   assert.equal(iesLemma.matched, 'study')
+
+  const ambiguousLemmaRes = await get('/api/dict/weeks')
+  assert.equal(ambiguousLemmaRes.status, 200)
+  const ambiguousLemma = await ambiguousLemmaRes.json()
+  assert.equal(ambiguousLemma.found, true)
+  assert.equal(ambiguousLemma.word, 'week')
+  assert.equal(ambiguousLemma.translation, '星期；周')
+  assert.equal(ambiguousLemma.matched, 'week')
 
   const missingWordRes = await get('/api/dict/notaword')
   assert.equal(missingWordRes.status, 200)

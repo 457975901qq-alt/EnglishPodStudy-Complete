@@ -243,8 +243,14 @@ async function lookupDictionary(inputWord) {
     addCandidate(lemmas[candidate])
   }
 
-  addWithLemma(normalizedWord)
-  addWithLemma(strippedWord)
+  // Prefer the lemma entry for inflected forms. Some dictionary datasets
+  // contain a weaker or unrelated translation on the inflected row itself
+  // (for example, "weeks" may be treated as a surname), while the lemma
+  // entry contains the useful common-word definition.
+  addCandidate(lemmas[normalizedWord])
+  addCandidate(lemmas[strippedWord])
+  addCandidate(normalizedWord)
+  addCandidate(strippedWord)
   for (const candidate of inflectionCandidates(strippedWord)) addWithLemma(candidate)
 
   for (const candidate of candidates) {
