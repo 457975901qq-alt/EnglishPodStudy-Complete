@@ -39,13 +39,14 @@ Assert-Null $byId['0001'].category 'front section category is empty'
 
 Assert-Equal $byId['0161'].title 'Computer Games' 'post-160 title is present'
 Assert-Equal $byId['0161'].displayTitle 'Daily Life - Computer Games' 'display title includes category'
-Assert-Null $byId['0161'].level 'post-160 level is empty'
+Assert-Equal $byId['0161'].level 'Intermediate' 'post-160 estimated level is present'
+Assert-Equal $byId['0161'].levelCode 'C' 'post-160 estimated levelCode is present'
 Assert-Equal $byId['0161'].category 'Daily Life' 'post-160 category is present'
 Assert-Equal $byId['0161'].resources.lesson 'resource/0161/lesson.mp3' 'lesson audio path is present'
 Assert-Equal $byId['0161'].availability.worksheet $true 'worksheet availability is present'
 
 $levelB = $data.levels | Where-Object code -eq 'B'
-Assert-Equal $levelB.count 57 'level summary count is grouped by levelCode'
+Assert-Equal $levelB.count 145 'level summary count is grouped by levelCode'
 
 $dailyLife = $data.categories | Where-Object name -eq 'Daily Life'
 Assert-Equal $dailyLife.count 88 'category summary count is grouped by category'

@@ -24,8 +24,8 @@ foreach ($lesson in $catalog.lessons) {
 }
 
 Assert-Equal $byNo['0161'].id '0161' 'post-160 id is the four digit lesson number'
-Assert-Null $byNo['0161'].level 'post-160 level is empty'
-Assert-Null $byNo['0161'].levelCode 'post-160 levelCode is empty'
+Assert-Equal $byNo['0161'].level 'Intermediate' 'post-160 estimated level is present'
+Assert-Equal $byNo['0161'].levelCode 'C' 'post-160 estimated levelCode is present'
 Assert-Equal $byNo['0161'].category 'Daily Life' 'category is parsed from titled series'
 Assert-Equal $byNo['0161'].topic 'Computer Games' 'topic drops category prefix'
 

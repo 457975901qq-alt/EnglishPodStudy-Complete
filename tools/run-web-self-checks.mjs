@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process'
 
 const files = [
+  'tools/course-list.self-check.mjs',
   'apps/web/src/components/lesson/courseFilter.self-check.mjs',
   'apps/web/src/components/lesson/playbackMode.self-check.mjs',
   'apps/web/src/components/lesson/playerVisibility.self-check.mjs',

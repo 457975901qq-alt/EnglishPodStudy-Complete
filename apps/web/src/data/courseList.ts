@@ -62,6 +62,7 @@ const COURSE_LEVEL_LABELS: Record<string, string> = {
   intermediate: '中等',
   'upper intermediate': '较难',
   advanced: '困难',
+  special: '特殊',
 }
 
 export function formatCourseLevel(level: string | null | undefined) {

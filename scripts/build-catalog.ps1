@@ -17,6 +17,19 @@ $levelNames = @{
   'E' = 'Advanced'
   'F' = 'Special'
 }
+$levelOverridePath = Join-Path $RootFull 'resource\lesson-levels.json'
+$levelOverrides = if (Test-Path $levelOverridePath) {
+  Get-Content $levelOverridePath -Raw | ConvertFrom-Json
+} else {
+  $null
+}
+
+function Get-LevelOverride([string]$number) {
+  if (-not $levelOverrides) { return $null }
+  $property = $levelOverrides.PSObject.Properties[$number]
+  if ($property) { return [string]$property.Value }
+  return $null
+}
 
 function Get-Mp3Title($file) {
   $folder = $shell.Namespace($file.DirectoryName)
@@ -56,8 +69,10 @@ foreach ($dir in $lessonDirs) {
   if (-not $mp3s) { continue }
 
   $first = $mp3s[0]
-  if ($first.BaseName -notmatch '_([A-Z])(\d{4})') { continue }
+  if ($first.BaseName -notmatch '_([A-Z]?)(\d{4})') { continue }
   $letter = $matches[1]
+  if ($num -gt 160) { $letter = $null }
+  $levelCode = if ($letter) { $letter } else { Get-LevelOverride $dir.Name }
 
   # Map audio files by suffix: dg=dialog, pb/pr=main lesson, rv=review
   $audio = @{}
@@ -84,11 +99,11 @@ foreach ($dir in $lessonDirs) {
   $txt = "$Root\english_pod\txt\englishpod_$($dir.Name).txt"
 
   $lessons += [ordered]@{
-    id        = ('{0}{1}' -f $letter, $dir.Name)
+    id        = ('{0}{1}' -f $levelCode, $dir.Name)
     no        = $dir.Name
     seq       = $num
-    level     = $levelNames[$letter]
-    levelCode = $letter
+    level     = $levelNames[$levelCode]
+    levelCode = $levelCode
     topic     = $topic
     group     = $dir.Parent.Name
     audio     = [ordered]@{

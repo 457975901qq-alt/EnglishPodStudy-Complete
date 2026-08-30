@@ -17,6 +17,19 @@ $levelNames = @{
   'E' = 'Advanced'
   'F' = 'Special'
 }
+$levelOverridePath = Join-Path $RootFull 'resource\lesson-levels.json'
+$levelOverrides = if (Test-Path $levelOverridePath) {
+  Get-Content $levelOverridePath -Raw | ConvertFrom-Json
+} else {
+  $null
+}
+
+function Get-LevelOverride([string]$number) {
+  if (-not $levelOverrides) { return $null }
+  $property = $levelOverrides.PSObject.Properties[$number]
+  if ($property) { return [string]$property.Value }
+  return $null
+}
 
 function Get-Mp3Title($file) {
   $folder = $shell.Namespace($file.DirectoryName)
@@ -76,6 +89,7 @@ foreach ($dir in $lessonDirs) {
   if ($first.BaseName -notmatch '_([A-Z]?)(\d{4})') { continue }
   $letter = if ($matches[1]) { $matches[1] } else { $null }
   if ($num -gt 160) { $letter = $null }
+  $levelCode = if ($letter) { $letter } else { Get-LevelOverride $no }
 
   $dest = Join-Path $ResourceDir $no
   New-Item -ItemType Directory -Force -Path $dest | Out-Null
@@ -117,8 +131,8 @@ foreach ($dir in $lessonDirs) {
     id        = $no
     no        = $no
     seq       = $num
-    level     = if ($letter) { $levelNames[$letter] } else { $null }
-    levelCode = $letter
+    level     = if ($levelCode) { $levelNames[$levelCode] } else { $null }
+    levelCode = $levelCode
     category  = $titleParts.category
     topic     = $titleParts.topic
     group     = $dir.Parent.Name
@@ -188,7 +202,7 @@ $courseList = [ordered]@{
       from        = '0001'
       to          = '0160'
       count       = @($courseLessons | Where-Object { $_['seq'] -le 160 }).Count
-      description = 'Difficulty levels are available only in this range.'
+      description = 'Official levels are available for 0001-0160; later lessons use content-based estimates.'
     },
     [ordered]@{
       name        = 'category'
