@@ -474,6 +474,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
             onSave={(entry, selection) => {
               addVocab({
                 word: entry.word,
+                audioWord: selection.word,
                 phonetic: entry.phonetic,
                 translation: entry.translation,
                 pos: entry.pos,

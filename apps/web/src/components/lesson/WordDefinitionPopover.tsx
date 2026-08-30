@@ -91,7 +91,7 @@ export function WordDefinitionPopover({
       role="dialog"
       aria-label={`${selection.word} 的释义`}
     >
-      <audio ref={audioRef} preload="auto" aria-hidden="true" />
+      <audio className="word-audio-element" ref={audioRef} preload="auto" aria-hidden="true" />
       <div className="word-popover-head">
         <div>
           <div className="word-popover-word-row">

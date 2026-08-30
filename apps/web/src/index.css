@@ -866,6 +866,10 @@
     opacity: 0.45;
   }
 
+  .word-audio-element {
+    display: none;
+  }
+
   .word-popover-phonetic,
   .word-popover-muted {
     margin-top: 2px;

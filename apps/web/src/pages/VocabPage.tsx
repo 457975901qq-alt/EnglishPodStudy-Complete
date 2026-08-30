@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { formatTime } from '@/data/courseList'
 import { PAGE_TITLES } from '@/lib/pageTitles'
+import { WordAudioButton } from '@/components/lesson/WordAudioButton'
 import {
   readVocab,
   removeVocab,
@@ -153,6 +154,10 @@ export function VocabPage() {
                 <div>
                   <div className="flex flex-wrap items-baseline gap-3">
                     <h2 className="text-2xl font-semibold">{entry.word}</h2>
+                    <WordAudioButton
+                      word={entry.audioWord ?? entry.word}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-soft)] bg-[var(--surface)] text-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-40"
+                    />
                     {entry.phonetic && (
                       <span className="text-sm text-[var(--muted)]">/{entry.phonetic}/</span>
                     )}

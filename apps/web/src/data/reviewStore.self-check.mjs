@@ -40,6 +40,7 @@ globalThis.window = {
 const firstEntry = addVocab(
   {
     word: 'Business',
+    audioWord: 'Business',
     phonetic: 'biz',
     translation: 'n. 商业',
     pos: 'n.',
@@ -68,6 +69,7 @@ assert.equal(firstEntry.id, 'business')
 assert.equal(secondEntry.id, 'business')
 assert.equal(readVocab().length, 1)
 assert.equal(readVocab()[0].contexts.length, 2)
+assert.equal(readVocab()[0].audioWord, 'business')
 assert.equal(readVocab()[0].review.dueAt, now + DAY)
 
 addReviewSentence(

@@ -29,6 +29,7 @@ export type VocabContext = {
 export type VocabEntry = {
   id: string
   word: string
+  audioWord?: string
   phonetic?: string
   translation: string
   pos?: string
@@ -40,6 +41,7 @@ export type VocabEntry = {
 
 export type VocabDraft = {
   word: string
+  audioWord?: string
   phonetic?: string
   translation: string
   pos?: string
@@ -89,6 +91,11 @@ const STAGE_INTERVALS = [DAY_MS, 3 * DAY_MS, 7 * DAY_MS, 14 * DAY_MS, 30 * DAY_M
 
 function normalizeWord(word: string) {
   return word.trim().toLowerCase()
+}
+
+function normalizeAudioWord(word: unknown) {
+  const value = String(word ?? '').trim()
+  return value ? normalizeWord(value) : undefined
 }
 
 function normalizeTime(value: unknown) {
@@ -192,6 +199,7 @@ function normalizeVocabEntry(value: unknown, now: number): VocabEntry | null {
   return {
     id: word,
     word,
+    audioWord: normalizeAudioWord(record.audioWord),
     phonetic: record.phonetic ? String(record.phonetic) : undefined,
     translation,
     pos: record.pos ? String(record.pos) : undefined,
@@ -268,6 +276,7 @@ function mergeVocabEntries(entries: VocabEntry[]) {
 
     merged.set(entry.id, {
       ...existing,
+      audioWord: existing.audioWord ?? entry.audioWord,
       phonetic: existing.phonetic ?? entry.phonetic,
       translation: existing.translation || entry.translation,
       pos: existing.pos ?? entry.pos,
@@ -320,6 +329,7 @@ export function addVocab(draft: VocabDraft, options: ClockOptions = {}): VocabEn
   const entry: VocabEntry = {
     id,
     word: id,
+    audioWord: normalizeAudioWord(draft.audioWord ?? existing?.audioWord),
     phonetic: draft.phonetic ?? existing?.phonetic,
     translation: draft.translation || existing?.translation || '',
     pos: draft.pos ?? existing?.pos,
