@@ -43,7 +43,7 @@ type PersistentPlayerProps = {
   lesson: CourseLesson
   lessons: CourseLesson[]
   currentTime: number
-  seekRequest: { time: number; version: number; autoplay?: boolean } | null
+  seekRequest: { time: number; endTime?: number; version: number; autoplay?: boolean } | null
   autoplayRequest: { lessonId: string; version: number } | null
   resumeTime: number
   subtitleMode: SubtitleMode
@@ -105,6 +105,7 @@ export function PersistentPlayer({
   onAutoplayLesson,
 }: PersistentPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
+  const clipEndRef = useRef<number | null>(null)
   const subtitleSwitcherRef = useRef<HTMLDivElement>(null)
   const subtitleButtonRef = useRef<HTMLButtonElement>(null)
   const speedSwitcherRef = useRef<HTMLDivElement>(null)
@@ -226,6 +227,7 @@ export function PersistentPlayer({
   useEffect(() => {
     if (!seekRequest || !audioRef.current) return
     const audio = audioRef.current
+    clipEndRef.current = seekRequest.endTime ?? null
     audio.currentTime = seekRequest.time
     if (shouldAutoplaySeek(audio.paused, Boolean(seekRequest.autoplay))) {
       void playAudio(audio)
@@ -245,6 +247,11 @@ export function PersistentPlayer({
 
   const handleEnded = () => {
     const audio = audioRef.current
+    if (clipEndRef.current !== null) {
+      clipEndRef.current = null
+      setIsPlaying(false)
+      return
+    }
     onFlushProgress?.()
     const action = getEndedPlaybackAction(playbackMode, lessons, lesson.id)
 
@@ -272,6 +279,7 @@ export function PersistentPlayer({
         ref={audioRef}
         src={getResourceUrl(lesson.id, 'lesson.mp3')}
         onLoadStart={() => {
+          clipEndRef.current = null
           setIsPlaying(false)
           setDuration(0)
           onDurationChange(0)
@@ -291,7 +299,19 @@ export function PersistentPlayer({
             void playAudio(audio)
           }
         }}
-        onTimeUpdate={(event) => onTimeUpdate(event.currentTarget.currentTime)}
+        onTimeUpdate={(event) => {
+          const audio = event.currentTarget
+          const clipEnd = clipEndRef.current
+          if (clipEnd !== null && audio.currentTime >= clipEnd) {
+            clipEndRef.current = null
+            audio.pause()
+            audio.currentTime = clipEnd
+            setIsPlaying(false)
+            onTimeUpdate(clipEnd)
+            return
+          }
+          onTimeUpdate(audio.currentTime)
+        }}
         onPause={onFlushProgress}
         onEnded={handleEnded}
       />

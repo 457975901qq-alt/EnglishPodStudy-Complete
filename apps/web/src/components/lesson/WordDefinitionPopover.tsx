@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDictLookup, type DictLookupResult } from '@/data/dictLookup'
 import type { SubtitleWordSelection } from './SubtitlePanel'
 
@@ -30,52 +30,7 @@ export function WordDefinitionPopover({
   onRemove,
 }: WordDefinitionPopoverProps) {
   const panelRef = useRef<HTMLDivElement>(null)
-  const [isSpeaking, setIsSpeaking] = useState(false)
-  const [speechError, setSpeechError] = useState<{ word: string; message: string } | null>(null)
   const lookup = useDictLookup(selection?.word ?? null)
-  const speechSupported =
-    typeof window !== 'undefined' &&
-    'speechSynthesis' in window &&
-    'SpeechSynthesisUtterance' in window
-
-  useEffect(() => {
-    return () => {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel()
-      }
-    }
-  }, [selection?.word])
-
-  const handleSpeak = () => {
-    if (!selection || !speechSupported) return
-
-    const speech = window.speechSynthesis
-    if (isSpeaking) {
-      speech.cancel()
-      setIsSpeaking(false)
-      return
-    }
-
-    speech.cancel()
-    setSpeechError(null)
-    const utterance = new SpeechSynthesisUtterance(selection.word)
-    utterance.lang = 'en-US'
-    utterance.rate = 0.82
-    const voices = speech.getVoices()
-    utterance.voice =
-      voices.find((voice) => voice.lang.toLowerCase() === 'en-us') ??
-      voices.find((voice) => voice.lang.toLowerCase().startsWith('en')) ??
-      null
-    utterance.onstart = () => setIsSpeaking(true)
-    utterance.onend = () => setIsSpeaking(false)
-    utterance.onerror = (event) => {
-      setIsSpeaking(false)
-      if (event.error !== 'canceled') {
-        setSpeechError({ word: selection.word, message: '无法播放发音，请检查浏览器语音设置。' })
-      }
-    }
-    speech.speak(utterance)
-  }
 
   useEffect(() => {
     if (!selection) return
@@ -117,18 +72,9 @@ export function WordDefinitionPopover({
         <div>
           <div className="word-popover-word-row">
             <p className="word-popover-word">{entry?.word ?? selection.word}</p>
-            <button
-              className="word-popover-audio"
-              type="button"
-              onClick={handleSpeak}
-              disabled={!speechSupported}
-              aria-label={isSpeaking ? '停止发音' : '播放发音'}
-              aria-pressed={isSpeaking}
-              title={speechSupported ? '播放英文发音' : '当前浏览器不支持语音播放'}
-            >
-              <span aria-hidden="true">{isSpeaking ? '■' : '🔊'}</span>
-              {isSpeaking ? '停止' : '发音'}
-            </button>
+            <span className="word-popover-audio-status" aria-label="已自动播放课程原声">
+              🔊 原声
+            </span>
           </div>
           {entry?.phonetic && <p className="word-popover-phonetic">/{entry.phonetic}/</p>}
         </div>
@@ -139,9 +85,6 @@ export function WordDefinitionPopover({
 
       {lookup.loading && <p className="word-popover-muted">正在查询释义...</p>}
       {lookup.error && <p className="word-popover-error">{lookup.error}</p>}
-      {speechError?.word === selection.word && (
-        <p className="word-popover-error">{speechError.message}</p>
-      )}
       {lookup.data && !lookup.data.found && (
         <p className="word-popover-muted">本地词典暂未收录这个词。</p>
       )}

@@ -75,6 +75,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
   })
   const [seekRequest, setSeekRequest] = useState<{
     time: number
+    endTime?: number
     version: number
     autoplay?: boolean
   } | null>(null)
@@ -137,6 +138,16 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
     if (forcedSubtitleMode) return
     setSubtitleMode(mode)
     saveSubtitleMode(mode)
+  }
+
+  const handleWordSelect = (selection: SubtitleWordSelection) => {
+    setSelectedWord(selection)
+    setSeekRequest((current) => ({
+      time: selection.cue.start,
+      endTime: selection.cue.end,
+      version: (current?.version ?? 0) + 1,
+      autoplay: true,
+    }))
   }
 
   const updateStage = (stage: LearningStage) => {
@@ -443,7 +454,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
               currentTime={currentTime}
               message={subtitleMessage}
               obscured={effectiveSubtitleMode === 'off'}
-              onWordSelect={setSelectedWord}
+                onWordSelect={handleWordSelect}
               onSeek={(time) => {
                 setSelectedWord(null)
                 setSeekRequest((current) => ({
