@@ -56,6 +56,8 @@ const subtitleModeFiles = new Map([
   ['zh', 'subtitle.zh.srt'],
 ])
 
+const YOUDAO_WORD_AUDIO_URL = 'https://dict.youdao.com/dictvoice'
+
 function json(res, status, body, head = false) {
   const payload = JSON.stringify(body)
   res.writeHead(status, {
@@ -100,6 +102,57 @@ function stripWord(word) {
     .filter((char) => /[a-z0-9]/i.test(char))
     .join('')
     .toLowerCase()
+}
+
+function normalizeAudioWord(inputWord) {
+  let word
+  try {
+    word = decodeURIComponent(inputWord).trim().toLowerCase().replaceAll('’', "'")
+  } catch {
+    return null
+  }
+
+  // The endpoint is intentionally limited to subtitle word tokens. It must
+  // never become a general-purpose URL proxy or receive a sentence.
+  return /^[a-z0-9]+(?:['-][a-z0-9]+)*$/i.test(word) && word.length <= 80 ? word : null
+}
+
+async function sendDictionaryAudio(req, res, inputWord) {
+  const word = normalizeAudioWord(inputWord)
+  if (!word) {
+    notFound(res, req.method === 'HEAD')
+    return
+  }
+
+  const audioUrl = `${YOUDAO_WORD_AUDIO_URL}?audio=${encodeURIComponent(word)}&type=2`
+  let response
+  try {
+    response = await fetch(audioUrl, {
+      headers: { accept: 'audio/mpeg,audio/*;q=0.9,*/*;q=0.1' },
+      signal: AbortSignal.timeout(5000),
+    })
+  } catch {
+    serviceUnavailable(res, 'Word pronunciation is temporarily unavailable', req.method === 'HEAD')
+    return
+  }
+
+  const contentType = response.headers.get('content-type') ?? ''
+  if (!response.ok || !contentType.toLowerCase().startsWith('audio/')) {
+    serviceUnavailable(res, 'Word pronunciation is temporarily unavailable', req.method === 'HEAD')
+    return
+  }
+
+  const audio = Buffer.from(await response.arrayBuffer())
+  res.writeHead(200, {
+    'cache-control': 'public, max-age=86400',
+    'content-length': audio.length,
+    'content-type': contentType,
+  })
+  if (req.method === 'HEAD') {
+    res.end()
+    return
+  }
+  res.end(audio)
 }
 
 function inflectionCandidates(word) {
@@ -586,6 +639,11 @@ async function route(req, res) {
         head,
       )
     }
+    return
+  }
+
+  if (parts[0] === 'api' && parts[1] === 'dict-audio' && parts.length === 3) {
+    await sendDictionaryAudio(req, res, parts[2])
     return
   }
 

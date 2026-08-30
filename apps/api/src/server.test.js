@@ -305,6 +305,11 @@ try {
   const missingWord = await missingWordRes.json()
   assert.equal(missingWord.found, false)
 
+  // Word audio must reject sentences so a dictionary click can never play a
+  // full subtitle line through this endpoint.
+  const sentenceAudioRes = await get('/api/dict-audio/a%20full%20sentence')
+  assert.equal(sentenceAudioRes.status, 404)
+
   const audioRes = await get('/api/resources/0161/lesson.mp3')
   assert.equal(audioRes.status, 200)
   assert.equal(audioRes.headers.get('content-type'), 'audio/mpeg')

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useDictLookup, type DictLookupResult } from '@/data/dictLookup'
+import { getWordAudioUrl } from '@/data/dictAudio'
 import type { SubtitleWordSelection } from './SubtitlePanel'
 
 type WordDefinitionPopoverProps = {
@@ -30,7 +31,29 @@ export function WordDefinitionPopover({
   onRemove,
 }: WordDefinitionPopoverProps) {
   const panelRef = useRef<HTMLDivElement>(null)
+  const audioRef = useRef<HTMLAudioElement>(null)
   const lookup = useDictLookup(selection?.word ?? null)
+  const audioUrl = selection ? getWordAudioUrl(selection.word) : null
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio || !audioUrl) return
+
+    audio.pause()
+    audio.src = audioUrl
+    audio.currentTime = 0
+    audio.load()
+    void audio.play().catch(() => {
+      // Browser autoplay policies can reject an async media request. The
+      // visible replay button remains available in that case.
+    })
+
+    return () => {
+      audio.pause()
+      audio.removeAttribute('src')
+      audio.load()
+    }
+  }, [audioUrl, selection])
 
   useEffect(() => {
     if (!selection) return
@@ -68,13 +91,26 @@ export function WordDefinitionPopover({
       role="dialog"
       aria-label={`${selection.word} 的释义`}
     >
+      <audio ref={audioRef} preload="auto" aria-hidden="true" />
       <div className="word-popover-head">
         <div>
           <div className="word-popover-word-row">
-            <p className="word-popover-word">{entry?.word ?? selection.word}</p>
-            <span className="word-popover-audio-status" aria-label="已自动播放课程原声">
-              🔊 原声
-            </span>
+            <p className="word-popover-word">{selection.word}</p>
+            <button
+              className="word-popover-audio"
+              type="button"
+              onClick={() => {
+                const audio = audioRef.current
+                if (!audio) return
+                audio.currentTime = 0
+                void audio.play()
+              }}
+              disabled={!audioUrl}
+              aria-label={`播放 ${selection.word} 的单词发音`}
+              title="重播单词发音"
+            >
+              🔊
+            </button>
           </div>
           {entry?.phonetic && <p className="word-popover-phonetic">/{entry.phonetic}/</p>}
         </div>

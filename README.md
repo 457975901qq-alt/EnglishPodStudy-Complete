@@ -48,6 +48,8 @@ EnglishPod365 is an online English learning website built around 365 EnglishPod 
 
 在课程字幕中点击英文单词，会弹出释义卡片，展示音标、词性和中文释义。用户可以把单词加入生词本，系统会记录来源课程、句子和时间点，方便之后回到真实语境中复习。
 
+点击单词后会自动播放当前点击的“原词”发音，例如点击 `weeks` 播放 `weeks`，不会播放整句课程音频。发音使用与 EasyDict 英文单词发音相同的有道单词音频接口，由本项目后端代理；弹窗中的 🔊 按钮可手动重播。为了避免把句子误当成单词，音频接口只接受英文单词、连字符词和缩写形式。
+
 词典查询支持三层匹配：原词精确匹配、ECDICT 词形映射（例如 `running` → `run`、`goes` → `go`），以及常见的复数、过去式、进行时和第三人称形式回退。因此点击字幕中的变形词时，也能尽量显示原形释义。
 
 词典数据位于 `resource/dict/ecdict.mini.csv`，当前是从公开 [ECDICT](https://github.com/skywind3000/ECDICT) 数据整理出的课程词汇子集，覆盖仓库课程字幕中的词汇及其常见变形，约 5.7 万条词典记录。启动时会自动生成本地查询索引：
@@ -317,6 +319,7 @@ npm run preview -w apps/web
 - `GET /api/courses/:lessonId/subtitles?mode=bilingual|off|zh|en`：读取并解析字幕。
 - `GET /api/resources/:lessonId/:fileName`：读取课程音频、PDF、字幕或文本资源。
 - `GET /api/dict/:word`：查询本地词典。
+- `GET /api/dict-audio/:word`：获取当前单词的有道单词发音音频，不接受整句文本。
 
 ## 常用命令
 
@@ -337,5 +340,4 @@ npm run start:api    # 生产方式启动 API
 - 学习进度、生词本和复习计划保存在浏览器本地存储，换浏览器或清缓存后不会自动同步。
 - 当前没有用户系统，适合个人自部署使用。
 - AI 解析、PDF 内嵌阅读、跟读评分等能力在 `PRD.md` 中有规划，但 README 仅描述当前代码中可运行的核心功能。
-
 
