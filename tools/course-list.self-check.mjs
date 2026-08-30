@@ -12,6 +12,7 @@ const names = {
 
 assert.equal(data.count, 365)
 assert.equal(data.lessons.length, 365)
+assert.ok(data.lessons.every((lesson) => String(lesson.displayTitle ?? '').trim()), 'all courses have names')
 assert.ok(data.lessons.every((lesson) => lesson.level && lesson.levelCode))
 assert.ok(data.lessons.every((lesson) => names[lesson.levelCode] === lesson.level))
 assert.deepEqual(

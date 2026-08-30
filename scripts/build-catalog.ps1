@@ -23,10 +23,23 @@ $levelOverrides = if (Test-Path $levelOverridePath) {
 } else {
   $null
 }
+$lessonTitleOverridePath = Join-Path $RootFull 'resource\lesson-titles.json'
+$lessonTitleOverrides = if (Test-Path $lessonTitleOverridePath) {
+  Get-Content $lessonTitleOverridePath -Raw | ConvertFrom-Json
+} else {
+  $null
+}
 
 function Get-LevelOverride([string]$number) {
   if (-not $levelOverrides) { return $null }
   $property = $levelOverrides.PSObject.Properties[$number]
+  if ($property) { return [string]$property.Value }
+  return $null
+}
+
+function Get-LessonTitleOverride([string]$number) {
+  if (-not $lessonTitleOverrides) { return $null }
+  $property = $lessonTitleOverrides.PSObject.Properties[$number]
   if ($property) { return [string]$property.Value }
   return $null
 }
@@ -91,6 +104,8 @@ foreach ($dir in $lessonDirs) {
   $mainFile = $mp3s | Where-Object { $_.BaseName -match '(pb|pr)$' } | Select-Object -First 1
   if (-not $mainFile) { $mainFile = $first }
   $topic = Clean-Topic (Get-Mp3Title $mainFile)
+  $titleOverride = Get-LessonTitleOverride $dir.Name
+  if ($titleOverride) { $topic = $titleOverride }
 
   $pdf = Get-ChildItem $dir.FullName -Filter *.pdf | Select-Object -First 1
   $pdfRel = if ($pdf) { Rel $pdf.FullName } else { $null }

@@ -617,7 +617,7 @@
                         "level":  "Elementary",
                         "levelCode":  "B",
                         "category":  null,
-                        "topic":  null,
+                        "topic":  "Cancelling an Appointment",
                         "group":  "0031-0040",
                         "audio":  {
                                       "dialog":  "resource/0031/dialog.mp3",

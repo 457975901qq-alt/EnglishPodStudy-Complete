@@ -31,7 +31,9 @@ EnglishPod365 is an online English learning website built around 365 EnglishPod 
 
 ### 课程库
 
-课程库读取 `resource/course-list.json`，展示课程编号、标题、等级和学习状态。支持按课程标题、课号、等级或分类搜索，也支持按学习状态筛选，方便从 365 节课程中快速找到要学的内容。前 160 节沿用原始资料中的官方级别；0161—0365 原始资料没有级别字段，项目依据课程主题和字幕内容补充了可复现的估算级别，并保存在 `resource/lesson-levels.json` 中。
+课程库读取 `resource/course-list.json`，展示课程编号、标题、等级和学习状态。支持按课程标题、课号、等级或分类搜索，也支持按学习状态筛选，方便从 365 节课程中快速找到要学的内容。课程表格使用独立滚动区域；向下滚动时页面标题、搜索框和筛选栏会自然收起，滚回列表顶部后自动恢复，以便一屏看到更多课程。前 160 节沿用原始资料中的官方级别；0161—0365 原始资料没有级别字段，项目依据课程主题和字幕内容补充了可复现的估算级别，并保存在 `resource/lesson-levels.json` 中。
+
+课程标题优先从课程音频元数据生成；当原始音频缺少标题时，使用 `resource/lesson-titles.json` 中的明确覆盖值。例如 0031 课根据字幕内容标注为 `Cancelling an Appointment`。课程自检会阻止空标题再次进入课程库。
 
 ### 沉浸式课程学习页
 
@@ -88,7 +90,9 @@ node tools/build-dict.mjs
 ├── apps
 │   ├── api              # Node.js API，提供课程列表、字幕、资源和词典查询
 │   └── web              # React + Vite 前端应用
-├── resource             # 课程资源、course-list.json、dict 词典数据
+├── resource             # 课程资源、课程目录、标题和 dict 词典数据
+│   ├── lesson-levels.json  # 0161—0365 的估算级别覆盖
+│   └── lesson-titles.json  # 音频元数据缺失时的课程标题覆盖
 ├── tools
 │   ├── build-dict.mjs   # 从词典 CSV 构建 lookup/lemmas JSON
 │   └── dev.mjs          # 同时启动 API 与 Web 开发服务
