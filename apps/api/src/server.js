@@ -154,12 +154,26 @@ const CONTRACTION_EXPANSIONS = {
   "you've": ['you', 'have'],
   "we've": ['we', 'have'],
   "they've": ['they', 'have'],
+  "let's": ['let', 'us'],
   "i'll": ['i', 'will'],
   "you'll": ['you', 'will'],
   "he'll": ['he', 'will'],
   "she'll": ['she', 'will'],
   "we'll": ['we', 'will'],
   "they'll": ['they', 'will'],
+  "it'll": ['it', 'will'],
+  "that'll": ['that', 'will'],
+  "there'll": ['there', 'will'],
+  "i'd": ['i', 'would'],
+  "you'd": ['you', 'would'],
+  "he'd": ['he', 'would'],
+  "she'd": ['she', 'would'],
+  "we'd": ['we', 'would'],
+  "they'd": ['they', 'would'],
+  "it'd": ['it', 'would'],
+  "that'd": ['that', 'would'],
+  "what'd": ['what', 'did'],
+  "where'd": ['where', 'did'],
   "can't": ['can', 'not'],
   "won't": ['will', 'not'],
   "don't": ['do', 'not'],
@@ -178,6 +192,38 @@ const CONTRACTION_EXPANSIONS = {
   "that's": ['that', 'is'],
   "what's": ['what', 'is'],
   "there's": ['there', 'is'],
+  "who's": ['who', 'is'],
+  "how's": ['how', 'is'],
+  "here's": ['here', 'is'],
+  "where's": ['where', 'is'],
+  "when's": ['when', 'is'],
+  "who've": ['who', 'have'],
+  "might've": ['might', 'have'],
+  "ain't": ['are', 'not'],
+  "o'clock": ['of', 'the', 'clock'],
+  "ma'am": ['madam'],
+}
+const AMBIGUOUS_CONTRACTION_EXPANSIONS = {
+  "he's": [['he', 'is'], ['he', 'has']],
+  "she's": [['she', 'is'], ['she', 'has']],
+  "it's": [['it', 'is'], ['it', 'has']],
+  "that's": [['that', 'is'], ['that', 'has']],
+  "there's": [['there', 'is'], ['there', 'has']],
+  "who's": [['who', 'is'], ['who', 'has']],
+  "how's": [['how', 'is'], ['how', 'has']],
+  "here's": [['here', 'is'], ['here', 'has']],
+  "where's": [['where', 'is'], ['where', 'has']],
+  "when's": [['when', 'is'], ['when', 'has']],
+  "what's": [['what', 'is'], ['what', 'has']],
+  "i'd": [['i', 'would'], ['i', 'had']],
+  "you'd": [['you', 'would'], ['you', 'had']],
+  "he'd": [['he', 'would'], ['he', 'had']],
+  "she'd": [['she', 'would'], ['she', 'had']],
+  "we'd": [['we', 'would'], ['we', 'had']],
+  "they'd": [['they', 'would'], ['they', 'had']],
+  "it'd": [['it', 'would'], ['it', 'had']],
+  "that'd": [['that', 'would'], ['that', 'had']],
+  "ain't": [['am', 'not'], ['is', 'not'], ['are', 'not']],
 }
 
 function hasMorphologicalTranslation(entry) {
@@ -187,19 +233,23 @@ function hasMorphologicalTranslation(entry) {
 function lookupContraction(word, lookup) {
   const parts = CONTRACTION_EXPANSIONS[word]
   if (!parts) return null
+  const expansions = AMBIGUOUS_CONTRACTION_EXPANSIONS[word] ?? [parts]
 
-  const entries = parts.map((part) => lookup[part] ?? lookup[stripWord(part)])
-  if (entries.some((entry) => !entry)) return null
+  const resolved = expansions.map((expansion) => ({
+    expansion,
+    entries: expansion.map((part) => lookup[part] ?? lookup[stripWord(part)]),
+  }))
+  if (resolved.some(({ entries }) => entries.some((entry) => !entry))) return null
 
   return {
     found: true,
     query: word,
-    matched: parts.join(' '),
-    word: parts.join(' '),
+    matched: resolved.map(({ expansion }) => expansion.join(' ')).join(' / '),
+    word: resolved.map(({ expansion }) => expansion.join(' ')).join(' / '),
     phonetic: '',
     pos: '',
-    translation: entries
-      .map((entry, index) => `${parts[index]}：${entry.translation}`)
+    translation: resolved
+      .map(({ expansion, entries }) => `${expansion.join(' ')}：${entries.map((entry) => entry.translation).join('；')}`)
       .join('\n'),
   }
 }

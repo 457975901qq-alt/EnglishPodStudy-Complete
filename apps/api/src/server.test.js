@@ -99,6 +99,60 @@ await writeFile(
       pos: 'v',
       translation: '有；已经',
     },
+    let: {
+      word: 'let',
+      phonetic: 'let',
+      pos: 'v',
+      translation: '让；允许',
+    },
+    us: {
+      word: 'us',
+      phonetic: 'ʌs',
+      pos: 'pron',
+      translation: '我们',
+    },
+    this: {
+      word: 'this',
+      phonetic: 'ðɪs',
+      pos: 'pron',
+      translation: '这；本',
+    },
+    thi: {
+      word: 'thi',
+      phonetic: '',
+      pos: 'abbr',
+      translation: '温度-湿度指数',
+    },
+    who: {
+      word: 'who',
+      phonetic: 'huː',
+      pos: 'pron',
+      translation: '谁',
+    },
+    is: {
+      word: 'is',
+      phonetic: 'ɪz',
+      pos: 'v',
+      translation: '是',
+    },
+    has: {
+      word: 'has',
+      phonetic: 'hæz',
+      pos: 'v',
+      translation: '有；已经',
+    },
+    would: {
+      word: 'would',
+      phonetic: 'wʊd',
+      pos: 'v',
+      translation: '将；会',
+    },
+    had: {
+      word: 'had',
+      phonetic: 'hæd',
+      pos: 'v',
+      translation: '有过；已经',
+    },
   }),
 )
 await writeFile(
@@ -223,8 +277,28 @@ try {
   const contraction = await contractionRes.json()
   assert.equal(contraction.found, true)
   assert.equal(contraction.word, 'they have')
-  assert.match(contraction.translation, /they：他们；它们/)
-  assert.match(contraction.translation, /have：有；已经/)
+  assert.equal(contraction.translation, 'they have：他们；它们；有；已经')
+
+  const letUsRes = await get("/api/dict/let's")
+  assert.equal(letUsRes.status, 200)
+  const letUs = await letUsRes.json()
+  assert.equal(letUs.found, true)
+  assert.equal(letUs.word, 'let us')
+
+  const thisRes = await get('/api/dict/this')
+  assert.equal(thisRes.status, 200)
+  const thisWord = await thisRes.json()
+  assert.equal(thisWord.found, true)
+  assert.equal(thisWord.word, 'this')
+  assert.equal(thisWord.translation, '这；本')
+
+  const ambiguousRes = await get("/api/dict/who's")
+  assert.equal(ambiguousRes.status, 200)
+  const ambiguous = await ambiguousRes.json()
+  assert.equal(ambiguous.found, true)
+  assert.equal(ambiguous.word, 'who is / who has')
+  assert.match(ambiguous.translation, /who is：谁；是/)
+  assert.match(ambiguous.translation, /who has：谁；有；已经/)
 
   const missingWordRes = await get('/api/dict/notaword')
   assert.equal(missingWordRes.status, 200)
