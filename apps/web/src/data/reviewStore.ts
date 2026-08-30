@@ -88,6 +88,39 @@ type ClockOptions = {
 }
 
 const STAGE_INTERVALS = [DAY_MS, 3 * DAY_MS, 7 * DAY_MS, 14 * DAY_MS, 30 * DAY_MS, 60 * DAY_MS]
+const LEGACY_CONTRACTION_AUDIO_WORDS: Record<string, string> = {
+  "i am": "i'm",
+  "you are": "you're",
+  "he is": "he's",
+  "she is": "she's",
+  "it is": "it's",
+  "we are": "we're",
+  "they are": "they're",
+  "i have": "i've",
+  "you have": "you've",
+  "we have": "we've",
+  "they have": "they've",
+  "let us": "let's",
+  "i will": "i'll",
+  "you will": "you'll",
+  "he will": "he'll",
+  "she will": "she'll",
+  "we will": "we'll",
+  "they will": "they'll",
+  "it will": "it'll",
+  "can not": "can't",
+  "will not": "won't",
+  "do not": "don't",
+  "does not": "doesn't",
+  "did not": "didn't",
+  "is not": "isn't",
+  "are not": "aren't",
+  "was not": "wasn't",
+  "were not": "weren't",
+  "have not": "haven't",
+  "has not": "hasn't",
+  "had not": "hadn't",
+}
 
 function normalizeWord(word: string) {
   return word.trim().toLowerCase()
@@ -95,7 +128,10 @@ function normalizeWord(word: string) {
 
 function normalizeAudioWord(word: unknown) {
   const value = String(word ?? '').trim()
-  return value ? normalizeWord(value) : undefined
+  const normalized = value ? normalizeWord(value) : ''
+  if (!normalized) return undefined
+  if (LEGACY_CONTRACTION_AUDIO_WORDS[normalized]) return LEGACY_CONTRACTION_AUDIO_WORDS[normalized]
+  return /^[a-z0-9]+(?:['-][a-z0-9]+)*$/i.test(normalized) ? normalized : undefined
 }
 
 function normalizeTime(value: unknown) {
@@ -199,7 +235,7 @@ function normalizeVocabEntry(value: unknown, now: number): VocabEntry | null {
   return {
     id: word,
     word,
-    audioWord: normalizeAudioWord(record.audioWord),
+    audioWord: normalizeAudioWord(record.audioWord) ?? normalizeAudioWord(word),
     phonetic: record.phonetic ? String(record.phonetic) : undefined,
     translation,
     pos: record.pos ? String(record.pos) : undefined,
