@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import { Link, NavLink, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { PAGE_TITLES } from '@/lib/pageTitles'
 import { formatCourseLevel, formatTime, getLevelBadge, useCourseList, type CourseListData } from '@/data/courseList'
@@ -79,6 +79,9 @@ function AppShell({
   theme: Theme
   onCycleTheme: () => void
 }) {
+  const location = useLocation()
+  const isCourseLibrary = location.pathname === '/courses'
+
   return (
     <div className="min-h-dvh bg-[var(--bg)] text-[var(--fg)]">
       <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b border-[var(--border-soft)] bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] px-4 backdrop-blur-xl md:px-7">
@@ -91,7 +94,12 @@ function AppShell({
         <ThemeToggle theme={theme} onToggle={onCycleTheme} className="ml-auto theme-toggle" />
       </header>
 
-      <div className="grid min-h-[calc(100dvh-var(--topbar-h))] grid-cols-1 md:grid-cols-[280px_1fr]">
+      <div
+        className={cn(
+          'grid min-h-[calc(100dvh-var(--topbar-h))] grid-cols-1 md:grid-cols-[280px_1fr]',
+          isCourseLibrary && 'app-shell-body-courses',
+        )}
+      >
         <aside className="border-b border-[var(--border-soft)] bg-[var(--surface-warm)] p-3 md:border-b-0 md:border-r">
           <nav className="grid gap-1">
             {navItems.map((item) => (
@@ -115,7 +123,12 @@ function AppShell({
           </nav>
         </aside>
 
-        <main className="min-w-0 px-5 py-8 md:px-10 lg:px-16">
+        <main
+          className={cn(
+            'min-w-0 px-5 py-8 md:px-10 lg:px-16',
+            isCourseLibrary && 'app-shell-main-courses',
+          )}
+        >
           <Outlet />
         </main>
       </div>
@@ -356,6 +369,8 @@ function CoursesPage() {
   const [query, setQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<LessonStatusFilter>('all')
   const [progressMap, setProgressMap] = useState(() => readLessonProgress())
+  const [isListScrolled, setIsListScrolled] = useState(false)
+  const courseListRef = useRef<HTMLDivElement>(null)
   const lessons = data?.lessons ?? []
   const rows = lessons
     .map((lesson) => {
@@ -377,6 +392,16 @@ function CoursesPage() {
     }
   }, [])
 
+  useEffect(() => {
+    const courseList = courseListRef.current
+    if (!courseList) return
+
+    const updateScrollState = () => setIsListScrolled(courseList.scrollTop > 8)
+    updateScrollState()
+    courseList.addEventListener('scroll', updateScrollState, { passive: true })
+    return () => courseList.removeEventListener('scroll', updateScrollState)
+  }, [rows.length])
+
   const statusCounts = lessons.reduce<Record<LessonStatus | 'all', number>>(
     (counts, lesson) => {
       const status = getLessonStatus(progressMap[lesson.id] ?? { progress: 0 })
@@ -388,51 +413,53 @@ function CoursesPage() {
   )
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-5">
-      <PageHeading eyebrow="Lessons" title={PAGE_TITLES.courses} />
-      {loading && <StateText>正在加载课程列表...</StateText>}
-      {error && <StateText>课程列表加载失败：{error}</StateText>}
+    <section className={cn('courses-page mx-auto grid max-w-6xl gap-3', isListScrolled && 'is-list-scrolled')}>
+      <div className="course-page-top">
+        <PageHeading eyebrow="Lessons" title={PAGE_TITLES.courses} />
+        {loading && <StateText>正在加载课程列表...</StateText>}
+        {error && <StateText>课程列表加载失败：{error}</StateText>}
 
-      <div className="sticky top-14 z-10 flex flex-wrap items-center gap-3 border-b border-[var(--border-soft)] bg-[color-mix(in_srgb,var(--bg)_88%,transparent)] py-4 backdrop-blur-xl">
-        <label className="sr-only" htmlFor="course-search">搜索课程</label>
-        <input
-          id="course-search"
-          className="min-w-[220px] flex-1 rounded-[var(--radius-md)] border border-[var(--border-soft)] bg-[var(--surface-warm)] px-4 py-2.5 text-sm text-[var(--fg)] outline-none transition placeholder:text-[var(--meta)] focus:border-[var(--accent)]"
-          placeholder="搜索课程、课号、等级或分类"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          {COURSE_STATUS_FILTERS.map((filter) => (
-            <button
-              key={filter.value}
-              className={cn(
-                'rounded-[var(--radius-pill)] border px-3 py-1.5 transition',
-                statusFilter === filter.value
-                  ? 'border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] text-[var(--accent)]'
-                  : 'border-[var(--border-soft)] bg-[var(--surface-warm)] text-[var(--muted)] hover:bg-[var(--surface)]',
-              )}
-              type="button"
-              onClick={() => setStatusFilter(filter.value)}
-            >
-              {filter.label} {statusCounts[filter.value]}
-            </button>
-          ))}
+        <div className="sticky top-14 z-10 flex flex-wrap items-center gap-3 border-b border-[var(--border-soft)] bg-[color-mix(in_srgb,var(--bg)_88%,transparent)] py-3 backdrop-blur-xl">
+          <label className="sr-only" htmlFor="course-search">搜索课程</label>
+          <input
+            id="course-search"
+            className="min-w-[220px] flex-1 rounded-[var(--radius-md)] border border-[var(--border-soft)] bg-[var(--surface-warm)] px-4 py-2.5 text-sm text-[var(--fg)] outline-none transition placeholder:text-[var(--meta)] focus:border-[var(--accent)]"
+            placeholder="搜索课程、课号、等级或分类"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            {COURSE_STATUS_FILTERS.map((filter) => (
+              <button
+                key={filter.value}
+                className={cn(
+                  'rounded-[var(--radius-pill)] border px-3 py-1.5 transition',
+                  statusFilter === filter.value
+                    ? 'border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_10%,transparent)] text-[var(--accent)]'
+                    : 'border-[var(--border-soft)] bg-[var(--surface-warm)] text-[var(--muted)] hover:bg-[var(--surface)]',
+                )}
+                type="button"
+                onClick={() => setStatusFilter(filter.value)}
+              >
+                {filter.label} {statusCounts[filter.value]}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-soft)]">
+      <div className="course-library overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-soft)]">
         <div className="grid grid-cols-[76px_minmax(0,1fr)_150px_190px] gap-4 border-b border-[var(--border-soft)] bg-[var(--surface)] px-4 py-2 font-[var(--font-mono)] text-xs uppercase tracking-[0.08em] text-[var(--meta)] max-lg:hidden">
           <span>Lesson</span>
           <span>Title</span>
           <span>级别</span>
           <span>Progress</span>
         </div>
-        <div className="divide-y divide-[var(--border-soft)]">
+        <div className="course-library-scroll divide-y divide-[var(--border-soft)]" ref={courseListRef}>
           {rows.map(({ lesson, progress, status }) => (
             <Link
               key={lesson.id}
-              className="grid gap-3 bg-[var(--surface-warm)] px-4 py-3 transition hover:bg-[var(--surface)] lg:grid-cols-[76px_minmax(0,1fr)_150px_190px] lg:items-center lg:gap-4"
+              className="course-library-row grid gap-3 bg-[var(--surface-warm)] px-4 py-2 transition hover:bg-[var(--surface)] lg:grid-cols-[76px_minmax(0,1fr)_150px_190px] lg:items-center lg:gap-4"
               to={courseHref(lesson.id, progress)}
             >
               <span className="font-[var(--font-mono)] text-xs text-[var(--meta)]">{lesson.id}</span>
@@ -443,7 +470,7 @@ function CoursesPage() {
                 </span>
               </span>
               <span className="hidden lg:block">{lessonLevelBadge(lesson)}</span>
-              <span className="grid gap-1.5">
+              <span className="course-row-progress grid gap-1">
                 <span className="flex items-center justify-between gap-2 text-xs text-[var(--meta)]">
                   <span>{lessonStatusLabel(status)}</span>
                   <span>{formatCourseProgress(progress)}</span>

@@ -331,6 +331,84 @@
     min-height: 0;
   }
 
+  /* The course library owns its viewport so only the lesson rows scroll. */
+  .app-shell-body-courses {
+    height: calc(100dvh - var(--topbar-h));
+    min-height: 0;
+  }
+
+  .app-shell-main-courses {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .courses-page {
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .course-page-top {
+    display: grid;
+    min-height: 0;
+    max-height: 500px;
+    gap: var(--space-3);
+    overflow: hidden;
+    opacity: 1;
+    transform: translateY(0);
+    transform-origin: top;
+    will-change: max-height, opacity, transform;
+    transition:
+      max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 220ms ease-out,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .courses-page.is-list-scrolled .course-page-top {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .course-page-top {
+      transition-duration: 1ms;
+      will-change: auto;
+    }
+  }
+
+  .course-library {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .course-library-scroll {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  @media (min-width: 768px) {
+    .app-shell-body-courses {
+      grid-template-rows: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .app-shell-body-courses {
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .app-shell-body-courses > aside {
+      min-height: 0;
+    }
+  }
+
   .course-list {
     display: flex;
     min-height: 0;
