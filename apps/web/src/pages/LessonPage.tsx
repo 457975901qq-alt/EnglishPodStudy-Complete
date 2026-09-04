@@ -132,7 +132,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
     })
   }
 
-  const flushProgress = useCallback(() => {
+  const flushProgress = useCallback((updateState = true) => {
     const pending = pendingProgressRef.current
     pendingProgressRef.current = null
     if (progressSaveTimerRef.current !== null) {
@@ -148,7 +148,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
       pending.duration,
     )
     progressMapRef.current = next
-    setProgressMap(next)
+    if (updateState) setProgressMap(next)
   }, [])
 
   const playbackMatchesLesson = playbackState.lessonId === activeLesson?.id
@@ -214,7 +214,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
     rememberProgress(currentTime, nextDuration)
   }
 
-  useEffect(() => () => flushProgress(), [activeLesson?.id, flushProgress])
+  useEffect(() => () => flushProgress(false), [activeLesson?.id, flushProgress])
 
   useEffect(() => {
     if (!toastMessage) return
@@ -298,6 +298,14 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
       autoplay: true,
     }))
   }, [activeLesson, searchParams])
+
+  const handleSelectLesson = useCallback((selectedLessonId: string) => {
+    setNavOpen(false)
+    setAutoplayRequest((current) => ({
+      lessonId: selectedLessonId,
+      version: (current?.version ?? 0) + 1,
+    }))
+  }, [setAutoplayRequest])
 
   if (loading) {
     return (
@@ -390,13 +398,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
           activeLesson={activeLesson}
           progressMap={progressMap}
           activeProgress={activeProgress}
-          onSelectLesson={(selectedLessonId) => {
-            closeCourseNav()
-            setAutoplayRequest((current) => ({
-              lessonId: selectedLessonId,
-              version: (current?.version ?? 0) + 1,
-            }))
-          }}
+          onSelectLesson={handleSelectLesson}
         />
 
         <main className="main">

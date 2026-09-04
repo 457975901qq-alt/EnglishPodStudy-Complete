@@ -51,9 +51,8 @@ export function WordDefinitionPopover({
     return () => {
       audio.pause()
       audio.removeAttribute('src')
-      audio.load()
     }
-  }, [audioUrl, selection])
+  }, [audioUrl])
 
   useEffect(() => {
     if (!selection) return

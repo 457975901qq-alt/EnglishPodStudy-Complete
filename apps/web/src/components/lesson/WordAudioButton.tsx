@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { getWordAudioUrl } from '@/data/dictAudio'
 
 type WordAudioButtonProps = {
@@ -9,6 +9,10 @@ type WordAudioButtonProps = {
 export function WordAudioButton({ word, className = '' }: WordAudioButtonProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
   const audioUrl = getWordAudioUrl(word)
+
+  useEffect(() => () => {
+    audioRef.current?.pause()
+  }, [])
 
   const playAudio = () => {
     const audio = audioRef.current

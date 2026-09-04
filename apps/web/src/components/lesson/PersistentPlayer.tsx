@@ -105,6 +105,7 @@ export function PersistentPlayer({
   onAutoplayLesson,
 }: PersistentPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null)
+  const mountedRef = useRef(true)
   const subtitleSwitcherRef = useRef<HTMLDivElement>(null)
   const subtitleButtonRef = useRef<HTMLButtonElement>(null)
   const speedSwitcherRef = useRef<HTMLDivElement>(null)
@@ -127,6 +128,13 @@ export function PersistentPlayer({
   const playbackModeLabel = PLAYBACK_MODE_LABELS[playbackMode]
   const nextPlaybackModeLabel = PLAYBACK_MODE_LABELS[getNextPlaybackMode(playbackMode)]
   const subtitleModeLabel = SUBTITLE_MODE_LABELS[subtitleMode]
+
+  useEffect(() => () => {
+    mountedRef.current = false
+    const audio = audioRef.current
+    audio?.pause()
+    audio?.removeAttribute('src')
+  }, [])
 
   useEffect(() => {
     if (!subtitleMenuOpen) return
@@ -217,6 +225,7 @@ export function PersistentPlayer({
   const playAudio = async (audio: HTMLAudioElement) => {
     try {
       await audio.play()
+      if (!mountedRef.current) return
       setIsPlaying(true)
     } catch {
       setIsPlaying(false)
@@ -294,7 +303,9 @@ export function PersistentPlayer({
         onTimeUpdate={(event) => {
           onTimeUpdate(event.currentTarget.currentTime)
         }}
-        onPause={onFlushProgress}
+        onPause={() => {
+          if (mountedRef.current) onFlushProgress?.()
+        }}
         onEnded={handleEnded}
       />
       <div className="now">
