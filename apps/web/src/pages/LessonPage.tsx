@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { ThemeToggle, type Theme } from '@/components/ThemeToggle'
 import { CourseSidebar } from '@/components/lesson/CourseSidebar'
@@ -17,7 +17,14 @@ import {
   type LearningStage,
   type LessonProgressMap,
 } from '@/data/progressStore'
-import { addReviewSentence, addVocab, isVocabSaved, removeVocabByWord } from '@/data/vocabStore'
+import {
+  addReviewSentence,
+  addVocab,
+  isVocabSaved,
+  readVocab,
+  removeVocabByWord,
+  VOCAB_CHANGE_EVENT,
+} from '@/data/vocabStore'
 
 type LessonPageProps = {
   theme: Theme
@@ -83,7 +90,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
     version: number
   } | null>(null)
   const [selectedWord, setSelectedWord] = useState<SubtitleWordSelection | null>(null)
-  const [, setVocabVersion] = useState(0)
+  const [vocabEntries, setVocabEntries] = useState(() => readVocab())
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [navOpen, setNavOpen] = useState(false)
   const handledSeekParamRef = useRef('')
@@ -97,6 +104,25 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
     time: number
     duration: number
   } | null>(null)
+
+  const savedWords = useMemo(() => {
+    if (!activeLesson) return []
+
+    return vocabEntries
+      .filter((entry) => entry.contexts.some((context) => context.lessonId === activeLesson.id))
+      .flatMap((entry) => [entry.word, entry.audioWord ?? ''])
+      .filter(Boolean)
+  }, [activeLesson, vocabEntries])
+
+  useEffect(() => {
+    const refreshVocab = () => setVocabEntries(readVocab())
+    window.addEventListener(VOCAB_CHANGE_EVENT, refreshVocab)
+    window.addEventListener('storage', refreshVocab)
+    return () => {
+      window.removeEventListener(VOCAB_CHANGE_EVENT, refreshVocab)
+      window.removeEventListener('storage', refreshVocab)
+    }
+  }, [])
 
   const updateProgressMap = (updater: (current: LessonProgressMap) => LessonProgressMap) => {
     setProgressMap((current) => {
@@ -445,6 +471,7 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
             <SubtitlePanel
               cues={subtitles.data ?? []}
               currentTime={currentTime}
+              savedWords={savedWords}
               message={subtitleMessage}
               obscured={effectiveSubtitleMode === 'off'}
               onWordSelect={handleWordSelect}
@@ -483,7 +510,6 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
                 audioEnd: selection.cue.end,
                 sourceText: selection.cue.text,
               })
-              setVocabVersion((version) => version + 1)
               setToastMessage(`${entry.word} 已加入生词本`)
               setSelectedWord(null)
             }}
@@ -495,7 +521,6 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
                 selectedWord.cue.start,
                 selectedWord.cue.text,
               )
-              setVocabVersion((version) => version + 1)
               setToastMessage(`${entry.word} 已移出生词本`)
             }}
           />

@@ -123,7 +123,7 @@ export function PersistentPlayer({
   const progress = duration > 0 ? (seekValue / duration) * 100 : 0
   const speedLabel = playbackRate === 1 ? '1.0x' : `${playbackRate}x`
   const levelBadge = getLevelBadge(lesson)
-  const levelLabel = formatCourseLevel(lesson.level)
+  const levelLabel = lesson.cefrLevel ? `CEFR ${lesson.cefrLevel}` : formatCourseLevel(lesson.level)
   const playbackModeLabel = PLAYBACK_MODE_LABELS[playbackMode]
   const nextPlaybackModeLabel = PLAYBACK_MODE_LABELS[getNextPlaybackMode(playbackMode)]
   const subtitleModeLabel = SUBTITLE_MODE_LABELS[subtitleMode]
@@ -300,7 +300,7 @@ export function PersistentPlayer({
       <div className="now">
         <div
           className={`cover level-badge ${levelBadge.className}`}
-          aria-label={`等级 ${levelBadge.label}`}
+          aria-label={levelBadge.label}
         >
           {levelBadge.code}
         </div>

@@ -547,6 +547,26 @@
     --level-ring: #5856d6;
   }
 
+  .cefr-a1,
+  .cefr-a2 {
+    --level-bg: color-mix(in srgb, var(--success) 16%, var(--bg));
+    --level-fg: color-mix(in srgb, var(--success), black 28%);
+    --level-ring: var(--success);
+  }
+
+  .cefr-b1,
+  .cefr-b2 {
+    --level-bg: color-mix(in srgb, var(--accent) 14%, var(--bg));
+    --level-fg: var(--accent-active);
+    --level-ring: var(--accent);
+  }
+
+  .cefr-c1 {
+    --level-bg: color-mix(in srgb, var(--warn) 18%, var(--bg));
+    --level-fg: color-mix(in srgb, var(--warn), black 45%);
+    --level-ring: var(--warn);
+  }
+
   .level-x {
     --level-bg: var(--surface);
     --level-fg: var(--muted);
@@ -885,6 +905,17 @@
     background: color-mix(in srgb, var(--accent) 14%, transparent);
     color: var(--fg);
     outline: none;
+  }
+
+  .word-token.saved {
+    background: color-mix(in srgb, var(--warn) 18%, var(--bg));
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .word-token.saved:hover,
+  .word-token.saved:focus-visible {
+    background: color-mix(in srgb, var(--warn) 28%, var(--bg));
   }
 
   .word-popover {

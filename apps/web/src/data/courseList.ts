@@ -31,6 +31,9 @@ export type CourseLesson = {
   displayTitle: string
   level: string | null
   levelCode: string | null
+  cefrLevel: string | null
+  cefrScore: number | null
+  cefrConfidence: 'high' | 'medium' | 'low' | null
   category: string | null
   group: string
   section: 'level' | 'category'
@@ -52,6 +55,13 @@ export type CourseListData = {
   }>
   levels: Array<{ code: string; name: string; count: number }>
   categories: Array<{ name: string; count: number }>
+  cefr?: {
+    name: string
+    focus: string
+    methodology: { version: string; weights: Record<string, number>; bands: Array<{ level: string; min: number; max: number }> }
+    limitations: string[]
+    levels: Record<string, number>
+  }
   lessons: CourseLesson[]
 }
 
@@ -69,14 +79,17 @@ export function formatCourseLevel(level: string | null | undefined) {
   return level ? COURSE_LEVEL_LABELS[level.trim().toLowerCase()] ?? '' : ''
 }
 
-export function getLevelBadge(lesson: Pick<CourseLesson, 'level' | 'levelCode'>) {
-  const code = lesson.levelCode ?? 'X'
-  const normalizedCode = /^[A-Z]$/.test(code) ? code : 'X'
+export function getLevelBadge(
+  lesson: Pick<CourseLesson, 'level' | 'levelCode' | 'cefrLevel'>,
+) {
+  const sourceCode = lesson.cefrLevel ?? lesson.levelCode ?? 'X'
+  const normalizedCode = /^(?:[ABC][12]|[A-Z])$/.test(sourceCode) ? sourceCode : 'X'
+  const isCefr = /^[ABC][12]$/.test(normalizedCode)
 
   return {
     code: normalizedCode,
-    label: formatCourseLevel(lesson.level),
-    className: `level-${normalizedCode.toLowerCase()}`,
+    label: isCefr ? `CEFR ${normalizedCode}` : formatCourseLevel(lesson.level),
+    className: isCefr ? `cefr-${normalizedCode.toLowerCase()}` : `level-${normalizedCode.toLowerCase()}`,
   }
 }
 

@@ -18,6 +18,7 @@ export type SubtitleWordSelection = {
 type SubtitlePanelProps = {
   cues: SubtitleCue[]
   currentTime: number
+  savedWords?: string[]
   message?: string
   obscured?: boolean
   onSeek: (time: number) => void
@@ -28,6 +29,7 @@ type SubtitlePanelProps = {
 export function SubtitlePanel({
   cues,
   currentTime,
+  savedWords = [],
   message,
   obscured = false,
   onSeek,
@@ -36,6 +38,10 @@ export function SubtitlePanel({
 }: SubtitlePanelProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const activeCueRef = useRef<HTMLDivElement>(null)
+  const savedWordSet = useMemo(
+    () => new Set(savedWords.map((word) => normalizeWord(word)).filter(Boolean)),
+    [savedWords],
+  )
   const activeIndex = findActiveCueIndex(cues, currentTime)
   const renderedCues = useMemo(
     () => cues.map((cue) => ({
@@ -108,7 +114,7 @@ export function SubtitlePanel({
                         token.isWord ? (
                           <button
                             key={`${cue.id}-${lineIndex}-${tokenIndex}`}
-                            className="word-token"
+                            className={`word-token${savedWordSet.has(normalizeWord(token.text)) ? ' saved' : ''}`}
                             type="button"
                             onClick={(event) => {
                               event.stopPropagation()
@@ -153,6 +159,10 @@ export function SubtitlePanel({
       </div>
     </div>
   )
+}
+
+function normalizeWord(word: string) {
+  return word.trim().toLowerCase().replaceAll('’', "'")
 }
 
 function findActiveCueIndex(cues: SubtitleCue[], currentTime: number) {

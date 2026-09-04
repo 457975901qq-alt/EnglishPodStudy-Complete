@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { PAGE_TITLES } from '@/lib/pageTitles'
-import { formatCourseLevel, formatTime, getLevelBadge, useCourseList, type CourseListData } from '@/data/courseList'
+import { formatCourseLevel, formatTime, getLevelBadge, useCourseList, type CourseLesson, type CourseListData } from '@/data/courseList'
 import { clearLessonProgress, PROGRESS_CHANGE_EVENT, readLessonProgress } from '@/data/progressStore'
 import { clearReviewMemory, countDueReviewItems, readVocab, REVIEW_CHANGE_EVENT, VOCAB_CHANGE_EVENT } from '@/data/vocabStore'
 import { ThemeToggle, type Theme } from '@/components/ThemeToggle'
@@ -314,7 +314,7 @@ function CourseDistribution({ data }: { data: CourseListData }) {
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div>
           <p className="font-semibold">课程结构</p>
-          <p className="text-sm text-[var(--muted)]">按难度分布</p>
+          <p className="text-sm text-[var(--muted)]">按 CEFR 听力对齐等级分布</p>
         </div>
         <span className="font-[var(--font-mono)] text-xs text-[var(--meta)]">{data.count} lessons</span>
       </div>
@@ -345,7 +345,7 @@ function getCourseDistributionRows(data: CourseListData) {
   const counts = new Map<string, number>()
 
   for (const lesson of data.lessons) {
-    const label = lesson.level ?? lesson.category ?? '未分类'
+    const label = lesson.cefrLevel ?? '未评估'
     counts.set(label, (counts.get(label) ?? 0) + 1)
   }
 
@@ -466,7 +466,7 @@ function CoursesPage() {
               <span className="min-w-0">
                 <span className="block truncate font-semibold">{lesson.displayTitle}</span>
                 <span className="mt-1 block text-xs text-[var(--meta)] lg:hidden">
-                  {lessonListMeta(lesson.level, status)}
+                  {lessonListMeta(lesson, status)}
                 </span>
               </span>
               <span className="hidden lg:block">{lessonLevelBadge(lesson)}</span>
@@ -520,11 +520,11 @@ function progressBarWidth(progress?: { progress: number }) {
   return (progress?.progress ?? 0) + '%'
 }
 
-function lessonLevelBadge(lesson: { level: string | null; levelCode: string | null }) {
-  const levelLabel = formatCourseLevel(lesson.level)
+function lessonLevelBadge(lesson: Pick<CourseLesson, 'level' | 'levelCode' | 'cefrLevel'>) {
+  const levelBadge = getLevelBadge(lesson)
+  const levelLabel = lesson.cefrLevel ? `CEFR ${lesson.cefrLevel}` : formatCourseLevel(lesson.level)
   if (!levelLabel) return null
 
-  const levelBadge = getLevelBadge(lesson)
   return (
     <span className="course-level-pill">
       <span className={`level-badge ${levelBadge.className}`} aria-hidden="true">
@@ -535,8 +535,8 @@ function lessonLevelBadge(lesson: { level: string | null; levelCode: string | nu
   )
 }
 
-function lessonListMeta(level: string | null, status: LessonStatus) {
-  const levelLabel = formatCourseLevel(level)
+function lessonListMeta(lesson: Pick<CourseLesson, 'level' | 'levelCode' | 'cefrLevel'>, status: LessonStatus) {
+  const levelLabel = lesson.cefrLevel ? `CEFR ${lesson.cefrLevel}` : formatCourseLevel(lesson.level)
   return levelLabel ? levelLabel + ' · ' + lessonStatusLabel(status) : lessonStatusLabel(status)
 }
 

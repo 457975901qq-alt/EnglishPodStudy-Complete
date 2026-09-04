@@ -31,7 +31,20 @@ EnglishPod365 is an online English learning website built around 365 EnglishPod 
 
 ### 课程库
 
-课程库读取 `resource/course-list.json`，展示课程编号、标题、等级和学习状态。支持按课程标题、课号、等级或分类搜索，也支持按学习状态筛选，方便从 365 节课程中快速找到要学的内容。课程表格使用独立滚动区域；向下滚动时页面标题、搜索框和筛选栏会自然收起，滚回列表顶部后自动恢复，以便一屏看到更多课程。前 160 节沿用原始资料中的官方级别；0161—0365 原始资料没有级别字段，项目依据课程主题和字幕内容补充了可复现的估算级别，并保存在 `resource/lesson-levels.json` 中。
+课程库读取 `resource/course-list.json`，展示课程编号、标题、CEFR 等级和学习状态。支持按课程标题、课号、等级或分类搜索，也支持按学习状态筛选，方便从 365 节课程中快速找到要学的内容。课程表格使用独立滚动区域；向下滚动时页面标题、搜索框和筛选栏会自然收起，滚回列表顶部后自动恢复，以便一屏看到更多课程。
+
+### CEFR 课程难度评估
+
+全部 365 节课程均使用同一套 CEFR 对齐规则评估，界面显示 `A1`—`C1` 等级、0—100 对齐分数和评估置信度。评估重点参考 [Council of Europe CEFR descriptors](https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors) 及其 [listening comprehension guidance](https://www.coe.int/en/web/common-european-framework-reference-languages/listening-comprehension)，并将字幕与音频可观测特征转化为可复核指标：
+
+- 词汇：使用 ECDICT 的 Oxford 标记和词频排名估算内容词难度；
+- 句法：使用字幕语块平均词数和从属/连接标记密度；
+- 语速：使用字幕时间轴估算每分钟词数；
+- 信息密度：使用内容词比例和词汇类型—标记比作辅助指标。
+
+详细结果、分数、指标和规则版本保存在 `resource/cefr-assessment.json`。API 会将这些数据合并到课程列表，所以课程库、课程侧栏和播放器使用同一份评估结果。原始 EnglishPod B—F 级别仍保留在课程目录中，仅用于来源追溯，不再作为最终 CEFR 等级。
+
+这是一种“CEFR 对齐估算”，不是官方 CEFR 认证或分级考试成绩。仅凭字幕、时间轴和词典元数据无法完整测量理解任务完成度、口音变化和学习者实际表现；正式定级仍应配合听力理解题和学习者测评。
 
 课程标题优先从课程音频元数据生成；当原始音频缺少标题时，使用 `resource/lesson-titles.json` 中的明确覆盖值。例如 0031 课根据字幕内容标注为 `Cancelling an Appointment`。课程自检会阻止空标题再次进入课程库。
 
@@ -90,11 +103,14 @@ node tools/build-dict.mjs
 ├── apps
 │   ├── api              # Node.js API，提供课程列表、字幕、资源和词典查询
 │   └── web              # React + Vite 前端应用
-├── resource             # 课程资源、课程目录、标题和 dict 词典数据
-│   ├── lesson-levels.json  # 0161—0365 的估算级别覆盖
+├── resource             # 课程资源、课程目录、标题、CEFR 和 dict 词典数据
+│   ├── cefr-assessment.json # 365 节课的 CEFR 对齐评估结果
+│   ├── lesson-levels.json  # 原始资料缺失时的旧级别覆盖
 │   └── lesson-titles.json  # 音频元数据缺失时的课程标题覆盖
 ├── tools
+│   ├── assess-cefr.mjs  # 根据字幕和词典元数据生成 CEFR 评估
 │   ├── build-dict.mjs   # 从词典 CSV 构建 lookup/lemmas JSON
+│   ├── cefr.self-check.mjs # 校验 365 节课的 CEFR 数据完整性
 │   └── dev.mjs          # 同时启动 API 与 Web 开发服务
 ├── package.json         # workspace 脚本入口
 └── PRD.md               # 产品需求文档
@@ -150,6 +166,12 @@ npm ci
 
 ```bash
 node tools/build-dict.mjs
+```
+
+如果字幕或词典数据发生变化，可重新生成 CEFR 评估：
+
+```bash
+node tools/assess-cefr.mjs --write
 ```
 
 ### 3. 启动开发环境

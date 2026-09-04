@@ -85,7 +85,7 @@ export function CourseSidebar({
             >
               <span
                 className={`level-badge ${levelBadge.className}`}
-                aria-label={`等级 ${levelBadge.label}`}
+                aria-label={levelBadge.label}
               >
                 {levelBadge.code}
               </span>

@@ -22,6 +22,7 @@ type SearchableLesson = {
   title?: string
   displayTitle?: string
   level?: string | null
+  cefrLevel?: string | null
   category?: string | null
 }
 
@@ -29,7 +30,7 @@ export function matchesLessonSearch(lesson: SearchableLesson, query: string) {
   const normalizedQuery = query.trim().toLowerCase()
   if (!normalizedQuery) return true
 
-  return [lesson.id, lesson.title, lesson.displayTitle, lesson.level, lesson.category]
+  return [lesson.id, lesson.title, lesson.displayTitle, lesson.level, lesson.cefrLevel, lesson.category]
     .filter(Boolean)
     .some((value) => String(value).toLowerCase().includes(normalizedQuery))
 }

@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../../..')
 const resourceDir = path.join(rootDir, 'resource')
 const catalogPath = path.join(resourceDir, 'course-list.json')
+const cefrAssessmentPath = path.join(resourceDir, 'cefr-assessment.json')
 const dictDir = process.env.ENGLISHPOD_DICT_DIR
   ? path.resolve(process.env.ENGLISHPOD_DICT_DIR)
   : path.join(resourceDir, 'dict')
@@ -344,8 +345,35 @@ let catalogState = null
 
 async function readCatalog() {
   if (!catalogState) {
-    catalogState = readFile(catalogPath, 'utf8')
-      .then((content) => JSON.parse(content.replace(/^\uFEFF/, '')))
+    catalogState = Promise.all([
+      readFile(catalogPath, 'utf8'),
+      readFile(cefrAssessmentPath, 'utf8'),
+    ])
+      .then(([catalogContent, assessmentContent]) => {
+        const catalog = JSON.parse(catalogContent.replace(/^\uFEFF/, ''))
+        const assessment = JSON.parse(assessmentContent.replace(/^\uFEFF/, ''))
+        const assessmentById = new Map(assessment.assessments.map((item) => [item.id, item]))
+        return {
+          ...catalog,
+          cefr: {
+            ...assessment.standard,
+            methodology: assessment.methodology,
+            limitations: assessment.limitations,
+            levels: assessment.levels,
+          },
+          lessons: catalog.lessons.map((lesson) => {
+            const item = assessmentById.get(lesson.id)
+            return item
+              ? {
+                  ...lesson,
+                  cefrLevel: item.cefrLevel,
+                  cefrScore: item.score,
+                  cefrConfidence: item.confidence,
+                }
+              : lesson
+          }),
+        }
+      })
       .catch((error) => {
         catalogState = null
         throw error
