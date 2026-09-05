@@ -526,11 +526,10 @@ function lessonLevelBadge(lesson: Pick<CourseLesson, 'level' | 'levelCode' | 'ce
   if (!levelLabel) return null
 
   return (
-    <span className="course-level-pill">
+    <span className="course-level-pill" aria-label={levelLabel}>
       <span className={`level-badge ${levelBadge.className}`} aria-hidden="true">
         {levelBadge.code}
       </span>
-      <span>{levelLabel}</span>
     </span>
   )
 }
