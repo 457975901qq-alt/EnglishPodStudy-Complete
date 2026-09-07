@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getLevelBadge, type CourseLesson } from '@/data/courseList'
 import type { LessonProgressMap } from '@/data/progressStore'
@@ -38,6 +38,7 @@ export const CourseSidebar = memo(function CourseSidebar({
   onSelectLesson,
 }: CourseSidebarProps) {
   const [statusFilter, setStatusFilter] = useState<LessonStatusFilter>('all')
+  const courseScrollRef = useRef<HTMLDivElement>(null)
   const lessonRows = lessons
     .map((lesson) => {
       const isActive = lesson.id === activeLesson.id
@@ -50,6 +51,28 @@ export const CourseSidebar = memo(function CourseSidebar({
       return { lesson, isActive, progress, status }
     })
     .filter(({ status }) => matchesLessonStatusFilter(statusFilter, status))
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const courseScroll = courseScrollRef.current
+      const activeItem = courseScroll?.querySelector<HTMLElement>('.course-item.active')
+      if (!courseScroll || !activeItem) return
+
+      const scrollBounds = courseScroll.getBoundingClientRect()
+      const activeBounds = activeItem.getBoundingClientRect()
+      const targetTop = courseScroll.scrollTop
+        + activeBounds.top
+        - scrollBounds.top
+        - (courseScroll.clientHeight - activeBounds.height) / 2
+
+      courseScroll.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [activeLesson.id, statusFilter])
 
   return (
     <nav className="course-list" id="courseList" aria-label="课程列表">
@@ -71,7 +94,7 @@ export const CourseSidebar = memo(function CourseSidebar({
         ))}
       </div>
 
-      <div className="course-scroll">
+      <div className="course-scroll" ref={courseScrollRef}>
         {lessonRows.map((row) => (
           <CourseSidebarRow key={row.lesson.id} {...row} onSelectLesson={onSelectLesson} />
         ))}
