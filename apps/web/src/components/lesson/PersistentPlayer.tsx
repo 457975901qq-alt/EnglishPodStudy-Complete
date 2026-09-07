@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   formatCourseLevel,
@@ -38,6 +38,11 @@ const SPEED_RATE_OPTIONS = SPEED_RATES.map((rate) => ({
   rate,
   label: rate === 1 ? '1.0x' : `${rate}x`,
 }))
+
+function isEditableTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false
+  return target.isContentEditable || ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName)
+}
 
 type PersistentPlayerProps = {
   lesson: CourseLesson
@@ -222,15 +227,15 @@ export function PersistentPlayer({
     }
   }
 
-  const playAudio = async (audio: HTMLAudioElement) => {
+  const playAudio = useCallback(async (audio: HTMLAudioElement) => {
     try {
       await audio.play()
       if (!mountedRef.current) return
       setIsPlaying(true)
     } catch {
-      setIsPlaying(false)
+      if (mountedRef.current) setIsPlaying(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     if (!seekRequest || !audioRef.current) return
@@ -239,8 +244,9 @@ export function PersistentPlayer({
     if (shouldAutoplaySeek(audio.paused, Boolean(seekRequest.autoplay))) {
       void playAudio(audio)
     }
-  }, [seekRequest])
-  const togglePlay = async () => {
+  }, [seekRequest, playAudio])
+
+  const togglePlay = useCallback(async () => {
     const audio = audioRef.current
     if (!audio) return
 
@@ -250,7 +256,18 @@ export function PersistentPlayer({
       audio.pause()
       setIsPlaying(false)
     }
-  }
+  }, [playAudio])
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code !== 'Space' || event.repeat || isEditableTarget(event.target)) return
+      event.preventDefault()
+      void togglePlay()
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [togglePlay])
 
   const handleEnded = () => {
     const audio = audioRef.current
