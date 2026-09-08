@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process'
 
 const files = [
   'tools/course-list.self-check.mjs',
+  'tools/course-0030-subtitle.self-check.mjs',
   'apps/web/src/components/lesson/courseFilter.self-check.mjs',
   'apps/web/src/components/lesson/playbackMode.self-check.mjs',
   'apps/web/src/components/lesson/playerVisibility.self-check.mjs',

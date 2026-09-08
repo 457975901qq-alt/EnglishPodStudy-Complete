@@ -83,152 +83,152 @@ Okay.
 Well, with that, let's listen to the dialogue for the first time.
 
 22
-00:00:43,120 --> 00:00:51,000
-Oh, Arman, thank you for such a thoughtful invitation.
+00:00:45,680 --> 00:00:48,879
+Oh, Armand, thank you for such a
 
 23
-00:00:51,000 --> 00:00:54,520
-It's really very nice of you to invite us over for dinner.
+00:00:48,879 --> 00:00:51,600
+thoughtful invitation.
 
 24
-00:00:54,520 --> 00:00:55,520
-Don't you think so, Ellen?
+00:00:51,600 --> 00:00:54,120
+It's really very nice of you to
 
 25
-00:00:55,520 --> 00:00:56,520
-Oh, yes, of course.
+00:00:54,120 --> 00:00:57,000
+invite us over for dinner.
 
 26
-00:00:56,520 --> 00:00:57,520
-We'd love to come over.
+00:00:57,000 --> 00:00:59,399
+Don't you think so, Ellen?
 
 27
-00:00:57,520 --> 00:00:58,520
-Can I bring anything?
+00:00:59,399 --> 00:01:00,900
+Oh, yes, of course.
 
 28
-00:00:58,520 --> 00:00:59,520
-No, don't worry about it.
+00:01:00,900 --> 00:01:02,719
+We'd love to come over.
 
 29
-00:00:59,520 --> 00:01:00,520
-I'll take care of everything.
+00:01:02,719 --> 00:01:04,000
+Can I bring anything?
 
 30
-00:01:00,520 --> 00:01:01,520
-I'll see you tonight.
+00:01:04,000 --> 00:01:05,360
+No, don't worry about it.
 
 31
-00:01:01,520 --> 00:01:02,520
-Come with an appetite.
+00:01:05,360 --> 00:01:07,680
+I'll take care of everything.
 
 32
-00:01:02,520 --> 00:01:03,520
-I know I will.
+00:01:07,680 --> 00:01:09,700
+I'll see you tonight.
 
 33
-00:01:03,520 --> 00:01:04,520
-I don't want to go over to his place for dinner.
+00:01:09,700 --> 00:01:11,560
+Come with an appetite.
 
 34
-00:01:04,520 --> 00:01:05,520
-He gives me the creeps.
+00:01:14,439 --> 00:01:15,480
+I know I will.
 
 35
-00:01:05,520 --> 00:01:06,520
-Why on earth did you accept?
+00:01:15,480 --> 00:01:17,500
+I don't want
 
 36
-00:01:06,520 --> 00:01:07,520
-Oh, come on, Ellen.
+00:01:17,500 --> 00:01:19,360
+to go over to his place for dinner.
 
 37
-00:01:07,520 --> 00:01:08,520
-It'll be nice to get to know him.
+00:01:19,360 --> 00:01:21,799
+He gives me the creeps.
 
 38
-00:01:08,520 --> 00:01:09,520
-Besides, he's new to the neighborhood.
+00:01:21,799 --> 00:01:24,040
+Why on earth did you accept?
 
 39
-00:01:09,520 --> 00:01:10,520
-He's a bit of a creep.
+00:01:24,040 --> 00:01:25,400
+Oh, come on, Ellen.
 
 40
-00:01:10,520 --> 00:01:11,520
-He's a bit of a creep.
+00:01:25,400 --> 00:01:26,600
+It'll be nice to get to know him.
 
 41
-00:01:11,520 --> 00:01:12,520
-He's a bit of a creep.
+00:01:26,600 --> 00:01:28,600
+Besides, he's new to the neighborhood,
 
 42
-00:01:12,520 --> 00:01:13,520
-He's a bit of a creep.
+00:01:28,600 --> 00:01:30,400
+and it would be rude to
 
 43
-00:01:13,520 --> 00:01:14,520
-He's a bit of a creep.
+00:01:30,400 --> 00:01:31,439
+decline his invitation.
 
 44
-00:01:14,520 --> 00:01:15,520
-He's a bit of a creep.
+00:01:31,439 --> 00:01:32,500
+I guess so.
 
 45
-00:01:15,520 --> 00:01:16,520
-He's a bit of a creep.
+00:01:32,500 --> 00:01:34,479
+You always rope me into things like
 
 46
-00:01:16,520 --> 00:01:17,520
-He's a bit of a creep.
+00:01:37,730 --> 00:01:42,519
+[Music]
 
 47
-00:01:17,520 --> 00:01:18,520
-He's a bit of a creep.
+00:01:45,320 --> 00:01:48,320
+this!
 
 48
-00:01:18,520 --> 00:01:27,520
-He's a bit of a creep.
+00:01:49,280 --> 00:01:50,600
+[Music]
 
 49
-00:01:27,520 --> 00:01:38,520
-He's a bit of a creep.
-
-50
-00:01:38,520 --> 00:01:51,940
+00:01:50,600 --> 00:01:51,940
 Ladies!
 
-51
-00:01:51,940 --> 00:01:52,940
+50
+00:01:51,940 --> 00:01:53,940
 Thank you for coming.
 
-52
-00:01:52,940 --> 00:01:53,940
+51
+00:01:53,940 --> 00:01:55,400
 You look delicious.
 
-53
-00:01:53,940 --> 00:01:56,320
+52
+00:01:55,400 --> 00:01:56,680
 I mean beautiful.
 
-54
-00:01:56,320 --> 00:01:57,320
+53
+00:01:56,680 --> 00:01:59,680
 Please come in.
 
-55
-00:01:57,320 --> 00:01:58,320
-Oh, Arlond, you are too kind.
+54
+00:02:00,360 --> 00:02:04,479
+Oh, Armand, you are too kind.
 
-56
-00:01:58,320 --> 00:01:59,320
+55
+00:02:04,479 --> 00:02:15,429
 How did I get myself into this?
 
-57
-00:01:59,320 --> 00:02:22,520
+56
+00:02:17,879 --> 00:02:22,800
 Wow, I'm really anxious to see what happens in this dinner party.
 
+57
+00:02:22,800 --> 00:02:25,319
+Yeah, I guess we'll have to stay tuned
+
 58
-00:02:22,520 --> 00:02:26,040
-Yeah, I guess we'll have to stay tuned and find out.
+00:02:25,319 --> 00:02:26,040
+and find out.
 
 59
 00:02:26,040 --> 00:02:27,040
@@ -904,7 +904,7 @@ Why on earth did you accept?
 
 227
 00:09:26,080 --> 00:09:27,080
-Come on, Ellen.
+Oh, come on, Ellen.
 
 228
 00:09:27,080 --> 00:09:28,840
@@ -916,7 +916,7 @@ Besides, he's new to the neighborhood.
 
 230
 00:09:31,180 --> 00:09:34,080
-He'll be rude to decline his invitation.
+It would be rude to decline his invitation.
 
 231
 00:09:34,080 --> 00:09:35,080
@@ -924,7 +924,7 @@ I guess so.
 
 232
 00:09:35,080 --> 00:09:44,000
-You always wrote me into things like this.
+You always rope me into things like this.
 
 233
 00:09:44,000 --> 00:09:56,280
@@ -948,7 +948,7 @@ Please come in.
 
 238
 00:10:01,400 --> 00:10:02,400
-Oh, Arlond, you are too kind.
+Oh, Armand, you are too kind.
 
 239
 00:10:02,400 --> 00:10:23,320
@@ -1053,5 +1053,3 @@ Okay, folks.
 264
 00:11:20,320 --> 00:11:29,800
 So until then, it's goodbye.
-
-
