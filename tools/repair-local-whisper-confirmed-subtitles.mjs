@@ -26,6 +26,33 @@ const repairs = [{
     [221440, 223260, 'I just want my little Frankie to be okay.', '我只想让我的小弗兰基没事。'],
     [223900, 226960, "I couldn't imagine life without my little hamster.", '我无法想象没有我的小仓鼠的生活。'],
   ],
+}, {
+  course: '0099',
+  start: 304,
+  end: 332,
+  entries: [
+    [711520, 712480, 'Come on, Dave.', '得了吧，戴夫。'],
+    [712600, 713800, "It's a G-rated movie.", '这是一部 G 级电影。'],
+    [714120, 715160, "It's for the kids.", '这是给孩子们看的。'],
+    [715380, 716480, "It's not a thriller.", '它不是惊悚片。'],
+    [716760, 717680, "Well, that's just it.", '问题就在这里。'],
+    [718260, 720000, 'It did have some very dramatic and intense scenes.', '它确实有一些非常戏剧化和紧张的场景。'],
+    [720000, 724560, 'For example, when Mufasa dies, or the dark, grim portrayal of Scar.', '例如，木法沙去世时，或者对刀疤黑暗阴森的刻画。'],
+    [725140, 727020, 'Even so, the film is linear.', '即便如此，这部电影的情节还是线性的。'],
+    [727580, 730180, "Mufasa dies, Simba runs away thinking it's his fault,", '木法沙死了，辛巴以为是自己的错而逃走，'],
+    [730660, 732740, "falls in love and returns to retake what's rightfully his.", '随后坠入爱河，又回来夺回本该属于他的东西。'],
+    [732920, 733900, "It's just too cliche.", '这实在太老套了。'],
+    [734820, 736940, "How can it be cliche? It's a fable.", '怎么会老套呢？这是一个寓言。'],
+    [737540, 739220, "It's telling a time-honored story.", '它讲述的是一个经久不衰的故事。'],
+    [739680, 742740, 'The movie makes a point of how the hunger of power leads to corruption', '电影强调了对权力的渴望如何导致腐败，'],
+    [742740, 746660, 'and teaches children of the value of respect, life, and love.', '并教导孩子们尊重、生命和爱的价值。'],
+    [746940, 749500, 'You have always been so soft, Dick.', '你一直都这么心软，迪克。'],
+    [750000, 754340, "Open your heart, Dave. Don't shut us out.", '敞开心扉吧，戴夫。不要把我们拒之门外。'],
+    [754620, 756220, "Anyway, that's all for today, folks.", '总之，各位，今天就到这里。'],
+    [756640, 759180, 'Join us next time as we talk about how to lose a guy in 10 days.', '下次请继续收听，我们将聊聊如何在十天内甩掉一个男人。'],
+    [759440, 760840, "I'm sure you'll love that one, Dick.", '我相信你会喜欢那一部的，迪克。'],
+    [764500, 765900, 'All right, so a good movie.', '好了，所以这是一部好电影。'],
+  ],
 }]
 
 function parseTime(value) {
