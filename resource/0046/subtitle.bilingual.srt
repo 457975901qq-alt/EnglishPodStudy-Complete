@@ -394,1756 +394,1691 @@ I got a pulse.
 有脉搏了。
 
 80
-00:03:00,600 --> 00:03:01,600
+00:03:06,700 --> 00:03:07,720
 Okay, what's happening?
 好了，发生什么事了？
 
 81
-00:03:01,600 --> 00:03:02,600
+00:03:08,220 --> 00:03:10,100
 The patient is in acute respiratory failure.
 病人处于急性呼吸衰竭状态。
 
 82
-00:03:02,600 --> 00:03:03,600
+00:03:10,200 --> 00:03:11,520
 I think we're going to have to intubate.
 我想我们得给他插管了。
 
 83
-00:03:03,600 --> 00:03:04,600
-All right, we're going to have to intubate.
-好吧，我们得插管了。
+00:03:12,180 --> 00:03:12,760
+All right.
+好的。
 
 84
-00:03:04,600 --> 00:03:05,600
-I'm going to have to intubate.
-我得给他插管。
+00:03:13,040 --> 00:03:13,580
+Tube's in.
+管子插好了。
 
 85
-00:03:05,600 --> 00:03:06,600
-Okay, we're going to have to intubate.
-好的，我们得插管了。
-
-86
-00:03:06,600 --> 00:03:07,600
-I'm going to have to intubate.
-我得给他插管。
-
-87
-00:03:07,600 --> 00:03:08,600
-I'm going to have to intubate.
-我得给他插管。
-
-88
-00:03:08,600 --> 00:03:09,600
-I'm going to have to intubate.
-我得给他插管。
-
-89
-00:03:09,600 --> 00:03:10,600
-I'm going to have to intubate.
-我得给他插管。
-
-90
-00:03:10,600 --> 00:03:11,600
-I'm going to have to intubate.
-我得给他插管。
-
-91
-00:03:11,600 --> 00:03:12,600
-I'm going to have to intubate.
-我得给他插管。
-
-92
-00:03:12,600 --> 00:03:13,600
-I'm going to have to intubate.
-我得给他插管。
-
-93
-00:03:13,600 --> 00:03:14,600
-I'm going to have to intubiate.
-我得给他插管。
-
-94
-00:03:14,600 --> 00:03:15,600
-Don't worry, he's not dying.
-别担心，他还没死。
-
-95
-00:03:15,600 --> 00:03:16,600
-All right, tube's in.
-好了，管子插进去了。
-
-96
-00:03:16,600 --> 00:03:17,600
+00:03:13,820 --> 00:03:14,140
 Bag him.
 给他捏气囊。
 
-97
-00:03:17,600 --> 00:03:18,600
+86
+00:03:14,440 --> 00:03:16,340
 Somebody give him 10 cc's shot of adrenaline.
-谁给他注射10毫升肾上腺素。
+谁给他注射 10 毫升肾上腺素。
 
-98
-00:03:18,600 --> 00:03:19,600
-Let's go!
-快！
+87
+00:03:16,780 --> 00:03:18,700
+Let's go, people, move, move!
+快，大家动起来，快，快！
 
-99
-00:03:19,600 --> 00:03:20,600
-People, move!
-大家，动起来！
-
-100
-00:03:20,600 --> 00:03:21,600
-Move!
-快！
-
-101
-00:03:21,600 --> 00:03:22,600
+88
+00:03:25,580 --> 00:03:27,460
 Doctor, oh thank God!
 医生，哦，谢天谢地！
 
-102
-00:03:22,600 --> 00:03:23,600
+89
+00:03:27,660 --> 00:03:28,840
 How is he?
 他怎么样了？
 
-103
-00:03:23,600 --> 00:03:34,040
+90
+00:03:29,400 --> 00:03:33,220
 We've managed to stabilize Frankie, but he's not out of the woods yet.
 我们设法稳定了弗兰基的情况，但他还没有脱离危险。
 
-104
-00:03:34,040 --> 00:03:36,360
+91
+00:03:33,820 --> 00:03:35,340
 He's still in critical condition.
 他仍然处于危急状态。
 
-105
-00:03:36,360 --> 00:03:38,840
-We're moving him to intensive care, but-
-我们要把他转到重症监护室，但是——
+92
+00:03:35,860 --> 00:03:38,240
+We're moving him to intensive care, but...
+我们正要把他转到重症监护室，但是……
 
-106
-00:03:38,840 --> 00:03:41,480
+93
+00:03:39,140 --> 00:03:41,140
 Doctor, just do whatever it takes.
 医生，请不惜一切代价。
 
-107
-00:03:41,480 --> 00:03:44,020
+94
+00:03:41,440 --> 00:03:43,260
 I just want my little Frankie to be okay.
-我只想让我的小弗兰基好起来。
+我只想让我的小弗兰基没事。
 
-108
-00:03:44,020 --> 00:03:47,280
+95
+00:03:43,900 --> 00:03:46,960
 I couldn't imagine life without my little hamster.
 我无法想象没有我的小仓鼠的生活。
 
-109
+96
 00:03:54,420 --> 00:03:57,100
 Wow, so much drama over a little hamster.
 哇，为了一只小仓鼠这么大惊小怪。
 
-110
+97
 00:03:57,100 --> 00:03:57,940
 Yeah, a little pet, hey?
 是啊，一只小宠物，嗯？
 
-111
+98
 00:03:57,940 --> 00:03:59,960
 A little pet, a little hamster.
 一只小宠物，一只小仓鼠。
 
-112
+99
 00:03:59,960 --> 00:04:01,060
 Well, you know what?
 嗯，你知道吗？
 
-113
+100
 00:04:01,060 --> 00:04:03,020
 I can relate to this owner
 我能理解这位主人
 
-114
+101
 00:04:03,020 --> 00:04:05,540
 and I'm gonna tell you a little bit more about that later.
 我待会儿再跟你们详细说说。
 
-115
+102
 00:04:05,540 --> 00:04:07,500
 Yeah, I know you have a really good story about this.
 是啊，我知道你有个关于这个的好故事。
 
-116
+103
 00:04:07,500 --> 00:04:08,780
 Yeah, but in the meantime,
 是啊，不过与此同时，
 
-117
+104
 00:04:08,780 --> 00:04:11,580
 let's look at some great language in Language Takeaway.
 让我们看看《语言小贴士》里的一些精彩语言。
 
-118
+105
 00:04:15,580 --> 00:04:18,540
 All right, so let's take a look at our first word,
 好的，我们来看看第一个词，
 
-119
+106
 00:04:18,540 --> 00:04:19,380
 intubate.
 插管。
 
-120
+107
 00:04:19,380 --> 00:04:20,500
 Intubate.
 插管。
 
-121
+108
 00:04:20,500 --> 00:04:21,900
 Intubate.
 插管。
 
-122
+109
 00:04:21,900 --> 00:04:22,860
 Intubate.
 插管。
 
-123
+110
 00:04:22,860 --> 00:04:24,560
 So this is a medical procedure.
 所以这是一个医疗程序。
 
-124
+111
 00:04:24,560 --> 00:04:25,940
 Exactly.
 没错。
 
-125
+112
 00:04:25,940 --> 00:04:28,380
 When a patient can't breathe properly,
 当病人无法正常呼吸时，
 
-126
+113
 00:04:28,380 --> 00:04:30,820
 sometimes the doctor takes a long tube
 有时医生会拿一根长管
 
-127
+114
 00:04:30,820 --> 00:04:34,660
 and puts it into their mouth and down their pipes,
 放进他们的嘴里，顺着呼吸道往下，
 
-128
+115
 00:04:34,660 --> 00:04:36,140
 I guess, down their breathing tube.
 我想，是放进他们的呼吸管里。
 
-129
+116
 00:04:36,140 --> 00:04:36,980
 Right.
 对。
 
-130
+117
 00:04:36,980 --> 00:04:38,020
 So that they can breathe better.
 这样他们就能更好地呼吸。
 
-131
+118
 00:04:38,020 --> 00:04:40,300
 Okay, so that's to intubate.
 好的，这就是插管。
 
-132
+119
 00:04:40,300 --> 00:04:41,140
 Yes.
 是的。
 
-133
+120
 00:04:41,140 --> 00:04:43,540
 Okay, so once they've intubated the patient,
 好的，一旦他们给病人插管后，
 
-134
+121
 00:04:43,540 --> 00:04:45,180
 they start to bag him.
 他们就开始给他捏皮球。
 
-135
+122
 00:04:45,180 --> 00:04:46,500
 Yeah, bag him.
 对，捏皮球。
 
-136
+123
 00:04:46,500 --> 00:04:47,340
 Bag him.
 捏皮球。
 
-137
+124
 00:04:47,340 --> 00:04:48,160
 Bag him.
 捏皮球。
 
-138
+125
 00:04:48,160 --> 00:04:49,220
 Does that mean they like put a bag
 这是不是意味着他们把一个袋子
 
-139
+126
 00:04:49,220 --> 00:04:50,060
 over the person's head or something?
 套在病人头上之类的？
 
-140
+127
 00:04:50,060 --> 00:04:51,300
 No, no, no, no, no.
 不不不不不。
 
-141
+128
 00:04:51,300 --> 00:04:55,340
 So there's a bag attached to this intubation tube
 这个插管上连着一个皮球，
 
-142
+129
 00:04:55,340 --> 00:04:57,140
 and you squeeze it to put air into the lungs.
 你挤压它就能把空气送进肺部。
 
-143
+130
 00:04:57,140 --> 00:04:59,460
 Okay, so you squeeze this bag
 好的，所以你挤压这个皮球，
 
-144
+131
 00:04:59,460 --> 00:05:01,580
 and it puts air through the tube.
 空气就通过管子进去。
 
-145
+132
 00:05:01,580 --> 00:05:03,700
 I think this is just medical slang.
 我想这只是医学术语。
 
-146
+133
 00:05:03,700 --> 00:05:04,900
 Yeah, I guess bag him.
 对，我猜就是捏皮球。
 
-147
+134
 00:05:04,900 --> 00:05:06,800
 Yeah, but you hear it all the time on TV,
 对，但你在电视上经常听到，
 
-148
+135
 00:05:06,800 --> 00:05:08,420
 so it's important our listeners know it.
 所以让我们的听众知道很重要。
 
-149
+136
 00:05:08,420 --> 00:05:11,860
 Okay, let's look at our next word, critical condition.
 好的，我们来看下一个词，病危。
 
-150
+137
 00:05:11,860 --> 00:05:13,100
 Critical condition.
 病危。
 
-151
+138
 00:05:13,100 --> 00:05:14,500
 Critical condition.
 病危。
 
-152
+139
 00:05:14,500 --> 00:05:16,980
 The patient's in critical condition.
 病人情况危急。
 
-153
+140
 00:05:16,980 --> 00:05:18,940
 This condition means it's serious.
 这种情况意味着很严重。
 
-154
+141
 00:05:18,940 --> 00:05:22,120
 Right, if a patient is in critical condition,
 对，如果病人情况危急，
 
-155
+142
 00:05:22,120 --> 00:05:25,380
 they're either really, really hurt or really, really sick
 他们要么伤得很重，要么病得很重，
 
-156
+143
 00:05:25,380 --> 00:05:27,140
 and they could die pretty soon.
 而且可能很快就会死。
 
-157
+144
 00:05:27,140 --> 00:05:30,260
 Okay, so you don't want to be in critical condition.
 好的，所以你不想处于病危状态。
 
-158
+145
 00:05:30,260 --> 00:05:31,140
 No.
 不想。
 
-159
+146
 00:05:31,140 --> 00:05:33,780
 Let's take a look at our next word, stabilize.
 我们来看下一个词，稳定。
 
-160
+147
 00:05:33,780 --> 00:05:34,860
 Stabilize.
 稳定。
 
-161
+148
 00:05:34,860 --> 00:05:35,980
 Stabilize.
 稳定病情。
 
-162
+149
 00:05:35,980 --> 00:05:37,140
 Stabilize.
 稳定病情。
 
-163
+150
 00:05:37,140 --> 00:05:39,140
 So when the doctors stabilize a patient,
 所以当医生稳定病人的病情时，
 
-164
+151
 00:05:39,140 --> 00:05:41,340
 they take that patient out of danger.
 他们让病人脱离危险。
 
-165
+152
 00:05:41,340 --> 00:05:44,540
 Exactly, when a patient is stabilized,
 没错，当病人病情稳定后，
 
-166
+153
 00:05:44,540 --> 00:05:46,940
 they probably won't die in five minutes.
 他们大概不会在五分钟内死掉。
 
-167
+154
 00:05:46,940 --> 00:05:47,780
 Okay.
 好的。
 
-168
+155
 00:05:47,780 --> 00:05:49,020
 But they could still be really sick.
 但他们可能仍然病得很重。
 
-169
+156
 00:05:49,020 --> 00:05:50,980
 They could be in critical condition, right?
 他们可能处于危急状态，对吧？
 
-170
+157
 00:05:50,980 --> 00:05:52,140
 But it's under control.
 但情况已经得到控制。
 
-171
+158
 00:05:52,140 --> 00:05:52,980
 Exactly.
 没错。
 
-172
+159
 00:05:52,980 --> 00:05:53,800
 Okay.
 好的。
 
-173
+160
 00:05:53,800 --> 00:05:54,640
 Yeah.
 嗯。
 
-174
+161
 00:05:54,640 --> 00:05:55,460
 Stabilize.
 稳定病情。
 
-175
+162
 00:05:55,460 --> 00:05:57,820
 Let's look at our last word, ICU.
 我们来看最后一个词，ICU。
 
-176
+163
 00:05:57,820 --> 00:05:58,940
 ICU.
 ICU。
 
-177
+164
 00:05:58,940 --> 00:06:00,100
 ICU.
 ICU。
 
-178
+165
 00:06:00,100 --> 00:06:01,500
 Intensive care unit.
 重症监护室。
 
-179
+166
 00:06:01,500 --> 00:06:04,540
 Okay, that's what it means, intensive care unit.
 好的，就是这个意思，重症监护室。
 
-180
+167
 00:06:04,540 --> 00:06:05,380
 Yep.
 是的。
 
-181
+168
 00:06:05,380 --> 00:06:06,260
 So this is a place where patients
 所以这里是接收
 
-182
+169
 00:06:06,260 --> 00:06:08,780
 who are in critical condition are taken.
 处于危急状态的病人的地方。
 
-183
+170
 00:06:08,780 --> 00:06:09,700
 Right.
 对。
 
-184
+171
 00:06:09,700 --> 00:06:12,700
 So what's the difference between an ICU and a regular room?
 那么ICU和普通病房有什么区别？
 
-185
+172
 00:06:12,700 --> 00:06:15,060
 Well, I don't know, I've never been in one.
 嗯，我不知道，我没住过。
 
-186
+173
 00:06:15,060 --> 00:06:18,540
 But I think like patients are monitored regularly
 但我觉得病人会被定期监测，
 
-187
+174
 00:06:18,540 --> 00:06:21,020
 and I think there's, you know, maybe more,
 而且我想，你知道，可能更多，
 
-188
+175
 00:06:21,020 --> 00:06:24,220
 maybe there are more nurses and fewer patients.
 可能护士更多，病人更少。
 
-189
+176
 00:06:24,220 --> 00:06:25,980
 There's just a higher level of care.
 只是护理水平更高。
 
-190
+177
 00:06:25,980 --> 00:06:27,100
 A higher level of care.
 护理水平更高。
 
-191
+178
 00:06:27,100 --> 00:06:27,940
 Yeah.
 嗯。
 
-192
+179
 00:06:27,940 --> 00:06:28,820
 Okay.
 好的。
 
-193
+180
 00:06:28,820 --> 00:06:31,380
 Okay, so it's time for us to listen to our dialogue again.
 好了，现在该再听一遍我们的对话了。
 
-194
+181
 00:06:31,380 --> 00:06:34,180
 Now, try to catch all of these medical terms
 现在，试着找出所有这些医学术语，
 
-195
+182
 00:06:34,180 --> 00:06:35,340
 that we've just talked about,
 就是我们刚刚讨论过的，
 
-196
+183
 00:06:35,340 --> 00:06:37,540
 and then we'll come back and explain a few phrases.
 然后我们会回来解释一些短语。
 
-197
+184
 00:06:37,540 --> 00:06:40,780
 ♪♪
 ♪♪
 
-198
+185
 00:06:40,780 --> 00:06:41,740
 Help!
 救命！
 
-199
+186
 00:06:41,740 --> 00:06:43,260
 Are you a doctor?
 你是医生吗？
 
-200
+187
 00:06:43,260 --> 00:06:45,780
 My poor little Frankie has just stopped breathing.
 我可怜的小弗兰基刚刚停止呼吸了。
 
-201
+188
 00:06:45,780 --> 00:06:47,580
 Oh my gosh, help me.
 哦天哪，救救我。
 
-202
+189
 00:06:47,580 --> 00:06:49,340
 I tried to perform CPR, but I just,
 我试着做心肺复苏，但我就是，
 
-203
+190
 00:06:49,340 --> 00:06:51,260
 I don't know if I could get any air into his lungs.
 我不知道我能不能把空气送进他的肺里。
 
-204
+191
 00:06:51,260 --> 00:06:52,100
 Oh, Frankie.
 哦，弗兰基。
 
-205
+192
 00:06:53,340 --> 00:06:55,580
 Ellen, get him hooked up to a monitor.
 艾伦，把他连上监护仪。
 
-206
+193
 00:06:55,580 --> 00:06:57,420
 Somebody page Dr. Hauser.
 有人呼叫豪瑟医生。
 
-207
+194
 00:06:57,420 --> 00:06:59,500
 Get the patient to hold still.
 让病人别动。
 
-208
+195
 00:06:59,500 --> 00:07:00,760
 I can't get a pulse.
 我摸不到脉搏。
 
-209
+196
 00:07:01,820 --> 00:07:03,420
 Okay, he's on the monitor.
 好了，他上监护仪了。
 
-210
+197
 00:07:03,420 --> 00:07:04,780
 His BP's falling.
 他的血压在下降。
 
-211
+198
 00:07:04,780 --> 00:07:05,820
 He's flatlining.
 他的心跳成直线了。
 
-212
+199
 00:07:05,820 --> 00:07:06,900
 No, Frankie!
 不，弗兰基！
 
-213
+200
 00:07:08,620 --> 00:07:10,460
 Doctor, do something!
 医生，快想想办法！
 
-214
+201
 00:07:12,020 --> 00:07:13,620
 Someone get her out of here.
 谁把她带出去。
 
-215
+202
 00:07:13,620 --> 00:07:15,380
 Get me the defibrillator.
 把除颤器给我。
 
-216
+203
 00:07:15,380 --> 00:07:17,220
 Okay, clear.
 好的，离开。
 
-217
+204
 00:07:18,340 --> 00:07:19,580
 Again, clear.
 再来，离开。
 
-218
+205
 00:07:20,700 --> 00:07:22,660
 Come on, dammit, I'm not letting go of you.
 加油，该死的，我不会放弃你的。
 
-219
+206
 00:07:22,660 --> 00:07:23,500
 Clear!
 离开！
 
-220
+207
 00:07:24,820 --> 00:07:26,020
 I've got a pulse.
 有脉搏了。
 
-221
+208
 00:07:26,020 --> 00:07:27,500
 Okay, what's happening?
 好了，发生什么事了？
 
-222
+209
 00:07:27,500 --> 00:07:29,420
 The patient is in acute respiratory failure.
 病人出现急性呼吸衰竭。
 
-223
+210
 00:07:29,420 --> 00:07:31,580
 I think we're going to have to intubate.
 我想我们得给他插管。
 
-224
+211
 00:07:31,580 --> 00:07:33,020
 All right, tube's in.
 好了，插管进去了。
 
-225
+212
 00:07:33,020 --> 00:07:33,860
 Bag him.
 给他捏气囊。
 
-226
+213
 00:07:33,860 --> 00:07:36,020
 Somebody give him 10 cc's shot of adrenaline.
 谁给他注射10毫升肾上腺素。
 
-227
+214
 00:07:36,020 --> 00:07:38,420
 Let's go, people, move, move!
 大家动起来，快，快！
 
-228
+215
 00:07:39,380 --> 00:07:41,660
 Doctor, oh, thank God.
 医生，哦，谢天谢地。
 
-229
+216
 00:07:41,660 --> 00:07:43,380
 How is he?
 他怎么样了？
 
-230
+217
 00:07:43,380 --> 00:07:45,380
 We've managed to stabilize Frankie,
 我们设法稳定了弗兰基的情况。
 
-231
+218
 00:07:45,380 --> 00:07:47,580
 but he's not out of the woods yet.
 但他还没有脱离危险。
 
-232
+219
 00:07:47,580 --> 00:07:49,860
 He's still in critical condition.
 他仍然处于危急状态。
 
-233
+220
 00:07:49,860 --> 00:07:51,940
 We're moving him to intensive care, but-
 我们要把他转到重症监护室，但是——
 
-234
+221
 00:07:51,940 --> 00:07:55,180
 Doctor, just do whatever it takes.
 医生，请不惜一切代价。
 
-235
+222
 00:07:55,180 --> 00:07:57,700
 I just want my little Frankie to be okay.
 我只想让我的小弗兰基没事。
 
-236
+223
 00:07:57,700 --> 00:08:00,980
 I couldn't imagine life without my little hamster.
 我无法想象没有我的小仓鼠的生活。
 
-237
+224
 00:08:00,980 --> 00:08:04,060
 Okay, so there are some really good phrasal verbs
 好的，这段对话中有一些非常好的短语动词。
 
-238
+225
 00:08:04,060 --> 00:08:04,900
 in this dialogue.
 是的，几个不错的短语动词。
 
-239
+226
 00:08:04,900 --> 00:08:06,460
 Yeah, a couple of good phrasal verbs.
 好的，那我们来看看这些短语动词。
 
-240
+227
 00:08:06,460 --> 00:08:08,700
 Okay, so let's take a look at these phrasal verbs
 好的，那我们来看看这些短语动词。
 
-241
+228
 00:08:08,700 --> 00:08:09,940
 in putting it together.
 在把它组装起来。
 
-242
+229
 00:08:11,740 --> 00:08:12,900
 Putting it together.
 把它组装起来。
 
-243
+230
 00:08:14,220 --> 00:08:17,420
 All right, so what's our first phrasal verb today?
 好的，那我们今天的第一个动词短语是什么？
 
-244
+231
 00:08:17,420 --> 00:08:18,420
 Hook up.
 Hook up.
 
-245
+232
 00:08:18,420 --> 00:08:19,260
 Hook up.
 Hook up.
 
-246
+233
 00:08:19,260 --> 00:08:20,580
 Hook up.
 Hook up.
 
-247
+234
 00:08:20,580 --> 00:08:22,060
 So to hook up.
 所以是 hook up。
 
-248
+235
 00:08:22,060 --> 00:08:25,180
 So when we talk about hooking something up,
 当我们说 hook something up 时，
 
-249
+236
 00:08:25,180 --> 00:08:28,700
 we are usually talking about something that's
 通常指的是某种
 
-250
+237
 00:08:28,700 --> 00:08:32,420
 we are usually talking about electronics, right Marco?
 通常指的是电子产品，对吧 Marco？
 
-251
+238
 00:08:32,420 --> 00:08:35,620
 Yeah, you usually hook up your TV or your computer.
 是的，通常你会 hook up 你的电视或电脑。
 
-252
+239
 00:08:35,620 --> 00:08:37,140
 So why don't we listen to some examples
 那我们听一些例子
 
-253
+240
 00:08:37,140 --> 00:08:38,900
 of how we would use hook up.
 看看怎么使用 hook up。
 
-254
+241
 00:08:39,860 --> 00:08:41,140
 Example one.
 例子一。
 
-255
+242
 00:08:43,460 --> 00:08:45,620
 I finally got a Nintendo Wii.
 我终于买到了任天堂 Wii。
 
-256
+243
 00:08:45,620 --> 00:08:47,900
 Come on, help me hook it up to the TV.
 快来，帮我把它连接到电视上。
 
-257
+244
 00:08:50,820 --> 00:08:51,820
 Example two.
 例子二。
 
-258
+245
 00:08:55,220 --> 00:08:57,660
 I don't know how to hook up this new DVD player.
 我不知道怎么连接这个新 DVD 播放器。
 
-259
+246
 00:08:57,660 --> 00:08:58,740
 Can you help me?
 你能帮我吗？
 
-260
+247
 00:09:02,140 --> 00:09:03,420
 Example three.
 例子三。
 
-261
+248
 00:09:06,900 --> 00:09:10,100
 I just hooked up my new HDTV.
 我刚连接好了我的新高清电视。
 
-262
+249
 00:09:10,100 --> 00:09:11,900
 Wanna come over and watch a movie?
 想过来看电影吗？
 
-263
+250
 00:09:15,380 --> 00:09:18,180
 Great, so you can see that there are a few different
 很好，所以你可以看到有几种不同的
 
-264
+251
 00:09:18,180 --> 00:09:20,820
 variations of this pattern here with the word hook up
 这个模式的变体，关于 hook up 这个词
 
-265
+252
 00:09:20,820 --> 00:09:22,100
 because it's a phrasal verb.
 因为它是一个动词短语。
 
-266
+253
 00:09:22,100 --> 00:09:22,980
 Exactly.
 没错。
 
-267
+254
 00:09:22,980 --> 00:09:24,860
 And I think the same patterns can apply
 而且我认为同样的模式也适用于
 
-268
+255
 00:09:24,860 --> 00:09:27,380
 to our next phrasal verb.
 我们的下一个动词短语。
 
-269
+256
 00:09:27,380 --> 00:09:28,340
 Hold still.
 Hold still.
 
-270
+257
 00:09:28,340 --> 00:09:29,420
 Hold still.
 Hold still.
 
-271
+258
 00:09:29,420 --> 00:09:30,740
 Hold still.
 Hold still.
 
-272
+259
 00:09:30,740 --> 00:09:31,940
 Hold still.
 Hold still.
 
-273
+260
 00:09:31,940 --> 00:09:34,700
 So the doctor needed the patient to hold still.
 所以医生需要病人 hold still。
 
-274
+261
 00:09:34,700 --> 00:09:36,140
 Right, to stop moving.
 对，就是不要动。
 
-275
+262
 00:09:36,140 --> 00:09:38,020
 Stop moving, exactly.
 不要动，没错。
 
-276
+263
 00:09:38,020 --> 00:09:40,660
 Okay, let's listen to some more examples of hold still
 好的，我们来听更多关于 hold still 的例子
 
-277
+264
 00:09:40,660 --> 00:09:42,780
 because again, it's a really great phrasal verb
 因为同样，这是一个非常好的动词短语
 
-278
+265
 00:09:42,780 --> 00:09:44,580
 that you can change up a little bit.
 你可以稍微变化一下。
 
-279
+266
 00:09:46,140 --> 00:09:47,380
 Example one.
 例子一。
 
-280
+267
 00:09:52,100 --> 00:09:53,380
 If you don't hold still,
 如果你不动的话，
 
-281
+268
 00:09:53,380 --> 00:09:58,380
 I can't see if you have something in your eye.
 我看不到你眼睛里有没有东西。
 
-282
+269
 00:10:00,700 --> 00:10:01,780
 Example two.
 例子二。
 
-283
+270
 00:10:06,420 --> 00:10:08,420
 Hold still while she cuts your hair
 她给你剪头发时别动
 
-284
+271
 00:10:08,420 --> 00:10:10,340
 or else she might make a mistake.
 否则她可能会剪错。
 
-285
+272
 00:10:15,540 --> 00:10:16,860
 Example three.
 例子三。
 
-286
+273
 00:10:16,860 --> 00:10:21,860
 Hold still, you have a bee on your back.
 别动，你背上有一只蜜蜂。
 
-287
+274
 00:10:25,740 --> 00:10:27,420
 Okay, hold still, great word.
 好的，别动，好词。
 
-288
+275
 00:10:27,420 --> 00:10:28,620
 Yep.
 嗯。
 
-289
+276
 00:10:28,620 --> 00:10:30,460
 All right, one final phrase for you.
 好了，最后一个短语给你。
 
-290
+277
 00:10:30,460 --> 00:10:32,020
 Out of the woods.
 脱离危险。
 
-291
+278
 00:10:32,020 --> 00:10:33,620
 Out of the woods.
 脱离危险。
 
-292
+279
 00:10:33,620 --> 00:10:34,620
 Out of the woods.
 脱离危险。
 
-293
+280
 00:10:34,620 --> 00:10:36,060
 Out of the woods.
 脱离危险。
 
-294
+281
 00:10:36,060 --> 00:10:38,100
 So when someone's out of the woods, they're...
 所以当某人脱离危险时，他们就是……
 
-295
+282
 00:10:38,100 --> 00:10:39,100
 Free from danger.
 脱离了危险。
 
-296
+283
 00:10:39,100 --> 00:10:39,940
 Uh-huh, safe.
 嗯哼，安全了。
 
-297
+284
 00:10:39,940 --> 00:10:41,260
 Okay, safe.
 好的，安全了。
 
-298
+285
 00:10:41,260 --> 00:10:42,740
 I guess it's kind of a saying.
 我想这算是一种说法。
 
-299
+286
 00:10:42,740 --> 00:10:43,580
 Yeah.
 是的。
 
-300
+287
 00:10:43,580 --> 00:10:46,780
 Like I'm out of the woods, I'm free, I'm safe.
 就像我脱离危险了，我自由了，我安全了。
 
-301
+288
 00:10:46,780 --> 00:10:48,660
 I guess there are two variants of this phrase.
 我想这个短语有两种变体。
 
-302
+289
 00:10:48,660 --> 00:10:51,380
 We can say, I'm out of the woods or we're out of the woods
 我们可以说，我脱离危险了或者我们脱离危险了
 
-303
+290
 00:10:51,380 --> 00:10:53,820
 or I guess we're not out of the woods yet.
 或者我想我们还没脱离危险。
 
-304
+291
 00:10:53,820 --> 00:10:56,260
 Uh-huh, so, okay.
 嗯哼，所以，好的。
 
-305
+292
 00:10:56,260 --> 00:10:57,980
 Out of the woods.
 脱离危险。
 
-306
+293
 00:10:57,980 --> 00:11:00,300
 Okay, so now it's time for us to listen to our dialogue
 好的，现在让我们再听一遍对话
 
-307
+294
 00:11:00,300 --> 00:11:01,900
 again and when we come back,
 等我们回来的时候，
 
-308
+295
 00:11:01,900 --> 00:11:04,860
 Erica's gonna tell us about her ER story.
 Erica会告诉我们她在急诊室的故事。
 
-309
+296
 00:11:04,860 --> 00:11:07,020
 Help, are you a doctor?
 救命，你是医生吗？
 
-310
+297
 00:11:07,020 --> 00:11:09,500
 My poor little Frankie, he's just stopped breathing.
 我可怜的小Frankie，他刚刚停止呼吸了。
 
-311
+298
 00:11:09,500 --> 00:11:11,340
 Oh my gosh, help me.
 哦天哪，救救我。
 
-312
+299
 00:11:11,340 --> 00:11:12,940
 I tried to perform CPR, but I just,
 我试着做心肺复苏，但我就是，
 
-313
+300
 00:11:12,940 --> 00:11:15,060
 I don't know if I could get any air into his lungs.
 我不知道我能不能把空气送进他的肺里。
 
-314
+301
 00:11:15,060 --> 00:11:17,100
 Oh, Frankie.
 哦，Frankie。
 
-315
+302
 00:11:17,100 --> 00:11:19,300
 Ellen, get him hooked up to a monitor.
 Ellen，把他连接到监护仪上。
 
-316
+303
 00:11:19,300 --> 00:11:21,180
 Somebody page Dr. Hauser.
 谁呼叫一下Hauser医生。
 
-317
+304
 00:11:21,180 --> 00:11:23,180
 Get the patient to hold still.
 让病人别动。
 
-318
+305
 00:11:23,180 --> 00:11:24,540
 I can't get a pulse.
 我摸不到脉搏。
 
-319
+306
 00:11:24,540 --> 00:11:25,860
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-320
+307
 00:11:25,860 --> 00:11:27,180
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-321
+308
 00:11:27,180 --> 00:11:28,500
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-322
+309
 00:11:28,500 --> 00:11:29,820
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-323
+310
 00:11:29,820 --> 00:11:31,140
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-324
+311
 00:11:31,140 --> 00:11:32,460
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-325
+312
 00:11:32,460 --> 00:11:33,780
 I'm sorry, I'm sorry.
 对不起，对不起。
 
-326
+313
 00:11:33,780 --> 00:11:36,860
 I can't get a pulse.
 我摸不到脉搏。
 
-327
+314
 00:11:36,860 --> 00:11:38,420
 Okay, he's on the monitor.
 好了，他在监护仪上。
 
-328
+315
 00:11:38,420 --> 00:11:39,820
 His BP's falling.
 他的血压在下降。
 
-329
+316
 00:11:39,820 --> 00:11:40,860
 He's flatlining.
 他心跳停止了。
 
-330
+317
 00:11:40,860 --> 00:11:43,660
 No, Frankie!
 不，弗兰基！
 
-331
+318
 00:11:43,660 --> 00:11:46,140
 Doctor, do something!
 医生，快想想办法！
 
-332
+319
 00:11:46,140 --> 00:11:47,740
 Someone get her out of here.
 谁把她带出去。
 
-333
+320
 00:11:47,740 --> 00:11:49,500
 Get me the defibrillator.
 把除颤器给我。
 
-334
+321
 00:11:49,500 --> 00:11:52,420
 Okay, clear.
 好，闪开。
 
-335
+322
 00:11:52,420 --> 00:11:54,780
 Again, clear.
 再来，闪开。
 
-336
+323
 00:11:54,780 --> 00:11:56,740
 Come on, dammit, I'm not letting go of you.
 加油，该死的，我不会放弃你的。
 
-337
+324
 00:11:56,740 --> 00:11:58,940
 Clear.
 闪开。
 
-338
+325
 00:11:58,940 --> 00:12:00,100
 I got a pulse.
 有脉搏了。
 
-339
+326
 00:12:00,100 --> 00:12:01,660
 Okay, what's happening?
 好，现在什么情况？
 
-340
+327
 00:12:01,660 --> 00:12:03,500
 Patient is in acute respiratory failure.
 病人出现急性呼吸衰竭。
 
-341
+328
 00:12:03,500 --> 00:12:05,660
 I think we're going to have to intubate.
 我想我们得插管了。
 
-342
+329
 00:12:05,660 --> 00:12:07,100
 Alright, tube's in.
 好了，插管进去了。
 
-343
+330
 00:12:07,100 --> 00:12:08,100
 Bag him.
 给他捏气囊。
 
-344
+331
 00:12:08,100 --> 00:12:10,100
 Somebody give him 10 cc's shot of adrenaline.
 谁给他注射10毫升肾上腺素。
 
-345
+332
 00:12:10,100 --> 00:12:18,980
 Let's go, people, move, move!
 快，大家动起来，快，快！
 
-346
+333
 00:12:18,980 --> 00:12:21,260
 Doctor, oh thank God!
 医生，哦，谢天谢地！
 
-347
+334
 00:12:21,260 --> 00:12:22,980
 How is he?
 他怎么样了？
 
-348
+335
 00:12:22,980 --> 00:12:25,020
 We've managed to stabilize Frankie,
 我们设法稳定了弗兰基的情况，
 
-349
+336
 00:12:25,020 --> 00:12:27,220
 but he's not out of the woods yet.
 但他还没有脱离危险。
 
-350
+337
 00:12:27,220 --> 00:12:29,460
 He's still in critical condition.
 他仍然处于危急状态。
 
-351
+338
 00:12:29,460 --> 00:12:31,540
 We're moving him to intensive care, but...
 我们正要把他转到重症监护室，但是……
 
-352
+339
 00:12:31,540 --> 00:12:34,780
 Doctor, just do whatever it takes.
 医生，请不惜一切代价。
 
-353
+340
 00:12:34,780 --> 00:12:37,340
 I just want my little Frankie to be okay.
 我只想让我的小弗兰基没事。
 
-354
+341
 00:12:37,340 --> 00:12:45,940
 I couldn't imagine life without my little hamster.
 我无法想象没有我的小仓鼠的生活。
 
-355
+342
 00:12:45,940 --> 00:12:46,940
 Okay, Erica, so what happened?
 好了，埃里卡，发生什么事了？
 
-356
+343
 00:12:46,940 --> 00:12:48,740
 What emergency did you have?
 你遇到了什么紧急情况？
 
-357
+344
 00:12:48,740 --> 00:12:50,020
 Well, it was with my cat.
 嗯，是关于我的猫。
 
-358
+345
 00:12:50,020 --> 00:12:50,660
 Your cat.
 你的猫。
 
-359
+346
 00:12:50,660 --> 00:12:52,780
 Yes, I had some people over for dinner,
 是的，我请了一些人来家里吃饭，
 
-360
+347
 00:12:52,780 --> 00:12:55,700
 and it was maybe 1.30 in the morning,
 当时大概是凌晨一点半，
 
-361
+348
 00:12:55,700 --> 00:12:57,980
 and I went downstairs to let them out
 我下楼去放它们出去
 
-362
+349
 00:12:57,980 --> 00:12:59,380
 and show them where the taxis were,
 并告诉它们出租车在哪里，
 
-363
+350
 00:12:59,380 --> 00:13:02,020
 and then I came up and I saw that the cat was gone,
 然后我上楼发现猫不见了，
 
-364
+351
 00:13:02,020 --> 00:13:05,300
 and it turned out that the cat fell out of the window.
 结果发现猫从窗户掉下去了。
 
-365
+352
 00:13:05,300 --> 00:13:06,540
 Fell out of the window.
 从窗户掉下去了。
 
-366
+353
 00:13:06,540 --> 00:13:07,260
 Yeah.
 是啊。
 
-367
+354
 00:13:07,260 --> 00:13:09,540
 Alright, but our listeners have to know,
 好吧，但我们的听众必须知道，
 
-368
+355
 00:13:09,540 --> 00:13:11,780
 what story or what floor do you live on?
 你住在几楼？
 
-369
+356
 00:13:11,780 --> 00:13:12,740
 The 20th floor.
 20楼。
 
-370
+357
 00:13:12,740 --> 00:13:13,580
 The 20th.
 20楼。
 
-371
+358
 00:13:13,580 --> 00:13:15,900
 Yeah, so this is really dangerous, right?
 是啊，这真的很危险，对吧？
 
-372
+359
 00:13:15,900 --> 00:13:18,180
 That's really high up.
 那太高了。
 
-373
+360
 00:13:18,180 --> 00:13:20,340
 So I went outside and I was calling for my cat,
 所以我跑出去喊我的猫，
 
-374
+361
 00:13:20,340 --> 00:13:22,260
 and I was like, Mr. Finn, where are you?
 我说，芬恩先生，你在哪里？
 
-375
+362
 00:13:22,260 --> 00:13:23,340
 How did you know he fell out?
 你怎么知道它掉下去了？
 
-376
+363
 00:13:23,340 --> 00:13:24,140
 I just knew.
 我就是知道。
 
-377
+364
 00:13:24,140 --> 00:13:24,540
 Yeah?
 是吗？
 
-378
+365
 00:13:24,540 --> 00:13:24,900
 Yeah.
 嗯。
 
-379
+366
 00:13:24,900 --> 00:13:25,700
 Mother's instinct.
 母亲的直觉。
 
-380
+367
 00:13:25,700 --> 00:13:27,020
 I guess so.
 我想是吧。
 
-381
+368
 00:13:27,020 --> 00:13:30,660
 So he was calling back to me, and so I picked him up
 它回应了我，所以我把它抱起来
 
-382
+369
 00:13:30,660 --> 00:13:31,860
 and brought him to the house,
 带回了家，
 
-383
+370
 00:13:31,860 --> 00:13:33,700
 and we had to bring him to the vet,
 我们不得不带它去看兽医，
 
-384
+371
 00:13:33,700 --> 00:13:36,180
 and it was 2.30, 3 in the morning at this time,
 那时是凌晨两点半、三点，
 
-385
+372
 00:13:36,180 --> 00:13:40,860
 and the vet was not very happy that we woke him up out of bed.
 兽医被我们从床上叫起来很不高兴。
 
-386
+373
 00:13:40,860 --> 00:13:42,820
 But that was a really good emergency, though.
 但那确实是紧急情况。
 
-387
+374
 00:13:42,820 --> 00:13:43,540
 Yeah.
 是啊。
 
-388
+375
 00:13:43,540 --> 00:13:45,820
 So anyway, we brought him to the vet.
 总之，我们带它去了兽医那里。
 
-389
+376
 00:13:45,820 --> 00:13:48,940
 He was in critical condition for a couple of days,
 它情况危急了好几天，
 
-390
+377
 00:13:48,940 --> 00:13:53,820
 and then we had to keep him in the vet's ICU for about a week.
 然后我们不得不把它留在兽医的ICU大约一周。
 
-391
+378
 00:13:53,820 --> 00:13:55,020
 He broke his back.
 它摔断了背。
 
-392
+379
 00:13:55,020 --> 00:13:57,620
 He broke two of his legs.
 它摔断了两条腿。
 
-393
+380
 00:13:57,620 --> 00:13:58,420
 Wow.
 哇。
 
-394
+381
 00:13:58,420 --> 00:14:01,020
 Yeah, and so he was in the hospital for three weeks
 是啊，所以它在医院住了三周
 
-395
+382
 00:14:01,020 --> 00:14:04,620
 and then at home on bed rest for another three weeks.
 然后在家卧床休息又三周。
 
-396
+383
 00:14:04,620 --> 00:14:06,540
 But now he's good as new.
 但现在它完好如初了。
 
-397
+384
 00:14:06,540 --> 00:14:07,260
 Good as new.
 完好如初。
 
-398
+385
 00:14:07,260 --> 00:14:07,740
 Yeah.
 是啊。
 
-399
+386
 00:14:07,740 --> 00:14:10,300
 He used up one of his seven lives.
 它用掉了九条命中的一条。
 
-400
+387
 00:14:10,300 --> 00:14:10,780
 Nine lives.
 九条命。
 
-401
+388
 00:14:10,780 --> 00:14:11,180
 Nine?
 九条命？
 
-402
+389
 00:14:11,180 --> 00:14:11,540
 Nine.
 九条命。
 
-403
+390
 00:14:11,540 --> 00:14:12,340
 Yeah.
 是啊。
 
-404
+391
 00:14:12,340 --> 00:14:14,300
 I think maybe eight of his nine lives.
 我觉得他可能用掉了八条命。
 
-405
+392
 00:14:14,300 --> 00:14:15,460
 He's only got one left.
 他只剩一条命了。
 
-406
+393
 00:14:15,460 --> 00:14:15,980
 Yeah.
 是啊。
 
-407
+394
 00:14:15,980 --> 00:14:17,380
 Wow, that's an interesting story.
 哇，这故事真有意思。
 
-408
+395
 00:14:17,380 --> 00:14:20,300
 I guess that's the inspiration under this dialogue.
 我想这就是这段对话的灵感来源。
 
-409
+396
 00:14:20,300 --> 00:14:21,180
 Exactly.
 没错。
 
-410
+397
 00:14:21,180 --> 00:14:24,980
 Sometimes we Anglos really treat our cats
 有时候我们西方人真的把猫
 
-411
+398
 00:14:24,980 --> 00:14:27,380
 and our hamsters and our dogs like they're our children.
 还有仓鼠和狗当成自己的孩子。
 
-412
+399
 00:14:27,380 --> 00:14:28,100
 Yeah, yeah.
 是啊，是啊。
 
-413
+400
 00:14:28,100 --> 00:14:29,220
 No, that's good.
 不，这挺好的。
 
-414
+401
 00:14:29,220 --> 00:14:31,340
 Well, I'm glad Mr. Finn is OK and he's
 嗯，我很高兴芬恩先生没事了，他
 
-415
+402
 00:14:31,340 --> 00:14:32,540
 walking and good as new.
 又能走路了，跟新的一样。
 
-416
+403
 00:14:32,540 --> 00:14:33,500
 Yep, good as new.
 对，跟新的一样。
 
-417
+404
 00:14:33,500 --> 00:14:37,940
 So maybe our users have some stories about their pets
 所以也许我们的用户有一些关于宠物
 
-418
+405
 00:14:37,940 --> 00:14:39,340
 being taken to the hospital.
 被送进医院的故事。
 
-419
+406
 00:14:39,340 --> 00:14:40,140
 I want to hear.
 我想听听。
 
-420
+407
 00:14:40,140 --> 00:14:41,500
 Yeah, that should be interesting.
 是啊，那应该挺有意思的。
 
-421
+408
 00:14:41,500 --> 00:14:44,260
 I've never had a pet actually break a leg or anything,
 我从来没有宠物摔断腿之类的经历，
 
-422
+409
 00:14:44,260 --> 00:14:46,500
 so don't have any pet stories this time.
 所以这次没有宠物故事可讲。
 
-423
+410
 00:14:46,500 --> 00:14:48,100
 But we want to hear what you think,
 但我们想听听你们的想法，
 
-424
+411
 00:14:48,100 --> 00:14:50,860
 so come to EnglishPod.com, leave all your questions
 所以请访问EnglishPod.com，留下你们的所有问题
 
-425
+412
 00:14:50,860 --> 00:14:52,340
 and comments and your stories.
 和评论以及你们的故事。
 
-426
+413
 00:14:52,340 --> 00:14:53,060
 Yes.
 是的。
 
-427
+414
 00:14:53,060 --> 00:14:54,540
 And we'll be there to answer them.
 我们会在那里回答。
 
-428
+415
 00:14:54,540 --> 00:14:55,780
 So guys, thanks for listening.
 好了，朋友们，感谢收听。
 
-429
+416
 00:14:55,780 --> 00:14:57,980
 And until next time, goodbye.
 下次再见，拜拜。
 
-430
+417
 00:14:57,980 --> 00:15:24,540
 Bye.
 拜。
