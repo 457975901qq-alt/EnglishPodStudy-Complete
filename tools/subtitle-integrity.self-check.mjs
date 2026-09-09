@@ -10,6 +10,11 @@ function parseSrt(source) {
   })
 }
 
+function parseTime(value) {
+  const [hours, minutes, seconds] = value.replace(',', '.').split(':')
+  return Math.round((Number(hours) * 3_600 + Number(minutes) * 60 + Number(seconds)) * 1_000)
+}
+
 function isMusic(text) {
   return /^\s*(\[.*music.*\]|【.*音乐.*】|♪)\s*$/iu.test(text)
 }
@@ -17,6 +22,7 @@ function isMusic(text) {
 const courseIds = (await readdir('resource')).filter((entry) => /^\d{4}$/.test(entry)).sort()
 const repairedCourseIds = new Set(['0009', '0015', '0049', '0057', '0074', '0075', '0091', '0128', '0130', '0132', '0135', '0142', '0150', '0170', '0183', '0217', '0344', '0352'])
 const failures = []
+const knownGarbledArtefact = /Pサラロールカー|Copyright © 2020 The Ellen DeGeneres|영 studaos|��Music Playing��|энергetic guitar music|Ladas, 있을|^수가$|I'll watch Kill Bill at the end\.?/iu
 
 for (const course of courseIds) {
   const [englishSource, chineseSource, bilingualSource, transcript] = await Promise.all([
@@ -39,7 +45,15 @@ for (const course of courseIds) {
     if (previous.length === 8 && !isMusic(english[index].text) && previous.every((entry) => entry.text === english[index].text)) {
       failures.push(`${course}: repeated non-music subtitle at ${index - 6}-${index + 1}`)
     }
+    if (knownGarbledArtefact.test(english[index].text)) failures.push(`${course}: known garbled subtitle artefact at ${index + 1}`)
     if (repairedCourseIds.has(course) && entries.some((entry) => entry.id !== index + 1)) failures.push(`${course}: repaired subtitle id is not sequential at ${index + 1}`)
+  }
+
+  const last = english.at(-1)
+  const penultimate = english.at(-2)
+  const lastDuration = parseTime(last.end) - parseTime(last.start)
+  if (/^bye[.!]?$/iu.test(last.text) && /^bye[.!]?$/iu.test(penultimate?.text ?? '') && lastDuration > 5_000) {
+    failures.push(`${course}: long outro music is mislabeled as repeated goodbye`)
   }
 }
 
