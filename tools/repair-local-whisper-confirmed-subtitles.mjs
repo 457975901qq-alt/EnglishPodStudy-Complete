@@ -67,6 +67,31 @@ const repairs = [{
   removedText: "I'm so excited.",
   entries: [],
 }, {
+  // The second dialogue replay was replaced by hallucinated text in the
+  // generated supplement. These entries are aligned to the local lesson audio
+  // after converting it to WAV and transcribing with Whisper large-v3-turbo.
+  course: '0181',
+  start: 105,
+  end: 134,
+  entries: [
+    [338960, 342240, "Dad! Dad! Dad! Wake up! It's Christmas!", '爸爸！爸爸！爸爸！醒醒！圣诞节到了！'],
+    [343340, 345660, "Timmy, it's too early for this.", '蒂米，这也太早了。'],
+    [346380, 350040, "Look, it's six in the morning. Go back to bed.", '你看，才早上六点。回去睡觉。'],
+    [350620, 354760, 'No way! Santa already came and left all our presents.', '不行！圣诞老人已经来过，把我们的礼物都留下了。'],
+    [355160, 357380, 'Can we go open them, please? Please?', '我们可以去拆礼物吗？求你了？'],
+    [357800, 360880, 'Of course we can, honey. Bill, come on, get dressed.', '当然可以，亲爱的。比尔，快点，去穿衣服。'],
+    [361860, 365100, 'Fine. Not like Santa brought me any gifts.', '好吧。反正圣诞老人也没给我带礼物。'],
+    [365600, 368560, 'Bill, honestly, you can be such a grouch sometimes.', '比尔，说真的，你有时候真是个脾气很坏的人。'],
+    [369520, 373260, 'Look at all these presents under the Christmas tree. Awesome!', '看看圣诞树下这么多礼物。太棒了！'],
+    [374440, 376540, 'All right, Timmy, knock yourself out.', '好了，蒂米，尽情玩吧。'],
+    [376860, 380360, 'We should get ready and head to the market to buy everything for Christmas dinner tonight.', '我们该准备一下，去市场买今晚圣诞晚餐需要的东西。'],
+    [380680, 381480, "Yeah, you're right.", '对，你说得对。'],
+    [381700, 385840, "It's the first time we're hosting Christmas dinner at our house, so everything has to be perfect.", '这是我们第一次在家招待圣诞晚餐，所以一切都得完美。'],
+    [386320, 394320, "I got the list right here. Ham, turkey, mashed potatoes, ingredients for the gravy, and of course, yams.", '清单就在这儿：火腿、火鸡、土豆泥、做肉汁的食材，当然还有红薯。'],
+    [394820, 397420, 'My dad offered to bring the eggnog, so we should be set.', '我爸爸说他会带蛋奶酒，所以我们应该都准备好了。'],
+    [401000, 405460, "All right, we're back. So now let's take a look at a couple of phrases on Fluency Builder.", '好了，我们回来了。现在来看看“流利表达”中的几个短语。'],
+  ],
+}, {
   course: '0099',
   start: 304,
   end: 332,

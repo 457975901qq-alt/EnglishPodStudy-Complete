@@ -415,557 +415,501 @@ So I think we should take a look at the dialogue again and we'll be back soon wi
 Builder.
 
 105
-00:05:35,040 --> 00:05:36,040
-Dad, dad, dad.
+00:05:38,960 --> 00:05:42,240
+Dad! Dad! Dad! Wake up! It's Christmas!
 
 106
-00:05:36,040 --> 00:05:37,040
-Wake up.
+00:05:43,340 --> 00:05:45,660
+Timmy, it's too early for this.
 
 107
-00:05:37,040 --> 00:05:38,040
-It's Christmas.
+00:05:46,380 --> 00:05:50,040
+Look, it's six in the morning. Go back to bed.
 
 108
-00:05:38,040 --> 00:05:39,040
-Timmy, Timmy, Timmy.
+00:05:50,620 --> 00:05:54,760
+No way! Santa already came and left all our presents.
 
 109
-00:05:39,040 --> 00:05:40,040
-Timmy, Timmy.
+00:05:55,160 --> 00:05:57,380
+Can we go open them, please? Please?
 
 110
-00:05:40,040 --> 00:05:41,040
-Timmy, Timmy.
+00:05:57,800 --> 00:06:00,880
+Of course we can, honey. Bill, come on, get dressed.
 
 111
-00:05:41,040 --> 00:05:42,040
-Timmy, Timmy.
+00:06:01,860 --> 00:06:05,100
+Fine. Not like Santa brought me any gifts.
 
 112
-00:05:42,040 --> 00:05:43,040
-Timmy, Timmy.
+00:06:05,600 --> 00:06:08,560
+Bill, honestly, you can be such a grouch sometimes.
 
 113
-00:05:43,040 --> 00:05:44,040
-Timmy, Timmy.
+00:06:09,520 --> 00:06:13,260
+Look at all these presents under the Christmas tree. Awesome!
 
 114
-00:05:44,040 --> 00:05:45,040
-Timmy, Timmy.
+00:06:14,440 --> 00:06:16,540
+All right, Timmy, knock yourself out.
 
 115
-00:05:45,040 --> 00:05:46,040
-As a child William used to be such a spendthrift
-
-116
-00:05:46,040 --> 00:05:47,040
-on Christmas Sunflowers.
-
-117
-00:05:47,040 --> 00:05:49,480
-He used to rub centrally into Santa's shirt, nothing more.
-
-118
-00:05:49,480 --> 00:05:53,240
-Now the trollis all of a sudden complaining about the Christmas Sunflowers getting cooked
-
-119
-00:05:53,240 --> 00:05:55,020
-up in the sun.
-
-120
-00:05:55,020 --> 00:05:58,580
-We used to need New Year's sunflowers but there weren't any Favorites and Timmy was
-
-121
-00:05:58,580 --> 00:06:00,800
-praying for his brother to cook up a perfect one.
-
-122
-00:06:00,800 --> 00:06:03,680
-And if you lied to Santa then you must have failed.
-
-123
-00:06:03,680 --> 00:06:05,160
-People go crazy to distribute gifts.
-
-124
-00:06:05,160 --> 00:06:12,920
-Yeah, well now each has a Santa and a board and you remember you're Stu for now and suddenly
-
-125
-00:06:12,920 --> 00:06:13,920
-Awesome!
-
-126
-00:06:13,920 --> 00:06:16,960
-Alright, Timmy, knock yourself out.
-
-127
-00:06:16,960 --> 00:06:20,480
+00:06:16,860 --> 00:06:20,360
 We should get ready and head to the market to buy everything for Christmas dinner tonight.
 
-128
-00:06:20,480 --> 00:06:21,480
+116
+00:06:20,680 --> 00:06:21,480
 Yeah, you're right.
 
-129
-00:06:21,480 --> 00:06:25,240
-It's the first time we're hosting Christmas dinner at our house, so everything has to
+117
+00:06:21,700 --> 00:06:25,840
+It's the first time we're hosting Christmas dinner at our house, so everything has to be perfect.
 
-130
-00:06:25,240 --> 00:06:26,240
-be perfect.
+118
+00:06:26,320 --> 00:06:34,320
+I got the list right here. Ham, turkey, mashed potatoes, ingredients for the gravy, and of course, yams.
 
-131
-00:06:26,240 --> 00:06:28,280
-I've got the list right here.
-
-132
-00:06:28,280 --> 00:06:34,920
-Ham, turkey, mashed potatoes, ingredients for the gravy, and of course, yams.
-
-133
-00:06:34,920 --> 00:06:38,320
+119
+00:06:34,820 --> 00:06:37,420
 My dad offered to bring the eggnog, so we should be set.
 
-134
-00:06:38,320 --> 00:06:47,360
-Alright, we're back, so now let's take a look at a couple of phrases on Fluency Builder.
+120
+00:06:41,000 --> 00:06:45,460
+All right, we're back. So now let's take a look at a couple of phrases on Fluency Builder.
 
-135
+121
 00:06:47,360 --> 00:06:48,360
 Fluency Builder.
 
-136
+122
 00:06:48,360 --> 00:06:53,120
 Okay, so this first phrase is a phrase that I often heard as a child because I never wanted
 
-137
+123
 00:06:53,120 --> 00:06:54,120
 to go to sleep.
 
-138
+124
 00:06:54,120 --> 00:06:59,360
 So I'd go downstairs and my parents would say, Catherine, go back to bed.
 
-139
+125
 00:06:59,360 --> 00:07:00,360
 Go back to bed.
 
-140
+126
 00:07:00,360 --> 00:07:01,640
 Okay, go back to bed.
 
-141
+127
 00:07:01,640 --> 00:07:07,240
 So this is just a very common colloquial spoken way of saying, go back to sleep.
 
-142
+128
 00:07:07,240 --> 00:07:08,240
 Go to sleep.
 
-143
+129
 00:07:08,240 --> 00:07:09,240
 Be awake.
 
-144
+130
 00:07:09,240 --> 00:07:15,000
 So you can say, go to sleep, or you can say, go to bed, or if somebody has gotten out of
 
-145
+131
 00:07:15,000 --> 00:07:16,520
 bed, you say, go back to bed.
 
-146
+132
 00:07:16,520 --> 00:07:20,320
 Exactly, and so parents often use this with their kids because they want their kids to
 
-147
+133
 00:07:20,320 --> 00:07:21,320
 sleep.
 
-148
+134
 00:07:21,320 --> 00:07:25,520
 You can also say it about someone who's up at night worrying, and you say, come on, go
 
-149
+135
 00:07:25,520 --> 00:07:26,520
 back to bed.
 
-150
+136
 00:07:26,520 --> 00:07:27,520
 Go to sleep.
 
-151
+137
 00:07:27,520 --> 00:07:28,520
 Relax.
 
-152
+138
 00:07:28,520 --> 00:07:33,680
 Okay, and then we also saw this phrase, knock yourself out.
 
-153
+139
 00:07:33,680 --> 00:07:35,880
 Alright, Timmy, knock yourself out.
 
-154
+140
 00:07:35,880 --> 00:07:37,560
 So what is this?
 
-155
+141
 00:07:37,560 --> 00:07:38,560
 Knock yourself out.
 
-156
+142
 00:07:38,560 --> 00:07:40,440
 Well, I'm not really sure where this phrase comes from.
 
-157
+143
 00:07:40,440 --> 00:07:45,160
 I mean, to knock is like to knock on a door, right?
 
-158
+144
 00:07:45,160 --> 00:07:50,360
 But to knock yourself out, if I think about it, it probably means that you hit yourself
 
-159
+145
 00:07:50,360 --> 00:07:52,680
 in the head and you fall over.
 
-160
+146
 00:07:52,680 --> 00:07:56,680
 But the real meaning of this is, go have fun.
 
-161
+147
 00:07:56,680 --> 00:07:58,240
 Have as much fun as you can have.
 
-162
+148
 00:07:58,240 --> 00:08:00,280
 Right, have as much fun as you want.
 
-163
+149
 00:08:00,280 --> 00:08:01,440
 Go knock yourself out.
 
-164
+150
 00:08:01,440 --> 00:08:05,920
 So the parent is saying, hey, Timmy, go have as much fun as you want.
 
-165
+151
 00:08:05,920 --> 00:08:06,920
 Just go do it.
 
-166
+152
 00:08:06,920 --> 00:08:07,920
 Enjoy yourself.
 
-167
+153
 00:08:07,920 --> 00:08:10,200
 Yeah, like go open all these presents.
 
-168
+154
 00:08:10,200 --> 00:08:11,320
 Have all the fun you want.
 
-169
+155
 00:08:11,320 --> 00:08:16,160
 Alright, and then we saw another phrase when they finished talking about dinner and all
 
-170
+156
 00:08:16,160 --> 00:08:18,160
 the things they have to buy.
 
-171
+157
 00:08:18,160 --> 00:08:20,440
 They said, we should be set.
 
-172
+158
 00:08:20,440 --> 00:08:22,240
 We should be set or we are set.
 
-173
+159
 00:08:22,240 --> 00:08:26,200
 Well, this is funny because she says, well, my dad's going to bring the eggnog, so we
 
-174
+160
 00:08:26,200 --> 00:08:30,000
 should be set, which means we should have everything we need.
 
-175
+161
 00:08:30,000 --> 00:08:31,400
 So we don't need anything else.
 
-176
+162
 00:08:31,400 --> 00:08:32,400
 We're ready.
 
-177
+163
 00:08:32,400 --> 00:08:33,400
 Everything is good.
 
-178
+164
 00:08:33,400 --> 00:08:34,400
 Exactly.
 
-179
+165
 00:08:34,400 --> 00:08:35,400
 So we can say, we are set.
 
-180
+166
 00:08:35,400 --> 00:08:36,400
 I'm set.
 
-181
+167
 00:08:36,400 --> 00:08:38,720
 It's a way to say, are you ready?
 
-182
+168
 00:08:38,720 --> 00:08:39,720
 Are you prepared?
 
-183
+169
 00:08:39,720 --> 00:08:42,200
 Do you have everything you need?
 
-184
+170
 00:08:42,200 --> 00:08:45,080
 So I often use this when I'm going on a trip.
 
-185
+171
 00:08:45,080 --> 00:08:46,080
 Are you set?
 
-186
+172
 00:08:46,080 --> 00:08:47,080
 Did you pack everything?
 
-187
+173
 00:08:47,080 --> 00:08:48,080
 Are you all set?
 
-188
+174
 00:08:48,080 --> 00:08:49,080
 Are you all set?
 
-189
+175
 00:08:49,080 --> 00:08:50,080
 Yeah.
 
-190
+176
 00:08:50,080 --> 00:08:51,080
 Alright.
 
-191
+177
 00:08:51,080 --> 00:08:52,080
 I finished packing.
 
-192
+178
 00:08:52,080 --> 00:08:53,080
 I'm all set.
 
-193
+179
 00:08:53,080 --> 00:08:54,080
 I'm ready to go.
 
-194
+180
 00:08:54,080 --> 00:08:55,080
 All set and ready to go.
 
-195
+181
 00:08:55,080 --> 00:08:56,080
 Alright.
 
-196
+182
 00:08:56,080 --> 00:08:57,080
 Okay, so some interesting phrases there as well.
 
-197
+183
 00:08:57,080 --> 00:09:14,080
 Let's look at our dialogue for the last time.
 
-198
+184
 00:09:14,080 --> 00:09:34,160
 Dad, dad, dad, wake up.
 
-199
+185
 00:09:34,160 --> 00:09:35,680
 It's Christmas.
 
-200
+186
 00:09:35,680 --> 00:09:38,760
 Timmy, it's too early for this.
 
-201
+187
 00:09:38,760 --> 00:09:41,520
 Look, it's six in the morning.
 
-202
+188
 00:09:41,520 --> 00:09:42,800
 Go back to bed.
 
-203
+189
 00:09:42,800 --> 00:09:44,400
 No way.
 
-204
+190
 00:09:44,400 --> 00:09:46,920
 Santa already came and left all our presents.
 
-205
+191
 00:09:46,920 --> 00:09:49,920
 Can we go open them, please?
 
-206
+192
 00:09:49,920 --> 00:09:51,040
 Please?
 
-207
+193
 00:09:51,040 --> 00:09:52,520
 Of course we can, honey.
 
-208
+194
 00:09:52,520 --> 00:09:54,840
 Bill, come on, get dressed.
 
-209
+195
 00:09:54,840 --> 00:09:56,000
 Fine.
 
-210
+196
 00:09:56,000 --> 00:09:58,280
 Not like Santa brought me any gifts.
 
-211
+197
 00:09:58,280 --> 00:10:07,200
 Bill, honestly, you can be such a grouch sometimes.
 
-212
+198
 00:10:07,200 --> 00:10:10,360
 Look at all these presents under the Christmas tree.
 
-213
+199
 00:10:10,360 --> 00:10:11,360
 Awesome.
 
-214
+200
 00:10:11,360 --> 00:10:13,520
 Alright, Timmy, knock yourself out.
 
-215
+201
 00:10:13,520 --> 00:10:17,040
 We should get ready and head to the market to buy everything for Christmas dinner tonight.
 
-216
+202
 00:10:17,040 --> 00:10:18,040
 Yeah, you're right.
 
-217
+203
 00:10:18,040 --> 00:10:21,840
 It's the first time we're hosting Christmas dinner at our house, so everything has to
 
-218
+204
 00:10:21,840 --> 00:10:22,840
 be perfect.
 
-219
+205
 00:10:22,840 --> 00:10:24,960
 I've got the list right here.
 
-220
+206
 00:10:24,960 --> 00:10:31,480
 Ham, turkey, mashed potatoes, ingredients for the gravy, and of course, yams.
 
-221
+207
 00:10:31,480 --> 00:10:35,360
 My dad offered to bring the eggnog, so we should be set.
 
-222
+208
 00:10:35,360 --> 00:10:41,800
 Alright, we're back.
 
-223
+209
 00:10:41,800 --> 00:10:43,600
 As you mentioned, Christmas morning is great.
 
-224
+210
 00:10:43,600 --> 00:10:47,800
 You open presents and breakfast.
 
-225
+211
 00:10:47,800 --> 00:10:52,600
 It's a time to be together with your parents, your family, but as in this case, you can
 
-226
+212
 00:10:52,600 --> 00:10:56,920
 be a little bit of a grouch because you're just kind of tired because you had Thanksgiving
 
-227
+213
 00:10:56,920 --> 00:11:00,920
 and November and then Christmas, and now you're having New Year's, so you're kind of just
 
-228
+214
 00:11:00,920 --> 00:11:01,920
 like, ugh.
 
-229
+215
 00:11:01,920 --> 00:11:06,760
 The holiday season can be exhausting, and I know a lot of families have a special dinner
 
-230
+216
 00:11:06,760 --> 00:11:07,760
 on the 24th.
 
-231
+217
 00:11:07,760 --> 00:11:13,840
 That's Christmas Eve, and then by the time it's Christmas Day, the 25th, you're exhausted,
 
-232
+218
 00:11:13,840 --> 00:11:18,600
 you didn't get any sleep, you might have had too much to drink last night, and so it can
 
-233
+219
 00:11:18,600 --> 00:11:19,600
 be very tiring.
 
-234
+220
 00:11:19,600 --> 00:11:24,000
 Also, because the kids always get up way too early, like 6 o'clock.
 
-235
+221
 00:11:24,000 --> 00:11:26,120
 Right, to open their presents, right?
 
-236
+222
 00:11:26,120 --> 00:11:29,400
 And then they'll be playing with their toys all day, and you'll have a headache.
 
-237
+223
 00:11:29,400 --> 00:11:33,920
 But it's a great season to spend time with the family, and we want to know how you spend
 
-238
+224
 00:11:33,920 --> 00:11:39,200
 your Christmas Eve and your Christmas morning, so why don't you come to our website EnglishPod.com
 
-239
+225
 00:11:39,200 --> 00:11:41,520
 and leave your questions and comments there as well.
 
-240
+226
 00:11:41,520 --> 00:11:43,040
 We're looking forward to hearing from you.
 
-241
+227
 00:11:43,040 --> 00:11:46,040
 Again, happy holiday season, and until next time.
 
-242
+228
 00:11:46,040 --> 00:11:47,040
 Bye.
 
-243
+229
 00:11:47,040 --> 00:12:00,320
 [Music]
