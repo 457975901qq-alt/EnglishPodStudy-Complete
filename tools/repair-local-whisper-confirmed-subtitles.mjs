@@ -33,6 +33,7 @@ const repairs = [{
   course: '0046',
   start: 306,
   end: 312,
+  removedText: "I'm sorry, I'm sorry.",
   entries: [],
 }, {
   // Re-listen section. Its old captions were progressively early, then
@@ -56,6 +57,15 @@ const repairs = [{
     [751600, 760340, 'Doctor! Just do whatever it takes. I just want my little Frankie to be okay.', '医生！请不惜一切代价。我只想让我的小弗兰基没事。'],
     [760340, 768000, "I couldn't imagine life without my little hamster.", '我无法想象没有我的小仓鼠的生活。'],
   ],
+}, {
+  // The bundled supplement and the prior subtitles inserted a fabricated
+  // line plus five repeats here. The local audio goes straight from the
+  // warning about a heart attack to the ticket-price complaint.
+  course: '0169',
+  start: 255,
+  end: 260,
+  removedText: "I'm so excited.",
+  entries: [],
 }, {
   course: '0099',
   start: 304,
@@ -112,7 +122,7 @@ function renderSrt(entries) {
   return `${entries.map((entry, index) => `${index + 1}\n${formatTime(entry.start)} --> ${formatTime(entry.end)}\n${entry.text}`).join('\n\n')}\n`
 }
 
-for (const { course, start, end, entries: sourceEntries } of repairs) {
+for (const { course, start, end, entries: sourceEntries, removedText } of repairs) {
   const folder = `resource/${course}`
   const [englishSource, chineseSource, transcriptSource] = await Promise.all([
     readFile(`${folder}/subtitle.srt`, 'utf8'),
@@ -125,7 +135,7 @@ for (const { course, start, end, entries: sourceEntries } of repairs) {
   const replacement = sourceEntries.map(([entryStart, entryEnd, englishText, chineseText]) => ({ entryStart, entryEnd, englishText, chineseText }))
 
   const alreadyRepaired = replacement.length === 0
-    ? !english.slice(start - 1, end).some((entry) => entry.text === "I'm sorry, I'm sorry.")
+    ? !english.slice(start - 1, end).some((entry) => entry.text === removedText)
     : english.slice(start - 1, start - 1 + replacement.length).every((entry, index) => (
       entry.start === replacement[index].entryStart && entry.end === replacement[index].entryEnd && entry.text === replacement[index].englishText
     ))
