@@ -1474,611 +1474,446 @@ Erica's gonna tell us about her ER story.
 Erica会告诉我们她在急诊室的故事。
 
 296
-00:11:04,860 --> 00:11:07,020
-Help, are you a doctor?
-救命，你是医生吗？
+00:11:14,840 --> 00:11:21,020
+Help! Are you a doctor? My poor little Frankie has just stopped breathing. Oh my gosh, help me.
+救命！你是医生吗？我可怜的小弗兰基刚刚停止呼吸了。哦，天哪，救救我！
 
 297
-00:11:07,020 --> 00:11:09,500
-My poor little Frankie, he's just stopped breathing.
-我可怜的小Frankie，他刚刚停止呼吸了。
+00:11:21,400 --> 00:11:26,220
+I tried to perform CPR, but I just, I don't know if I could get any air into his lungs. Oh, Frankie!
+我试着做心肺复苏，但我不知道能不能把空气送进他的肺里。哦，弗兰基！
 
 298
-00:11:09,500 --> 00:11:11,340
-Oh my gosh, help me.
-哦天哪，救救我。
+00:11:27,280 --> 00:11:32,440
+Ellen, get him hooked up to a monitor. Somebody page Dr. Hauser. Get the patient to hold still.
+艾伦，把他接上监护仪。谁去呼叫豪泽医生。让病人别动。
 
 299
-00:11:11,340 --> 00:11:12,940
-I tried to perform CPR, but I just,
-我试着做心肺复苏，但我就是，
+00:11:33,540 --> 00:11:40,480
+I can't get a pulse. Okay, he's on the monitor. His BP's falling. He's flatlining.
+我摸不到脉搏。好了，他已经接上监护仪了。他的血压在下降，心电图变成直线了。
 
 300
-00:11:12,940 --> 00:11:15,060
-I don't know if I could get any air into his lungs.
-我不知道我能不能把空气送进他的肺里。
+00:11:40,880 --> 00:11:44,980
+No, Frankie! Doctor, do something!
+不，弗兰基！医生，快想想办法！
 
 301
-00:11:15,060 --> 00:11:17,100
-Oh, Frankie.
-哦，Frankie。
+00:11:45,980 --> 00:11:53,260
+Someone get her out of here. Get me the defibrillator. Okay, clear. Again, clear.
+谁把她带出去。把除颤器给我。好了，闪开。再来一次，闪开。
 
 302
-00:11:17,100 --> 00:11:19,300
-Ellen, get him hooked up to a monitor.
-Ellen，把他连接到监护仪上。
+00:11:54,580 --> 00:12:01,100
+Come on, dammit. I'm not letting go of you. Clear. I got a pulse? Okay. What's happening?
+加油，该死的！我不会放弃你。闪开。我摸到脉搏了？好了，发生什么事了？
 
 303
-00:11:19,300 --> 00:11:21,180
-Somebody page Dr. Hauser.
-谁呼叫一下Hauser医生。
+00:12:01,620 --> 00:12:04,900
+The patient is in acute respiratory failure. I think we're going to have to intubate.
+病人处于急性呼吸衰竭状态。我想我们得给他插管。
 
 304
-00:11:21,180 --> 00:11:23,180
-Get the patient to hold still.
-让病人别动。
+00:12:05,540 --> 00:12:12,060
+All right. Tube's in. Bag him. Somebody give him 10 cc's shot of adrenaline. Let's go, people. Move! Move!
+好的。管子插好了。给他捏气囊。谁给他注射 10 毫升肾上腺素。快，大家动起来！快！快！
 
 305
-00:11:23,180 --> 00:11:24,540
-I can't get a pulse.
-我摸不到脉搏。
+00:12:18,840 --> 00:12:22,220
+Doctor! Oh, thank God! How is he?
+医生！哦，谢天谢地！他怎么样了？
 
 306
-00:11:24,540 --> 00:11:25,860
-I'm sorry, I'm sorry.
-对不起，对不起。
+00:12:22,740 --> 00:12:31,600
+We've managed to stabilize Frankie, but he's not out of the woods yet. He's still in critical condition. We're moving him to intensive care, but...
+我们设法稳定了弗兰基的情况，但他还没有脱离危险。他仍处于危急状态。我们正要把他转到重症监护室，但是……
 
 307
-00:11:25,860 --> 00:11:27,180
-I'm sorry, I'm sorry.
-对不起，对不起。
+00:12:31,600 --> 00:12:40,340
+Doctor! Just do whatever it takes. I just want my little Frankie to be okay.
+医生！请不惜一切代价。我只想让我的小弗兰基没事。
 
 308
-00:11:27,180 --> 00:11:28,500
-I'm sorry, I'm sorry.
-对不起，对不起。
-
-309
-00:11:28,500 --> 00:11:29,820
-I'm sorry, I'm sorry.
-对不起，对不起。
-
-310
-00:11:29,820 --> 00:11:31,140
-I'm sorry, I'm sorry.
-对不起，对不起。
-
-311
-00:11:31,140 --> 00:11:32,460
-I'm sorry, I'm sorry.
-对不起，对不起。
-
-312
-00:11:32,460 --> 00:11:33,780
-I'm sorry, I'm sorry.
-对不起，对不起。
-
-313
-00:11:33,780 --> 00:11:36,860
-I can't get a pulse.
-我摸不到脉搏。
-
-314
-00:11:36,860 --> 00:11:38,420
-Okay, he's on the monitor.
-好了，他在监护仪上。
-
-315
-00:11:38,420 --> 00:11:39,820
-His BP's falling.
-他的血压在下降。
-
-316
-00:11:39,820 --> 00:11:40,860
-He's flatlining.
-他心跳停止了。
-
-317
-00:11:40,860 --> 00:11:43,660
-No, Frankie!
-不，弗兰基！
-
-318
-00:11:43,660 --> 00:11:46,140
-Doctor, do something!
-医生，快想想办法！
-
-319
-00:11:46,140 --> 00:11:47,740
-Someone get her out of here.
-谁把她带出去。
-
-320
-00:11:47,740 --> 00:11:49,500
-Get me the defibrillator.
-把除颤器给我。
-
-321
-00:11:49,500 --> 00:11:52,420
-Okay, clear.
-好，闪开。
-
-322
-00:11:52,420 --> 00:11:54,780
-Again, clear.
-再来，闪开。
-
-323
-00:11:54,780 --> 00:11:56,740
-Come on, dammit, I'm not letting go of you.
-加油，该死的，我不会放弃你的。
-
-324
-00:11:56,740 --> 00:11:58,940
-Clear.
-闪开。
-
-325
-00:11:58,940 --> 00:12:00,100
-I got a pulse.
-有脉搏了。
-
-326
-00:12:00,100 --> 00:12:01,660
-Okay, what's happening?
-好，现在什么情况？
-
-327
-00:12:01,660 --> 00:12:03,500
-Patient is in acute respiratory failure.
-病人出现急性呼吸衰竭。
-
-328
-00:12:03,500 --> 00:12:05,660
-I think we're going to have to intubate.
-我想我们得插管了。
-
-329
-00:12:05,660 --> 00:12:07,100
-Alright, tube's in.
-好了，插管进去了。
-
-330
-00:12:07,100 --> 00:12:08,100
-Bag him.
-给他捏气囊。
-
-331
-00:12:08,100 --> 00:12:10,100
-Somebody give him 10 cc's shot of adrenaline.
-谁给他注射10毫升肾上腺素。
-
-332
-00:12:10,100 --> 00:12:18,980
-Let's go, people, move, move!
-快，大家动起来，快，快！
-
-333
-00:12:18,980 --> 00:12:21,260
-Doctor, oh thank God!
-医生，哦，谢天谢地！
-
-334
-00:12:21,260 --> 00:12:22,980
-How is he?
-他怎么样了？
-
-335
-00:12:22,980 --> 00:12:25,020
-We've managed to stabilize Frankie,
-我们设法稳定了弗兰基的情况，
-
-336
-00:12:25,020 --> 00:12:27,220
-but he's not out of the woods yet.
-但他还没有脱离危险。
-
-337
-00:12:27,220 --> 00:12:29,460
-He's still in critical condition.
-他仍然处于危急状态。
-
-338
-00:12:29,460 --> 00:12:31,540
-We're moving him to intensive care, but...
-我们正要把他转到重症监护室，但是……
-
-339
-00:12:31,540 --> 00:12:34,780
-Doctor, just do whatever it takes.
-医生，请不惜一切代价。
-
-340
-00:12:34,780 --> 00:12:37,340
-I just want my little Frankie to be okay.
-我只想让我的小弗兰基没事。
-
-341
-00:12:37,340 --> 00:12:45,940
+00:12:40,340 --> 00:12:48,000
 I couldn't imagine life without my little hamster.
 我无法想象没有我的小仓鼠的生活。
 
-342
+309
 00:12:45,940 --> 00:12:46,940
 Okay, Erica, so what happened?
 好了，埃里卡，发生什么事了？
 
-343
+310
 00:12:46,940 --> 00:12:48,740
 What emergency did you have?
 你遇到了什么紧急情况？
 
-344
+311
 00:12:48,740 --> 00:12:50,020
 Well, it was with my cat.
 嗯，是关于我的猫。
 
-345
+312
 00:12:50,020 --> 00:12:50,660
 Your cat.
 你的猫。
 
-346
+313
 00:12:50,660 --> 00:12:52,780
 Yes, I had some people over for dinner,
 是的，我请了一些人来家里吃饭，
 
-347
+314
 00:12:52,780 --> 00:12:55,700
 and it was maybe 1.30 in the morning,
 当时大概是凌晨一点半，
 
-348
+315
 00:12:55,700 --> 00:12:57,980
 and I went downstairs to let them out
 我下楼去放它们出去
 
-349
+316
 00:12:57,980 --> 00:12:59,380
 and show them where the taxis were,
 并告诉它们出租车在哪里，
 
-350
+317
 00:12:59,380 --> 00:13:02,020
 and then I came up and I saw that the cat was gone,
 然后我上楼发现猫不见了，
 
-351
+318
 00:13:02,020 --> 00:13:05,300
 and it turned out that the cat fell out of the window.
 结果发现猫从窗户掉下去了。
 
-352
+319
 00:13:05,300 --> 00:13:06,540
 Fell out of the window.
 从窗户掉下去了。
 
-353
+320
 00:13:06,540 --> 00:13:07,260
 Yeah.
 是啊。
 
-354
+321
 00:13:07,260 --> 00:13:09,540
 Alright, but our listeners have to know,
 好吧，但我们的听众必须知道，
 
-355
+322
 00:13:09,540 --> 00:13:11,780
 what story or what floor do you live on?
 你住在几楼？
 
-356
+323
 00:13:11,780 --> 00:13:12,740
 The 20th floor.
 20楼。
 
-357
+324
 00:13:12,740 --> 00:13:13,580
 The 20th.
 20楼。
 
-358
+325
 00:13:13,580 --> 00:13:15,900
 Yeah, so this is really dangerous, right?
 是啊，这真的很危险，对吧？
 
-359
+326
 00:13:15,900 --> 00:13:18,180
 That's really high up.
 那太高了。
 
-360
+327
 00:13:18,180 --> 00:13:20,340
 So I went outside and I was calling for my cat,
 所以我跑出去喊我的猫，
 
-361
+328
 00:13:20,340 --> 00:13:22,260
 and I was like, Mr. Finn, where are you?
 我说，芬恩先生，你在哪里？
 
-362
+329
 00:13:22,260 --> 00:13:23,340
 How did you know he fell out?
 你怎么知道它掉下去了？
 
-363
+330
 00:13:23,340 --> 00:13:24,140
 I just knew.
 我就是知道。
 
-364
+331
 00:13:24,140 --> 00:13:24,540
 Yeah?
 是吗？
 
-365
+332
 00:13:24,540 --> 00:13:24,900
 Yeah.
 嗯。
 
-366
+333
 00:13:24,900 --> 00:13:25,700
 Mother's instinct.
 母亲的直觉。
 
-367
+334
 00:13:25,700 --> 00:13:27,020
 I guess so.
 我想是吧。
 
-368
+335
 00:13:27,020 --> 00:13:30,660
 So he was calling back to me, and so I picked him up
 它回应了我，所以我把它抱起来
 
-369
+336
 00:13:30,660 --> 00:13:31,860
 and brought him to the house,
 带回了家，
 
-370
+337
 00:13:31,860 --> 00:13:33,700
 and we had to bring him to the vet,
 我们不得不带它去看兽医，
 
-371
+338
 00:13:33,700 --> 00:13:36,180
 and it was 2.30, 3 in the morning at this time,
 那时是凌晨两点半、三点，
 
-372
+339
 00:13:36,180 --> 00:13:40,860
 and the vet was not very happy that we woke him up out of bed.
 兽医被我们从床上叫起来很不高兴。
 
-373
+340
 00:13:40,860 --> 00:13:42,820
 But that was a really good emergency, though.
 但那确实是紧急情况。
 
-374
+341
 00:13:42,820 --> 00:13:43,540
 Yeah.
 是啊。
 
-375
+342
 00:13:43,540 --> 00:13:45,820
 So anyway, we brought him to the vet.
 总之，我们带它去了兽医那里。
 
-376
+343
 00:13:45,820 --> 00:13:48,940
 He was in critical condition for a couple of days,
 它情况危急了好几天，
 
-377
+344
 00:13:48,940 --> 00:13:53,820
 and then we had to keep him in the vet's ICU for about a week.
 然后我们不得不把它留在兽医的ICU大约一周。
 
-378
+345
 00:13:53,820 --> 00:13:55,020
 He broke his back.
 它摔断了背。
 
-379
+346
 00:13:55,020 --> 00:13:57,620
 He broke two of his legs.
 它摔断了两条腿。
 
-380
+347
 00:13:57,620 --> 00:13:58,420
 Wow.
 哇。
 
-381
+348
 00:13:58,420 --> 00:14:01,020
 Yeah, and so he was in the hospital for three weeks
 是啊，所以它在医院住了三周
 
-382
+349
 00:14:01,020 --> 00:14:04,620
 and then at home on bed rest for another three weeks.
 然后在家卧床休息又三周。
 
-383
+350
 00:14:04,620 --> 00:14:06,540
 But now he's good as new.
 但现在它完好如初了。
 
-384
+351
 00:14:06,540 --> 00:14:07,260
 Good as new.
 完好如初。
 
-385
+352
 00:14:07,260 --> 00:14:07,740
 Yeah.
 是啊。
 
-386
+353
 00:14:07,740 --> 00:14:10,300
 He used up one of his seven lives.
 它用掉了九条命中的一条。
 
-387
+354
 00:14:10,300 --> 00:14:10,780
 Nine lives.
 九条命。
 
-388
+355
 00:14:10,780 --> 00:14:11,180
 Nine?
 九条命？
 
-389
+356
 00:14:11,180 --> 00:14:11,540
 Nine.
 九条命。
 
-390
+357
 00:14:11,540 --> 00:14:12,340
 Yeah.
 是啊。
 
-391
+358
 00:14:12,340 --> 00:14:14,300
 I think maybe eight of his nine lives.
 我觉得他可能用掉了八条命。
 
-392
+359
 00:14:14,300 --> 00:14:15,460
 He's only got one left.
 他只剩一条命了。
 
-393
+360
 00:14:15,460 --> 00:14:15,980
 Yeah.
 是啊。
 
-394
+361
 00:14:15,980 --> 00:14:17,380
 Wow, that's an interesting story.
 哇，这故事真有意思。
 
-395
+362
 00:14:17,380 --> 00:14:20,300
 I guess that's the inspiration under this dialogue.
 我想这就是这段对话的灵感来源。
 
-396
+363
 00:14:20,300 --> 00:14:21,180
 Exactly.
 没错。
 
-397
+364
 00:14:21,180 --> 00:14:24,980
 Sometimes we Anglos really treat our cats
 有时候我们西方人真的把猫
 
-398
+365
 00:14:24,980 --> 00:14:27,380
 and our hamsters and our dogs like they're our children.
 还有仓鼠和狗当成自己的孩子。
 
-399
+366
 00:14:27,380 --> 00:14:28,100
 Yeah, yeah.
 是啊，是啊。
 
-400
+367
 00:14:28,100 --> 00:14:29,220
 No, that's good.
 不，这挺好的。
 
-401
+368
 00:14:29,220 --> 00:14:31,340
 Well, I'm glad Mr. Finn is OK and he's
 嗯，我很高兴芬恩先生没事了，他
 
-402
+369
 00:14:31,340 --> 00:14:32,540
 walking and good as new.
 又能走路了，跟新的一样。
 
-403
+370
 00:14:32,540 --> 00:14:33,500
 Yep, good as new.
 对，跟新的一样。
 
-404
+371
 00:14:33,500 --> 00:14:37,940
 So maybe our users have some stories about their pets
 所以也许我们的用户有一些关于宠物
 
-405
+372
 00:14:37,940 --> 00:14:39,340
 being taken to the hospital.
 被送进医院的故事。
 
-406
+373
 00:14:39,340 --> 00:14:40,140
 I want to hear.
 我想听听。
 
-407
+374
 00:14:40,140 --> 00:14:41,500
 Yeah, that should be interesting.
 是啊，那应该挺有意思的。
 
-408
+375
 00:14:41,500 --> 00:14:44,260
 I've never had a pet actually break a leg or anything,
 我从来没有宠物摔断腿之类的经历，
 
-409
+376
 00:14:44,260 --> 00:14:46,500
 so don't have any pet stories this time.
 所以这次没有宠物故事可讲。
 
-410
+377
 00:14:46,500 --> 00:14:48,100
 But we want to hear what you think,
 但我们想听听你们的想法，
 
-411
+378
 00:14:48,100 --> 00:14:50,860
 so come to EnglishPod.com, leave all your questions
 所以请访问EnglishPod.com，留下你们的所有问题
 
-412
+379
 00:14:50,860 --> 00:14:52,340
 and comments and your stories.
 和评论以及你们的故事。
 
-413
+380
 00:14:52,340 --> 00:14:53,060
 Yes.
 是的。
 
-414
+381
 00:14:53,060 --> 00:14:54,540
 And we'll be there to answer them.
 我们会在那里回答。
 
-415
+382
 00:14:54,540 --> 00:14:55,780
 So guys, thanks for listening.
 好了，朋友们，感谢收听。
 
-416
+383
 00:14:55,780 --> 00:14:57,980
 And until next time, goodbye.
 下次再见，拜拜。
 
-417
+384
 00:14:57,980 --> 00:15:24,540
 Bye.
 拜。

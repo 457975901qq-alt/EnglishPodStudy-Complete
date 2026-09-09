@@ -27,6 +27,36 @@ const repairs = [{
     [223900, 226960, "I couldn't imagine life without my little hamster.", '我无法想象没有我的小仓鼠的生活。'],
   ],
 }, {
+  // The local audio at 00:11:24–00:11:33 continues straight from “I can't
+  // get a pulse” to “Okay, he's on the monitor.” The seven apology captions
+  // are not spoken and were inserted into all three subtitle modes.
+  course: '0046',
+  start: 306,
+  end: 312,
+  entries: [],
+}, {
+  // Re-listen section. Its old captions were progressively early, then
+  // contained seven unspoken apologies. Times below are from a WAV cut made
+  // at 00:11:00 and transcribed locally with Whisper large-v3-turbo.
+  course: '0046',
+  start: 296,
+  end: 334,
+  entries: [
+    [674840, 681020, 'Help! Are you a doctor? My poor little Frankie has just stopped breathing. Oh my gosh, help me.', '救命！你是医生吗？我可怜的小弗兰基刚刚停止呼吸了。哦，天哪，救救我！'],
+    [681400, 686220, "I tried to perform CPR, but I just, I don't know if I could get any air into his lungs. Oh, Frankie!", '我试着做心肺复苏，但我不知道能不能把空气送进他的肺里。哦，弗兰基！'],
+    [687280, 692440, 'Ellen, get him hooked up to a monitor. Somebody page Dr. Hauser. Get the patient to hold still.', '艾伦，把他接上监护仪。谁去呼叫豪泽医生。让病人别动。'],
+    [693540, 700480, "I can't get a pulse. Okay, he's on the monitor. His BP's falling. He's flatlining.", '我摸不到脉搏。好了，他已经接上监护仪了。他的血压在下降，心电图变成直线了。'],
+    [700880, 704980, 'No, Frankie! Doctor, do something!', '不，弗兰基！医生，快想想办法！'],
+    [705980, 713260, 'Someone get her out of here. Get me the defibrillator. Okay, clear. Again, clear.', '谁把她带出去。把除颤器给我。好了，闪开。再来一次，闪开。'],
+    [714580, 721100, "Come on, dammit. I'm not letting go of you. Clear. I got a pulse? Okay. What's happening?", '加油，该死的！我不会放弃你。闪开。我摸到脉搏了？好了，发生什么事了？'],
+    [721620, 724900, "The patient is in acute respiratory failure. I think we're going to have to intubate.", '病人处于急性呼吸衰竭状态。我想我们得给他插管。'],
+    [725540, 732060, "All right. Tube's in. Bag him. Somebody give him 10 cc's shot of adrenaline. Let's go, people. Move! Move!", '好的。管子插好了。给他捏气囊。谁给他注射 10 毫升肾上腺素。快，大家动起来！快！快！'],
+    [738840, 742220, 'Doctor! Oh, thank God! How is he?', '医生！哦，谢天谢地！他怎么样了？'],
+    [742740, 751600, "We've managed to stabilize Frankie, but he's not out of the woods yet. He's still in critical condition. We're moving him to intensive care, but...", '我们设法稳定了弗兰基的情况，但他还没有脱离危险。他仍处于危急状态。我们正要把他转到重症监护室，但是……'],
+    [751600, 760340, 'Doctor! Just do whatever it takes. I just want my little Frankie to be okay.', '医生！请不惜一切代价。我只想让我的小弗兰基没事。'],
+    [760340, 768000, "I couldn't imagine life without my little hamster.", '我无法想象没有我的小仓鼠的生活。'],
+  ],
+}, {
   course: '0099',
   start: 304,
   end: 332,
@@ -94,9 +124,11 @@ for (const { course, start, end, entries: sourceEntries } of repairs) {
   const transcript = transcriptSource.trimEnd().split(/\r?\n/)
   const replacement = sourceEntries.map(([entryStart, entryEnd, englishText, chineseText]) => ({ entryStart, entryEnd, englishText, chineseText }))
 
-  const alreadyRepaired = english.slice(start - 1, start - 1 + replacement.length).every((entry, index) => (
-    entry.start === replacement[index].entryStart && entry.end === replacement[index].entryEnd && entry.text === replacement[index].englishText
-  ))
+  const alreadyRepaired = replacement.length === 0
+    ? !english.slice(start - 1, end).some((entry) => entry.text === "I'm sorry, I'm sorry.")
+    : english.slice(start - 1, start - 1 + replacement.length).every((entry, index) => (
+      entry.start === replacement[index].entryStart && entry.end === replacement[index].entryEnd && entry.text === replacement[index].englishText
+    ))
   if (alreadyRepaired) {
     console.log(`${course} ${start}-${end} already repaired; skipped.`)
     continue
