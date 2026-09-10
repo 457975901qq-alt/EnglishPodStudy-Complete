@@ -86,6 +86,7 @@ function HighlightedText({ text, word }: { text: string; word: string }) {
 
 function ReviewAudio({ lessonId, start, end }: { lessonId: string; start: number; end: number }) {
   const audioRef = useRef<HTMLAudioElement>(null)
+  const segmentStartedRef = useRef(false)
 
   const resetToStart = () => {
     const audio = audioRef.current
@@ -93,18 +94,40 @@ function ReviewAudio({ lessonId, start, end }: { lessonId: string; start: number
     audio.currentTime = start
   }
 
+  useEffect(() => {
+    segmentStartedRef.current = false
+    const audio = audioRef.current
+    if (!audio) return
+    audio.pause()
+    audio.currentTime = start
+  }, [lessonId, start, end])
+
   return (
     <div className="grid gap-2">
       <audio
+        key={`${lessonId}:${start}:${end}`}
         ref={audioRef}
         className="w-full"
         controls
         preload="metadata"
         src={getResourceUrl(lessonId, 'lesson.mp3')}
-        onLoadedMetadata={resetToStart}
+        onLoadedMetadata={() => {
+          if (!segmentStartedRef.current) resetToStart()
+        }}
+        onCanPlay={() => {
+          if (!segmentStartedRef.current) resetToStart()
+        }}
         onPlay={(event) => {
           const audio = event.currentTarget
-          if (audio.currentTime < start || audio.currentTime > end) audio.currentTime = start
+          if (!segmentStartedRef.current || audio.currentTime < start || audio.currentTime >= end) {
+            audio.currentTime = start
+          }
+          segmentStartedRef.current = true
+        }}
+        onSeeking={(event) => {
+          const audio = event.currentTarget
+          if (audio.currentTime < start) audio.currentTime = start
+          if (end > start && audio.currentTime > end) audio.currentTime = end
         }}
         onTimeUpdate={(event) => {
           const audio = event.currentTarget
