@@ -9,6 +9,8 @@ globalThis.window = { localStorage: { setItem() {} }, dispatchEvent() {} }
 const staged = setLessonStage({ lesson: legacy }, 'lesson', 'shadowing')
 assert.equal(staged.lesson.stage, 'shadowing')
 assert.equal(staged.lesson.completedAt, undefined)
+assert.equal(setLessonStage(staged, 'lesson', 'mastery').lesson.stage, 'mastery')
+assert.equal(normalizeLessonProgress({ ...legacy, stage: 'mastery' })?.stage, 'mastery')
 assert.equal(normalizeLessonProgress({ ...legacy, progress: 100 })?.completedAt, undefined)
 assert.equal(completeLesson(staged, 'lesson', 123).lesson.completedAt, 123)
 

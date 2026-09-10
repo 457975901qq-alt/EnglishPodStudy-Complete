@@ -38,8 +38,16 @@ const FORCED_SUBTITLES: Partial<Record<LearningStage, SubtitleMode>> = {
   intensive: 'en',
   shadowing: 'en',
   final: 'off',
+  mastery: 'off',
 }
 const MASTERY_ITEMS = ['无字幕理解 ≥80%', '掌握 3–5 个表达', '跟读至少 3 句', '完成口头复述']
+const LEARNING_STEPS: ReadonlyArray<{ stage: Exclude<LearningStage, 'complete'>; label: string }> = [
+  { stage: 'blind', label: '盲听' },
+  { stage: 'intensive', label: '英文精听' },
+  { stage: 'shadowing', label: '跟读' },
+  { stage: 'final', label: '最终复听' },
+  { stage: 'mastery', label: '掌握自检' },
+]
 
 function readSubtitleMode(): SubtitleMode {
   try {
@@ -69,7 +77,9 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
   const [progressMap, setProgressMap] = useState<LessonProgressMap>(() => readLessonProgress())
   const progressMapRef = useRef(progressMap)
   const savedProgress = activeLesson ? progressMap[activeLesson.id] : undefined
-  const learningStage = savedProgress?.stage ?? 'blind'
+  const learningStage = savedProgress?.stage === 'complete' && !savedProgress.completedAt
+    ? 'mastery'
+    : (savedProgress?.stage ?? 'blind')
   const forcedSubtitleMode = guidedMode ? FORCED_SUBTITLES[learningStage] : undefined
   const effectiveSubtitleMode = forcedSubtitleMode ?? subtitleMode
   const subtitles = useLessonSubtitles(activeLesson?.id, effectiveSubtitleMode)
@@ -440,13 +450,16 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
               {guidedMode && !savedProgress?.completedAt && (
                 <div className="learning-steps">
                   <ol className="learning-step-list" aria-label="学习步骤">
-                    {['盲听', '英文精听', '跟读', '最终复听', '掌握自检'].map((label, index) => {
-                      const currentIndex = ['blind', 'intensive', 'shadowing', 'final', 'complete'].indexOf(learningStage)
-                      const isCurrent = index === currentIndex
-                      const isDone = index < currentIndex
-                      return <li key={label} className={isCurrent ? 'active' : isDone ? 'done' : ''} aria-current={isCurrent ? 'step' : undefined}>{index + 1}. {label}{isDone && <span className="sr-only">（已完成）</span>}</li>
+                    {LEARNING_STEPS.map((step, index) => {
+                      const isCurrent = step.stage === learningStage
+                      return <li key={step.stage} className={isCurrent ? 'active' : ''}>
+                        <button type="button" aria-current={isCurrent ? 'step' : undefined} onClick={() => updateStage(step.stage)}>
+                          {index + 1}. {step.label}
+                        </button>
+                      </li>
                     })}
                   </ol>
+                  <p className="learning-step-hint">可随时切换步骤；完成课程仍需通过掌握自检。</p>
                   <div ref={learningCurrentRef} className="learning-current" tabIndex={-1}>
                     {learningStage === 'blind' && <>
                       <h3>先盲听一遍</h3><p>关闭字幕，建议使用 1.0x。听完后选择首遍理解率。</p>
@@ -461,7 +474,11 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
                       <button className="learning-primary" type="button" onClick={() => updateStage('final')}>我已跟读至少 3 句</button>
                     </>}
                     {learningStage === 'final' && <>
-                      <h3>最终无字幕复听</h3><p>字幕已关闭。复听后完成四项掌握自检，全部确认才可完成本课。</p>
+                      <h3>最终无字幕复听</h3><p>字幕已关闭。复听后进入掌握自检。</p>
+                      <button className="learning-primary" type="button" onClick={() => updateStage('mastery')}>复听完成，开始掌握自检</button>
+                    </>}
+                    {learningStage === 'mastery' && <>
+                      <h3>掌握自检</h3><p>确认四项学习目标，全部确认后才可完成本课。</p>
                       <div className="mastery-checks">{MASTERY_ITEMS.map((item, index) => <label key={item}><input type="checkbox" checked={masteryChecks[index]} onChange={(event) => setMasteryState({ lessonId: activeLesson.id, checks: masteryChecks.map((checked, itemIndex) => itemIndex === index ? event.target.checked : checked) })} />{item}</label>)}</div>
                       <button className="learning-primary" type="button" disabled={!masteryChecks.every(Boolean)} onClick={() => activeLesson && updateProgressMap((current) => completeLesson(current, activeLesson.id))}>标记本课已学习</button>
                     </>}

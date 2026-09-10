@@ -17,7 +17,7 @@ export type LessonProgress = {
   completedAt?: number
 }
 
-export type LearningStage = 'blind' | 'intensive' | 'shadowing' | 'final' | 'complete'
+export type LearningStage = 'blind' | 'intensive' | 'shadowing' | 'final' | 'mastery' | 'complete'
 export type BlindRating = 'under60' | '60to85' | 'over85'
 
 export type LessonProgressMap = Record<string, LessonProgress>
@@ -26,7 +26,7 @@ function clampProgress(value: number) {
   return Math.max(0, Math.min(100, Math.round(value)))
 }
 
-const LEARNING_STAGES: LearningStage[] = ['blind', 'intensive', 'shadowing', 'final', 'complete']
+const LEARNING_STAGES: LearningStage[] = ['blind', 'intensive', 'shadowing', 'final', 'mastery', 'complete']
 const BLIND_RATINGS: BlindRating[] = ['under60', '60to85', 'over85']
 
 export function normalizeLessonProgress(value: unknown): LessonProgress | null {

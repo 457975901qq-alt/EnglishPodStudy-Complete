@@ -779,9 +779,21 @@
     font-size: var(--text-sm);
   }
 
-  .learning-step-list li { padding: 9px var(--space-3); border-radius: var(--radius-sm); }
-  .learning-step-list li.active { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-weight: 700; }
-  .learning-step-list li.done { color: var(--fg-2); }
+  .learning-step-list li { border-radius: var(--radius-sm); }
+  .learning-step-list button {
+    width: 100%;
+    padding: 9px var(--space-3);
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: var(--fg-2);
+    font: inherit;
+    text-align: left;
+  }
+  .learning-step-list button:hover { background: color-mix(in srgb, var(--accent) 7%, transparent); color: var(--accent); }
+  .learning-step-list button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .learning-step-list li.active button { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-weight: 700; }
+  .learning-step-hint { margin: calc(var(--space-4) * -1) 0 var(--space-4); color: var(--meta); font-size: var(--text-xs); }
   .learning-current { display: grid; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--border-soft); }
   .learning-actions { display: grid; grid-template-columns: 1fr; margin-top: var(--space-2); }
   .learning-primary { width: 100%; margin-top: var(--space-2); }
@@ -1501,7 +1513,7 @@
     .learning-guide-head { gap: var(--space-3); }
     .learning-steps { margin-top: var(--space-3); }
     .learning-step-list { margin-bottom: var(--space-3); }
-    .learning-step-list li { padding-block: 4px; }
+    .learning-step-list button { padding-block: 4px; }
     .learning-current { gap: var(--space-2); padding-top: var(--space-3); }
 
     .menu-toggle {
@@ -1563,7 +1575,7 @@
     .learning-mode-switch { width: auto; }
     .learning-mode-switch button { flex: none; }
     .learning-step-list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-    .learning-step-list li { text-align: center; }
+    .learning-step-list button { text-align: center; }
     .learning-actions { display: flex; flex-wrap: wrap; }
     .learning-primary { width: fit-content; }
     .mastery-checks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1580,7 +1592,7 @@
   @media (max-width: 560px) {
     .learning-guide-head { align-items: flex-start; flex-direction: column; }
     .learning-step-list { grid-template-columns: 1fr; }
-    .learning-step-list li { text-align: left; }
+    .learning-step-list button { text-align: left; }
     .mastery-checks { grid-template-columns: 1fr; }
 
     .player {
