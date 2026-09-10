@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import {
+  DEFAULT_PLAYBACK_MODE,
   getEndedPlaybackAction,
   getNextPlaybackMode,
   getNextLessonForMode,
@@ -7,6 +8,8 @@ import {
 } from './playbackMode.ts'
 
 const lessons = [{ id: '1' }, { id: '2' }, { id: '3' }]
+
+assert.equal(DEFAULT_PLAYBACK_MODE, 'repeat')
 
 assert.equal(getNextPlaybackMode('sequence'), 'shuffle')
 assert.equal(getNextPlaybackMode('shuffle'), 'repeat')

@@ -10,6 +10,7 @@ import {
 } from '@/data/courseList'
 import { shouldAutoplaySeek } from './seekBehavior'
 import {
+  DEFAULT_PLAYBACK_MODE,
   getEndedPlaybackAction,
   getNextLessonForMode,
   getNextPlaybackMode,
@@ -118,7 +119,7 @@ export function PersistentPlayer({
   const [duration, setDuration] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playbackRate, setPlaybackRate] = useState(1)
-  const [playbackMode, setPlaybackMode] = useState<PlaybackMode>('sequence')
+  const [playbackMode, setPlaybackMode] = useState<PlaybackMode>(DEFAULT_PLAYBACK_MODE)
   const [subtitleMenuOpen, setSubtitleMenuOpen] = useState(false)
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false)
   const navigate = useNavigate()

@@ -2,6 +2,8 @@ export type PlaybackMode = 'sequence' | 'shuffle' | 'repeat'
 
 type LessonLike = { id: string }
 
+export const DEFAULT_PLAYBACK_MODE: PlaybackMode = 'repeat'
+
 const PLAYBACK_MODES: PlaybackMode[] = ['sequence', 'shuffle', 'repeat']
 
 export function getNextPlaybackMode(mode: PlaybackMode): PlaybackMode {
