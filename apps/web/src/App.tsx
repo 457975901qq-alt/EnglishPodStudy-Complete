@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { PAGE_TITLES } from '@/lib/pageTitles'
 import { formatCourseLevel, formatTime, getLevelBadge, useCourseList, type CourseLesson, type CourseListData } from '@/data/courseList'
-import { clearLessonProgress, PROGRESS_CHANGE_EVENT, readLessonProgress } from '@/data/progressStore'
-import { clearReviewMemory, countDueReviewItems, readVocab, REVIEW_CHANGE_EVENT, VOCAB_CHANGE_EVENT } from '@/data/vocabStore'
+import { clearLessonProgress, clearLessonProgressForLesson, PROGRESS_CHANGE_EVENT, readLessonProgress } from '@/data/progressStore'
+import { clearLessonReviewMemory, clearReviewMemory, countDueReviewItems, readReviewSentences, readVocab, REVIEW_CHANGE_EVENT, VOCAB_CHANGE_EVENT } from '@/data/vocabStore'
 import { ThemeToggle, type Theme } from '@/components/ThemeToggle'
 import { getLessonStatus, matchesLessonSearch, matchesLessonStatusFilter, type LessonStatus, type LessonStatusFilter } from '@/components/lesson/courseFilter'
 import { LessonPage } from '@/pages/LessonPage'
@@ -552,10 +552,46 @@ function SettingsPage({
   theme: Theme
   onCycleTheme: () => void
 }) {
+  const { data } = useCourseList()
+  const lessons = data?.lessons ?? []
   const [clearConfirmOpen, setClearConfirmOpen] = useState(false)
   const [clearConfirmText, setClearConfirmText] = useState('')
   const [clearMessage, setClearMessage] = useState<string | null>(null)
+  const [lessonIdToClear, setLessonIdToClear] = useState('')
+  const [lessonClearConfirmOpen, setLessonClearConfirmOpen] = useState(false)
+  const [progressMap, setProgressMap] = useState(readLessonProgress)
+  const [vocabEntries, setVocabEntries] = useState(readVocab)
+  const [reviewSentences, setReviewSentences] = useState(readReviewSentences)
   const canClearMemory = clearConfirmText === CLEAR_MEMORY_CONFIRM_TEXT
+  const selectedLesson = lessons.find((lesson) => lesson.id === lessonIdToClear)
+  const selectedProgress = lessonIdToClear ? progressMap[lessonIdToClear] : undefined
+  const selectedVocabContexts = useMemo(
+    () => vocabEntries.reduce((count, entry) => count + entry.contexts.filter((context) => context.lessonId === lessonIdToClear).length, 0),
+    [lessonIdToClear, vocabEntries],
+  )
+  const selectedReviewSentences = useMemo(
+    () => reviewSentences.filter((sentence) => sentence.lessonId === lessonIdToClear).length,
+    [lessonIdToClear, reviewSentences],
+  )
+  const hasSelectedLessonMemory = Boolean(selectedProgress) || selectedVocabContexts > 0 || selectedReviewSentences > 0
+
+  useEffect(() => {
+    const refresh = () => {
+      setProgressMap(readLessonProgress())
+      setVocabEntries(readVocab())
+      setReviewSentences(readReviewSentences())
+    }
+    window.addEventListener(PROGRESS_CHANGE_EVENT, refresh)
+    window.addEventListener(VOCAB_CHANGE_EVENT, refresh)
+    window.addEventListener(REVIEW_CHANGE_EVENT, refresh)
+    window.addEventListener('storage', refresh)
+    return () => {
+      window.removeEventListener(PROGRESS_CHANGE_EVENT, refresh)
+      window.removeEventListener(VOCAB_CHANGE_EVENT, refresh)
+      window.removeEventListener(REVIEW_CHANGE_EVENT, refresh)
+      window.removeEventListener('storage', refresh)
+    }
+  }, [])
 
   const handleClearMemory = () => {
     if (!canClearMemory) return
@@ -565,6 +601,14 @@ function SettingsPage({
     setClearConfirmText('')
     setClearConfirmOpen(false)
     setClearMessage('学习记忆已清空。主题和字幕设置已保留。')
+  }
+
+  const handleClearLessonMemory = () => {
+    if (!selectedLesson || !hasSelectedLessonMemory) return
+    clearLessonProgressForLesson(selectedLesson.id)
+    const { removedContexts, removedSentences } = clearLessonReviewMemory(selectedLesson.id)
+    setLessonClearConfirmOpen(false)
+    setClearMessage(`已清除 LESSON ${selectedLesson.id}：进度、生词上下文 ${removedContexts} 条、复习句 ${removedSentences} 条。`)
   }
 
   return (
@@ -580,6 +624,42 @@ function SettingsPage({
           <ThemeToggle theme={theme} onToggle={onCycleTheme} />
         </div>
       </div>
+
+      <section className="rounded-[var(--radius-lg)] border border-[color-mix(in_srgb,var(--danger)_42%,var(--border-soft))] bg-[color-mix(in_srgb,var(--danger)_4%,var(--surface-warm))] p-5">
+        <p className="font-[var(--font-mono)] text-xs uppercase tracking-[0.08em] text-[var(--danger)]">按课程清除</p>
+        <h2 className="mt-3 font-semibold">清除单课学习记忆</h2>
+        <p className="mt-2 text-sm leading-6 text-[var(--muted)]">只删除所选课程的学习进度、生词上下文与复习句；其他课程和跨课程的生词会保留。</p>
+        <label className="mt-4 block text-sm font-semibold" htmlFor="lesson-memory-select">选择课程</label>
+        <select
+          id="lesson-memory-select"
+          className="mt-2 w-full rounded-[var(--radius-md)] border border-[var(--border-soft)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--fg)] outline-none focus:border-[var(--danger)]"
+          value={lessonIdToClear}
+          onChange={(event) => {
+            setLessonIdToClear(event.target.value)
+            setLessonClearConfirmOpen(false)
+            setClearMessage(null)
+          }}
+        >
+          <option value="">请选择课程</option>
+          {lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>LESSON {lesson.id} · {lesson.displayTitle}</option>)}
+        </select>
+        {selectedLesson && (
+          <div className="mt-4 rounded-[var(--radius-md)] bg-[var(--surface-warm)] p-4 text-sm">
+            <p className="font-semibold">LESSON {selectedLesson.id} · {selectedLesson.displayTitle}</p>
+            <p className="mt-2 text-[var(--muted)]">{selectedProgress ? `进度 ${selectedProgress.progress}%` : '无学习进度'} · 生词上下文 {selectedVocabContexts} 条 · 复习句 {selectedReviewSentences} 条</p>
+            {!lessonClearConfirmOpen ? (
+              <button className="mt-4 rounded-[var(--radius-md)] border border-[var(--danger)] px-4 py-2 text-sm font-semibold text-[var(--danger)] disabled:cursor-not-allowed disabled:opacity-45" type="button" disabled={!hasSelectedLessonMemory} onClick={() => setLessonClearConfirmOpen(true)}>
+                清除本课记忆
+              </button>
+            ) : (
+              <div className="mt-4 flex flex-wrap gap-3">
+                <button className="rounded-[var(--radius-md)] bg-[var(--danger)] px-4 py-2 text-sm font-semibold text-white" type="button" onClick={handleClearLessonMemory}>确认清除本课</button>
+                <button className="rounded-[var(--radius-md)] border border-[var(--border-soft)] px-4 py-2 text-sm font-semibold text-[var(--muted)]" type="button" onClick={() => setLessonClearConfirmOpen(false)}>取消</button>
+              </div>
+            )}
+          </div>
+        )}
+      </section>
 
       <section className="rounded-[var(--radius-lg)] border border-[color-mix(in_srgb,var(--danger)_42%,var(--border-soft))] bg-[color-mix(in_srgb,var(--danger)_6%,var(--surface-warm))] p-5">
         <p className="font-[var(--font-mono)] text-xs uppercase tracking-[0.08em] text-[var(--danger)]">

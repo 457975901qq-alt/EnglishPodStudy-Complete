@@ -89,6 +89,17 @@ export function clearLessonProgress() {
   emitProgressChange()
 }
 
+export function clearLessonProgressForLesson(lessonId: string) {
+  if (typeof window === 'undefined') return
+  const progressMap = readLessonProgress()
+  if (!(lessonId in progressMap)) return
+  const remaining = Object.fromEntries(
+    Object.entries(progressMap).filter(([storedLessonId]) => storedLessonId !== lessonId),
+  )
+  writeLessonProgress(remaining)
+  emitProgressChange()
+}
+
 export function saveLessonProgress(
   progressMap: LessonProgressMap,
   lessonId: string,

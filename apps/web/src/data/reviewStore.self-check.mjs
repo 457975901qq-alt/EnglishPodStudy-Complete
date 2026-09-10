@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import {
   addReviewSentence,
   addVocab,
+  clearLessonReviewMemory,
   getDueReviewItems,
   rateReviewItem,
   readReviewSentences,
@@ -146,5 +147,13 @@ writeReviewSentences(
 )
 assert.equal(getDueReviewItems(masteredDueAt - 1).length, 0)
 assert.equal(getDueReviewItems(masteredDueAt).length, 3)
+
+const cleared = clearLessonReviewMemory('0001')
+assert.deepEqual(cleared, { removedContexts: 1, removedSentences: 1 })
+assert.deepEqual(readVocab().map((entry) => [entry.id, entry.contexts.map((context) => context.lessonId)]), [
+  ['business', ['0002']],
+  ['project', ['0003']],
+])
+assert.equal(readReviewSentences().length, 0)
 
 console.log('review store checks passed')

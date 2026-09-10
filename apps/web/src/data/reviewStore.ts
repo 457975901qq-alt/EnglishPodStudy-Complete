@@ -346,6 +346,28 @@ export function clearReviewMemory() {
   emitChange(REVIEW_CHANGE_EVENT)
 }
 
+export function clearLessonReviewMemory(lessonId: string) {
+  const vocab = readVocab()
+  let removedContexts = 0
+  const remainingVocab = vocab.flatMap((entry) => {
+    const contexts = entry.contexts.filter((context) => context.lessonId !== lessonId)
+    removedContexts += entry.contexts.length - contexts.length
+    return contexts.length > 0 ? [{ ...entry, contexts, updatedAt: Date.now() }] : []
+  })
+
+  const sentences = readReviewSentences()
+  const remainingSentences = sentences.filter((sentence) => sentence.lessonId !== lessonId)
+  const removedSentences = sentences.length - remainingSentences.length
+
+  if (removedContexts > 0) {
+    writeVocab(remainingVocab)
+    emitChange(REVIEW_CHANGE_EVENT)
+  }
+  if (removedSentences > 0) writeReviewSentences(remainingSentences)
+
+  return { removedContexts, removedSentences }
+}
+
 export function addVocab(draft: VocabDraft, options: ClockOptions = {}): VocabEntry {
   const now = options.now ?? Date.now()
   const entries = readVocab({ now })
