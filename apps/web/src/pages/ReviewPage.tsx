@@ -48,10 +48,13 @@ function lessonTitle(lessons: CourseLesson[], lessonId: string) {
 }
 
 function englishLines(text: string) {
-  return text
+  const lines = text
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line && !CJK_RE.test(line))
+
+  return lines
+    .filter((line, index) => index === 0 || line.toLocaleLowerCase() !== lines[index - 1].toLocaleLowerCase())
     .join('\n')
 }
 
