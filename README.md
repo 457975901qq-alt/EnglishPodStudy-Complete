@@ -7,6 +7,8 @@ EnglishPod365 is an online English learning website built around 365 EnglishPod 
 
 ## 界面截图 / Screenshots
 
+以下截图于 2026-09-13 使用当前版本实际运行界面拍摄，分辨率为 1600 × 1100。学习进度与生词为独立演示会话中的示例数据。
+
 ### 总览 / Dashboard
 
 ![总览](screenshot/总览.png)
