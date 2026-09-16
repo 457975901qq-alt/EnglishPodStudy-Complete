@@ -7,7 +7,12 @@ export default defineConfig({
   plugins: [tailwindcss()],
   server: {
     proxy: {
-      '/api': 'http://localhost:4173',
+      // The API binds to 127.0.0.1. Using the same address avoids a
+      // localhost IPv6/IPv4 resolution mismatch in development mode.
+      '/api': {
+        target: 'http://127.0.0.1:4173',
+        changeOrigin: true,
+      },
     },
   },
   resolve: {
