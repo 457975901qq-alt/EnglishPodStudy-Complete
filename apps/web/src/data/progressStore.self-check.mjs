@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { clearLessonProgressForLesson, completeLesson, normalizeLessonProgress, readLessonProgress, setLessonStage } from './progressStore.ts'
+import { clearLessonProgressForLesson, completeLesson, normalizeLessonProgress, readLastLessonId, readLessonProgress, saveLastLessonId, setLessonStage } from './progressStore.ts'
 
 const legacy = normalizeLessonProgress({ currentTime: 30, duration: 60, progress: 50, updatedAt: 1 })
 assert.deepEqual(legacy, { currentTime: 30, duration: 60, progress: 50, updatedAt: 1 })
@@ -24,5 +24,8 @@ globalThis.window = {
   dispatchEvent() {},
 }
 memory.set('englishpod.lessonProgress.v1', JSON.stringify({ '0001': legacy, '0002': legacy }))
+saveLastLessonId('0001')
+assert.equal(readLastLessonId(), '0001')
 clearLessonProgressForLesson('0001')
 assert.deepEqual(Object.keys(readLessonProgress()), ['0002'])
+assert.equal(readLastLessonId(), null)

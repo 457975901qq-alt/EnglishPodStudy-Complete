@@ -4,7 +4,7 @@ import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'rea
 import { cn } from '@/lib/utils'
 import { PAGE_TITLES } from '@/lib/pageTitles'
 import { formatCourseLevel, formatTime, getLevelBadge, useCourseList, type CourseLesson, type CourseListData } from '@/data/courseList'
-import { clearLessonProgress, clearLessonProgressForLesson, PROGRESS_CHANGE_EVENT, readLessonProgress } from '@/data/progressStore'
+import { clearLessonProgress, clearLessonProgressForLesson, PROGRESS_CHANGE_EVENT, readLastLessonId, readLessonProgress } from '@/data/progressStore'
 import { clearLessonReviewMemory, clearReviewMemory, countDueReviewItems, readReviewSentences, readVocab, REVIEW_CHANGE_EVENT, VOCAB_CHANGE_EVENT } from '@/data/vocabStore'
 import { ThemeToggle, type Theme } from '@/components/ThemeToggle'
 import { getLessonStatus, matchesLessonSearch, matchesLessonStatusFilter, type LessonStatus, type LessonStatusFilter } from '@/components/lesson/courseFilter'
@@ -370,7 +370,9 @@ function CoursesPage() {
   const [statusFilter, setStatusFilter] = useState<LessonStatusFilter>('all')
   const [progressMap, setProgressMap] = useState(() => readLessonProgress())
   const [isListScrolled, setIsListScrolled] = useState(false)
+  const [lastLessonId] = useState(() => readLastLessonId())
   const courseListRef = useRef<HTMLDivElement>(null)
+  const hasRestoredLastLessonRef = useRef(false)
   const lessons = data?.lessons ?? []
   const rows = lessons
     .map((lesson) => {
@@ -401,6 +403,21 @@ function CoursesPage() {
     courseList.addEventListener('scroll', updateScrollState, { passive: true })
     return () => courseList.removeEventListener('scroll', updateScrollState)
   }, [rows.length])
+
+  useEffect(() => {
+    if (hasRestoredLastLessonRef.current || !lastLessonId) return
+
+    const courseList = courseListRef.current
+    const target = Array.from(courseList?.querySelectorAll<HTMLElement>('[data-lesson-id]') ?? [])
+      .find((row) => row.dataset.lessonId === lastLessonId)
+    if (!target) return
+
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ block: 'center', inline: 'nearest' })
+      hasRestoredLastLessonRef.current = true
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [lastLessonId, rows.length])
 
   const statusCounts = lessons.reduce<Record<LessonStatus | 'all', number>>(
     (counts, lesson) => {
@@ -460,6 +477,7 @@ function CoursesPage() {
             <Link
               key={lesson.id}
               className="course-library-row grid gap-3 bg-[var(--surface-warm)] px-4 py-2 transition hover:bg-[var(--surface)] lg:grid-cols-[76px_minmax(0,1fr)_150px_190px] lg:items-center lg:gap-4"
+              data-lesson-id={lesson.id}
               to={courseHref(lesson.id, progress)}
             >
               <span className="font-[var(--font-mono)] text-xs text-[var(--meta)]">{lesson.id}</span>

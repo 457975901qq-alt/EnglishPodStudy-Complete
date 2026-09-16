@@ -10,6 +10,7 @@ import {
   calculateProgress,
   completeLesson,
   readLessonProgress,
+  saveLastLessonId,
   saveLessonProgress,
   setLessonBlindRating,
   setLessonStage,
@@ -133,6 +134,16 @@ export function LessonPage({ theme, onCycleTheme }: LessonPageProps) {
       window.removeEventListener('storage', refreshVocab)
     }
   }, [])
+
+  useEffect(() => {
+    const activeLessonId = activeLesson?.id
+    if (!activeLessonId) return
+
+    // Record on entry as well as cleanup so an unexpected browser close can
+    // still restore the learner to this course next time.
+    saveLastLessonId(activeLessonId)
+    return () => saveLastLessonId(activeLessonId)
+  }, [activeLesson?.id])
 
   const updateProgressMap = (updater: (current: LessonProgressMap) => LessonProgressMap) => {
     setProgressMap((current) => {

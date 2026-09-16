@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'englishpod.lessonProgress.v1'
+const LAST_LESSON_KEY = 'englishpod.lastLesson.v1'
 
 export const PROGRESS_CHANGE_EVENT = 'englishpod-progress-change'
 
@@ -83,20 +84,49 @@ export function writeLessonProgress(progressMap: LessonProgressMap) {
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progressMap))
 }
 
+export function readLastLessonId() {
+  if (typeof window === 'undefined') return null
+
+  try {
+    const lessonId = window.localStorage.getItem(LAST_LESSON_KEY)
+    return lessonId && /^\d{4}$/.test(lessonId) ? lessonId : null
+  } catch {
+    return null
+  }
+}
+
+export function saveLastLessonId(lessonId: string) {
+  if (typeof window === 'undefined' || !/^\d{4}$/.test(lessonId)) return
+
+  try {
+    window.localStorage.setItem(LAST_LESSON_KEY, lessonId)
+  } catch {
+    // Local storage can be unavailable in private or restricted contexts.
+  }
+}
+
+function clearLastLessonId() {
+  if (typeof window === 'undefined') return
+  window.localStorage.removeItem(LAST_LESSON_KEY)
+}
+
 export function clearLessonProgress() {
   if (typeof window === 'undefined') return
   window.localStorage.removeItem(STORAGE_KEY)
+  clearLastLessonId()
   emitProgressChange()
 }
 
 export function clearLessonProgressForLesson(lessonId: string) {
   if (typeof window === 'undefined') return
   const progressMap = readLessonProgress()
-  if (!(lessonId in progressMap)) return
-  const remaining = Object.fromEntries(
-    Object.entries(progressMap).filter(([storedLessonId]) => storedLessonId !== lessonId),
-  )
-  writeLessonProgress(remaining)
+  if (lessonId in progressMap) {
+    const remaining = Object.fromEntries(
+      Object.entries(progressMap).filter(([storedLessonId]) => storedLessonId !== lessonId),
+    )
+    writeLessonProgress(remaining)
+  }
+  if (readLastLessonId() === lessonId) clearLastLessonId()
   emitProgressChange()
 }
 
