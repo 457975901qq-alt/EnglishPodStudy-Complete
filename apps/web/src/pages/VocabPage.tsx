@@ -198,7 +198,7 @@ export function VocabPage() {
                           className="font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
                           to={`/courses/${context.lessonId}?t=${Math.floor(context.audioStart)}`}
                         >
-                          LESSON {context.lessonId}
+                          Lesson {context.lessonId}
                         </Link>
                         <span>{formatTime(context.audioStart)}</span>
                         <span>{formatDate(context.createdAt)}</span>

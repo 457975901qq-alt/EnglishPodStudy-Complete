@@ -44,7 +44,7 @@ function itemEnd(item: ReviewItem) {
 }
 
 function lessonTitle(lessons: CourseLesson[], lessonId: string) {
-  return lessons.find((lesson) => lesson.id === lessonId)?.displayTitle ?? `LESSON ${lessonId}`
+  return lessons.find((lesson) => lesson.id === lessonId)?.displayTitle ?? `Lesson ${lessonId}`
 }
 
 function englishLines(text: string) {

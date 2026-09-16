@@ -466,7 +466,7 @@ function CoursesPage() {
       </div>
 
       <div className="course-library overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-soft)]">
-        <div className="grid grid-cols-[76px_minmax(0,1fr)_150px_190px] gap-4 border-b border-[var(--border-soft)] bg-[var(--surface)] px-4 py-2 font-[var(--font-mono)] text-xs uppercase tracking-[0.08em] text-[var(--meta)] max-lg:hidden">
+        <div className="grid grid-cols-[76px_minmax(0,1fr)_150px_190px] gap-4 border-b border-[var(--border-soft)] bg-[var(--surface)] px-4 py-2 font-[var(--font-mono)] text-xs tracking-[0.08em] text-[var(--meta)] max-lg:hidden">
           <span>Lesson</span>
           <span>Title</span>
           <span>级别</span>
@@ -626,7 +626,7 @@ function SettingsPage({
     clearLessonProgressForLesson(selectedLesson.id)
     const { removedContexts, removedSentences } = clearLessonReviewMemory(selectedLesson.id)
     setLessonClearConfirmOpen(false)
-    setClearMessage(`已清除 LESSON ${selectedLesson.id}：进度、生词上下文 ${removedContexts} 条、复习句 ${removedSentences} 条。`)
+    setClearMessage(`已清除 Lesson ${selectedLesson.id}：进度、生词上下文 ${removedContexts} 条、复习句 ${removedSentences} 条。`)
   }
 
   return (
@@ -659,11 +659,11 @@ function SettingsPage({
           }}
         >
           <option value="">请选择课程</option>
-          {lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>LESSON {lesson.id} · {lesson.displayTitle}</option>)}
+          {lessons.map((lesson) => <option key={lesson.id} value={lesson.id}>Lesson {lesson.id} · {lesson.displayTitle}</option>)}
         </select>
         {selectedLesson && (
           <div className="mt-4 rounded-[var(--radius-md)] bg-[var(--surface-warm)] p-4 text-sm">
-            <p className="font-semibold">LESSON {selectedLesson.id} · {selectedLesson.displayTitle}</p>
+            <p className="font-semibold">Lesson {selectedLesson.id} · {selectedLesson.displayTitle}</p>
             <p className="mt-2 text-[var(--muted)]">{selectedProgress ? `进度 ${selectedProgress.progress}%` : '无学习进度'} · 生词上下文 {selectedVocabContexts} 条 · 复习句 {selectedReviewSentences} 条</p>
             {!lessonClearConfirmOpen ? (
               <button className="mt-4 rounded-[var(--radius-md)] border border-[var(--danger)] px-4 py-2 text-sm font-semibold text-[var(--danger)] disabled:cursor-not-allowed disabled:opacity-45" type="button" disabled={!hasSelectedLessonMemory} onClick={() => setLessonClearConfirmOpen(true)}>
