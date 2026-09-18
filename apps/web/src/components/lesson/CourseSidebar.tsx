@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getLevelBadge, type CourseLesson } from '@/data/courseList'
 import type { LessonProgressMap } from '@/data/progressStore'
@@ -52,32 +52,56 @@ export const CourseSidebar = memo(function CourseSidebar({
     })
     .filter(({ status }) => matchesLessonStatusFilter(statusFilter, status))
 
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      const courseScroll = courseScrollRef.current
-      const activeItem = courseScroll?.querySelector<HTMLElement>('.course-item.active')
-      if (!courseScroll || !activeItem) return
+  const scrollToActiveLesson = useCallback(() => {
+    const courseScroll = courseScrollRef.current
+    const activeItem = courseScroll?.querySelector<HTMLElement>('.course-item.active')
+    if (!courseScroll || !activeItem) return
 
-      const scrollBounds = courseScroll.getBoundingClientRect()
-      const activeBounds = activeItem.getBoundingClientRect()
-      const targetTop = courseScroll.scrollTop
-        + activeBounds.top
-        - scrollBounds.top
-        - (courseScroll.clientHeight - activeBounds.height) / 2
+    const scrollBounds = courseScroll.getBoundingClientRect()
+    const activeBounds = activeItem.getBoundingClientRect()
+    const targetTop = courseScroll.scrollTop
+      + activeBounds.top
+      - scrollBounds.top
+      - (courseScroll.clientHeight - activeBounds.height) / 2
 
-      courseScroll.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      })
+    courseScroll.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     })
+  }, [])
 
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(scrollToActiveLesson)
     return () => window.cancelAnimationFrame(frame)
-  }, [activeLesson.id, statusFilter])
+  }, [activeLesson.id, statusFilter, scrollToActiveLesson])
+
+  const handleLocateActiveLesson = () => {
+    // The selected status filter can hide the course currently playing.
+    // Restore the full list first; the effect above then centers its row.
+    if (statusFilter !== 'all') {
+      setStatusFilter('all')
+      return
+    }
+    scrollToActiveLesson()
+  }
 
   return (
     <nav className="course-list" id="courseList" aria-label="课程列表">
       <div className="list-head">
         <span className="list-title">全部课程 · {lessons.length}</span>
+        <button
+          className="locate-current-course"
+          type="button"
+          onClick={handleLocateActiveLesson}
+          aria-label="快速定位当前播放课程"
+          title="定位当前播放课程"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+          </svg>
+          定位当前
+        </button>
       </div>
 
       <div className="filters" aria-label="课程状态筛选">
