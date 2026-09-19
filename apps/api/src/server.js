@@ -408,17 +408,19 @@ async function loadDictionary() {
 }
 
 async function readSubtitleFile(filePath) {
-  if (!subtitleCache.has(filePath)) {
-    subtitleCache.set(
-      filePath,
-      readFile(filePath, 'utf8').catch((error) => {
-        subtitleCache.delete(filePath)
-        throw error
-      }),
-    )
+  const fileStat = await stat(filePath)
+  const cached = subtitleCache.get(filePath)
+  if (cached && cached.mtimeMs === fileStat.mtimeMs && cached.size === fileStat.size) {
+    return cached.content
   }
 
-  return subtitleCache.get(filePath)
+  const content = await readFile(filePath, 'utf8')
+  subtitleCache.set(filePath, {
+    content,
+    mtimeMs: fileStat.mtimeMs,
+    size: fileStat.size,
+  })
+  return content
 }
 
 async function lookupDictionary(inputWord) {
