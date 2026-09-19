@@ -18,6 +18,7 @@ import {
 } from './playbackMode'
 
 const SPEED_RATES = [0.75, 1, 1.25, 1.5, 2]
+const KEYBOARD_SEEK_SECONDS = 3
 const PLAYBACK_MODE_LABELS: Record<PlaybackMode, string> = {
   sequence: '顺序播放',
   shuffle: '随机播放',
@@ -261,16 +262,37 @@ export function PersistentPlayer({
     }
   }, [playAudio])
 
+  const seekByKeyboard = useCallback((seconds: number) => {
+    const audio = audioRef.current
+    if (!audio) return
+    const maxTime = Number.isFinite(audio.duration) ? audio.duration : duration
+    if (maxTime <= 0) return
+
+    const nextTime = Math.max(0, Math.min(maxTime, audio.currentTime + seconds))
+    audio.currentTime = nextTime
+    onTimeUpdate(nextTime)
+  }, [duration, onTimeUpdate])
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.code !== 'Space' || event.repeat || isEditableTarget(event.target)) return
-      event.preventDefault()
-      void togglePlay()
+      if (isEditableTarget(event.target)) return
+
+      if (event.code === 'Space') {
+        if (event.repeat) return
+        event.preventDefault()
+        void togglePlay()
+        return
+      }
+
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault()
+        seekByKeyboard(event.key === 'ArrowLeft' ? -KEYBOARD_SEEK_SECONDS : KEYBOARD_SEEK_SECONDS)
+      }
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [togglePlay])
+  }, [seekByKeyboard, togglePlay])
 
   const handleEnded = () => {
     const audio = audioRef.current
